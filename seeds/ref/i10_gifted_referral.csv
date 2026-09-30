@@ -1,0 +1,8 @@
+code,description,source_order,valid_from_year,valid_to_year
+A,Referred by screening procedure,1,,
+B,Referred by school or district staff,2,,
+C,Referred by parent/guardian,3,,
+D,Referred by self,4,,
+E,Referred by peer,5,,
+F,Referred by other,6,,
+K,"Referred in prior year, referral reason unknown",7,,

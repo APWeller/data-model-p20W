@@ -1,0 +1,5 @@
+code,description,definition,source_order,valid_from_year,valid_to_year
+1,Not Yet Exiting,"Child is continuing in PK program. (Include children with IEPs who transfer out of the district, within the state, but are still continuing in a PK program.)",1,,
+2,Yes,The child has shown or maintained new skills or behaviors related to social-emotional skills since entry data was taken.,2,,
+3,No,The child has not shown or maintained new skills or behaviors related to social-emotional skills since entry data was taken.,3,,
+4,Less 6 months,Child exited prior to being in the PK program for 6 months.,4,,

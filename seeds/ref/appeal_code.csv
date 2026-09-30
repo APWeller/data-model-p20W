@@ -1,0 +1,6 @@
+code,description,source_order,valid_from_year,valid_to_year
+0,No appeal made,1,,
+1,Appeal made and granted,2,,
+2,"Appeal made and denied, not appealed to the school board",3,,
+3,"Appeal made and denied, appealed to the school board, denied by school board",4,,
+4,"Appeal made and denied, appealed to the school board and granted by school board",5,,

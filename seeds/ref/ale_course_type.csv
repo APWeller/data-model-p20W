@@ -1,0 +1,7 @@
+code,description,valid_elements,source_order,valid_from_year,valid_to_year
+N,"No, course was not taught through ALE","E09,H27,T12",1,,
+O,Online,"E09,H27,T12",2,,
+R,Remote,"E09,H27,T12",3,,
+T,Site Based – written student learning plan requires regular weekly in-person instructional contact time,"E09,H27,T12",4,,
+U,Site Based – written student learning plan requires less than weekly in-person instructional contact time,"E09,H27,T12",5,,
+Y,Yes (only applicable for school years prior to 2014-15),H27,6,,2014

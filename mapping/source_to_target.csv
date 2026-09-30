@@ -1,0 +1,794 @@
+element_id,target_table,target_column,transformation,notes
+A01,gold.dim_school_year,school_year,"silver.location.school_year, silver.xref_location.school_year -> school_year",
+A01,gold.dim_school_year_calendar,school_year_sk,"silver.location.school_year, silver.xref_location.school_year: school year (ending year) -> school_year_sk",
+A02,gold.dim_district,county_code,"silver.location.county_district_code, silver.xref_location.county_district_code -> county_code (SCD2)",code set: county_district
+A02,gold.dim_district,county_district_code,"silver.location.county_district_code, silver.xref_location.county_district_code -> county_district_code",code set: county_district
+A02,gold.dim_school,county_district_code,"silver.location.county_district_code, silver.xref_location.county_district_code -> county_district_code",code set: county_district
+A03,gold.dim_district,district_name,"silver.location.district_name, silver.xref_location.district_name -> district_name (SCD2)",
+A04,silver.xref_location,location_id,"silver.location.location_id, silver.xref_location.location_id -> silver.xref_location.location_id",Resolves every file's Location ID to the OSPI school code; gold uses school_sk
+A05,gold.dim_school,school_code,"silver.location.school_code, silver.xref_location.school_code -> school_code",code set: school
+A05,gold.dim_school_year_calendar,school_sk,"silver.location.school_code, silver.xref_location.school_code: lookup dim_school by county_district_code + OSPI school code (silver school_code); H26 9999 -> -3; unmatched -> -1, NULL -> -2",code set: school
+A06,gold.dim_school,school_name,"silver.location.school_name, silver.xref_location.school_name -> school_name (SCD2)",
+A07,gold.dim_school_year_calendar,calendar_days,silver.location.initial_school_start_date -> calendar_days,
+A07,gold.dim_school_year_calendar,first_instruction_date,silver.location.initial_school_start_date -> first_instruction_date,
+A07,gold.fact_district_enrollment,enrolled_days,"Derived: calendar days enrolled within A07-A08 bounds (approximation, design §6)",
+A07,gold.fact_school_enrollment,enrolled_days,"Derived: days present + full-day absences, bounded by A07/A08 (approximation, design §6)",
+A07,gold.fact_student_school_year,enrolled_days,"Derived: sum of school-enrollment enrolled_days (approximation, design §6)",
+A08,gold.dim_school_year_calendar,calendar_days,silver.location.last_school_end_date -> calendar_days,
+A08,gold.dim_school_year_calendar,last_instruction_date,silver.location.last_school_end_date -> last_instruction_date,
+A08,gold.fact_district_enrollment,enrolled_days,"Derived: calendar days enrolled within A07-A08 bounds (approximation, design §6)",
+A08,gold.fact_el_program,participation_days,Derived: calendar days from J07 to J08 (or A08),
+A08,gold.fact_program_participation,participation_days,Derived: calendar days from I07 to I08 (or A08),
+A08,gold.fact_school_enrollment,enrolled_days,"Derived: days present + full-day absences, bounded by A07/A08 (approximation, design §6)",
+A08,gold.fact_sped_program,participation_days,Derived: calendar days from K14 to K08 (or A08),
+A08,gold.fact_student_school_year,enrolled_days,"Derived: sum of school-enrollment enrolled_days (approximation, design §6)",
+B01,gold.dim_school_year,school_year,silver.district_student_enrollment.school_year -> school_year,
+B01,gold.fact_district_enrollment,school_year_sk,silver.district_student_enrollment.school_year: school year (ending year) -> school_year_sk,
+B01,gold.fact_student_school_year,school_year_sk,silver.district_student_enrollment.school_year: school year (ending year) -> school_year_sk,
+B02,gold.dim_district,county_district_code,silver.district_student_enrollment.county_district_code -> county_district_code,code set: county_district
+B02,gold.fact_district_enrollment,district_sk,"silver.district_student_enrollment.county_district_code: lookup dim_district by county_district_code, SCD2 row current for the school year; unmatched -> -1, NULL -> -2",code set: county_district
+B02,gold.fact_student_school_year,district_sk,"silver.district_student_enrollment.county_district_code: lookup dim_district by county_district_code, SCD2 row current for the school year; unmatched -> -1, NULL -> -2",code set: county_district
+B03,gold.dim_district,county_district_code,silver.district_student_enrollment.home_county_district_code -> county_district_code,code set: county_district
+B03,gold.fact_district_enrollment,home_district_sk,"silver.district_student_enrollment.home_county_district_code: lookup dim_district by county_district_code, SCD2 row current for the school year; unmatched -> -1, NULL -> -2",code set: county_district
+B04,silver.xref_student,district_student_id,silver.district_student_enrollment.district_student_id -> silver.xref_student.district_student_id,Collected with the SSID into xref_student; not carried into gold (SSID is the durable key)
+B05,gold.dim_student,ssid,silver.district_student_enrollment.ssid -> ssid,
+B05,gold.dim_student_pii,ssid,silver.district_student_enrollment.ssid -> ssid,
+B05,gold.fact_district_enrollment,student_sk,"silver.district_student_enrollment.ssid: lookup dim_student by SSID, SCD2 row current at the fact's effective date; unmatched -> -1, NULL -> -2",
+B05,gold.fact_student_school_year,student_sk,"silver.district_student_enrollment.ssid: lookup dim_student by SSID, SCD2 row current at the fact's effective date; unmatched -> -1, NULL -> -2",
+B06,gold.dim_student_pii,legal_last_name,"silver.district_student_enrollment.legal_last_name, silver.student_pii_history.attribute_value -> legal_last_name",
+B07,gold.dim_student_pii,legal_first_name,"silver.district_student_enrollment.legal_first_name, silver.student_pii_history.attribute_value -> legal_first_name",
+B08,gold.dim_student_pii,legal_middle_name,"silver.district_student_enrollment.legal_middle_name, silver.student_pii_history.attribute_value -> legal_middle_name",
+B09,gold.dim_student_pii,birth_date,"silver.district_student_enrollment.birth_date, silver.student_pii_history.attribute_value -> birth_date",
+B09,gold.fact_student_school_year,age_as_of_sept_1,Derived: age in years on September 1 of the school year,
+B10,gold.dim_country,code,ref.ref_code -> code,code set: country
+B10,gold.dim_country,description,ref.ref_code -> description,code set: country
+B10,gold.dim_student,birth_country_code,"silver.district_student_enrollment.birth_country, silver.student_attribute_history.attribute_value -> birth_country_code (SCD2)",code set: country
+B10,gold.dim_student,birth_country_sk,"silver.district_student_enrollment.birth_country, silver.student_attribute_history.attribute_value: lookup dim_country by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: country
+B11,INACTIVE,,,Element inactive in manual v19.0
+B12,gold.dim_student,gender,"silver.district_student_enrollment.gender, silver.student_attribute_history.attribute_value -> gender (SCD2)",code set: gender
+B13,gold.dim_grade_level,grade_level_code,"silver.district_student_enrollment.grade_level, silver.student_attribute_history.attribute_value -> grade_level_code","code set: grade_level, grade_level_age_assignment"
+B13,gold.dim_grade_level,grade_level_description,"silver.district_student_enrollment.grade_level, silver.student_attribute_history.attribute_value -> grade_level_description","code set: grade_level, grade_level_age_assignment"
+B13,gold.fact_district_enrollment,grade_level_sk,"silver.district_student_enrollment.grade_level, silver.student_attribute_history.attribute_value: lookup dim_grade_level by grade_level_code; unmatched -> -1, NULL -> -2","code set: grade_level, grade_level_age_assignment"
+B13,gold.fact_school_enrollment,grade_level_sk,"silver.district_student_enrollment.grade_level, silver.student_attribute_history.attribute_value: lookup dim_grade_level by grade_level_code; unmatched -> -1, NULL -> -2","code set: grade_level, grade_level_age_assignment"
+B13,gold.fact_student_school_year,grade_level_sk,"silver.district_student_enrollment.grade_level, silver.student_attribute_history.attribute_value: lookup dim_grade_level by grade_level_code; unmatched -> -1, NULL -> -2","code set: grade_level, grade_level_age_assignment"
+B14,gold.fact_district_enrollment,enrolled_days,"Derived: calendar days enrolled within A07-A08 bounds (approximation, design §6)",
+B14,gold.fact_district_enrollment,entry_date_sk,silver.district_student_enrollment.district_enrollment_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+B15,gold.fact_district_enrollment,enrolled_days,"Derived: calendar days enrolled within A07-A08 bounds (approximation, design §6)",
+B15,gold.fact_district_enrollment,exit_date_sk,silver.district_student_enrollment.district_exit_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+B16,INACTIVE,,,Element inactive in manual v19.0
+B17,gold.dim_language,code,ref.ref_code -> code,code set: language
+B17,gold.dim_language,description,ref.ref_code -> description,code set: language
+B17,gold.dim_language,recommended_language,ref.ref_code -> recommended_language,code set: language
+B17,gold.dim_student,primary_language_sk,"silver.district_student_enrollment.primary_language_code, silver.student_attribute_history.attribute_value: lookup dim_language by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: language
+B18,gold.dim_language,code,ref.ref_code -> code,code set: language
+B18,gold.dim_language,description,ref.ref_code -> description,code set: language
+B18,gold.dim_language,recommended_language,ref.ref_code -> recommended_language,code set: language
+B18,gold.fact_student_school_year,home_language_sk,"silver.district_student_enrollment.home_language_code, silver.student_attribute_history.attribute_value: lookup dim_language by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: language
+B19,INACTIVE,,,Element inactive in manual v19.0
+B20,gold.dim_student_pii,residential_zip_plus4,"silver.district_student_enrollment.residential_zip_plus4, silver.student_pii_history.attribute_value -> residential_zip_plus4",
+B21,gold.dim_student_profile,homeless_status_code,"silver.district_student_enrollment.homeless_status_code, silver.student_attribute_history.attribute_value -> homeless_status_code",code set: homeless_status
+B21,gold.dim_student_profile,is_homeless,"silver.district_student_enrollment.homeless_status_code, silver.student_attribute_history.attribute_value -> is_homeless",code set: homeless_status
+B21,gold.fact_district_enrollment,student_profile_sk,"silver.district_student_enrollment.homeless_status_code, silver.student_attribute_history.attribute_value: lookup dim_student_profile by the combination of its codes (insert new combinations)",code set: homeless_status
+B21,gold.fact_school_enrollment,student_profile_sk,"silver.district_student_enrollment.homeless_status_code, silver.student_attribute_history.attribute_value: lookup dim_student_profile by the combination of its codes (insert new combinations)",code set: homeless_status
+B21,gold.fact_student_school_year,student_profile_sk,"silver.district_student_enrollment.homeless_status_code, silver.student_attribute_history.attribute_value: lookup dim_student_profile by the combination of its codes (insert new combinations)",code set: homeless_status
+B22,gold.dim_student_profile,private_school_part_time_code,"silver.district_student_enrollment.private_school_part_time_code, silver.student_attribute_history.attribute_value -> private_school_part_time_code",code set: private_school_part_time
+B22,gold.fact_district_enrollment,student_profile_sk,"silver.district_student_enrollment.private_school_part_time_code, silver.student_attribute_history.attribute_value: lookup dim_student_profile by the combination of its codes (insert new combinations)",code set: private_school_part_time
+B22,gold.fact_school_enrollment,student_profile_sk,"silver.district_student_enrollment.private_school_part_time_code, silver.student_attribute_history.attribute_value: lookup dim_student_profile by the combination of its codes (insert new combinations)",code set: private_school_part_time
+B22,gold.fact_student_school_year,student_profile_sk,"silver.district_student_enrollment.private_school_part_time_code, silver.student_attribute_history.attribute_value: lookup dim_student_profile by the combination of its codes (insert new combinations)",code set: private_school_part_time
+B23,gold.dim_student_profile,home_school_part_time_code,"silver.district_student_enrollment.home_school_part_time_code, silver.student_attribute_history.attribute_value -> home_school_part_time_code",code set: home_school_part_time
+B23,gold.fact_district_enrollment,student_profile_sk,"silver.district_student_enrollment.home_school_part_time_code, silver.student_attribute_history.attribute_value: lookup dim_student_profile by the combination of its codes (insert new combinations)",code set: home_school_part_time
+B23,gold.fact_school_enrollment,student_profile_sk,"silver.district_student_enrollment.home_school_part_time_code, silver.student_attribute_history.attribute_value: lookup dim_student_profile by the combination of its codes (insert new combinations)",code set: home_school_part_time
+B23,gold.fact_student_school_year,student_profile_sk,"silver.district_student_enrollment.home_school_part_time_code, silver.student_attribute_history.attribute_value: lookup dim_student_profile by the combination of its codes (insert new combinations)",code set: home_school_part_time
+B24,gold.dim_student_profile,exchange_status_code,"silver.district_student_enrollment.exchange_status_code, silver.student_attribute_history.attribute_value -> exchange_status_code",code set: exchange_status
+B24,gold.fact_district_enrollment,student_profile_sk,"silver.district_student_enrollment.exchange_status_code, silver.student_attribute_history.attribute_value: lookup dim_student_profile by the combination of its codes (insert new combinations)",code set: exchange_status
+B24,gold.fact_school_enrollment,student_profile_sk,"silver.district_student_enrollment.exchange_status_code, silver.student_attribute_history.attribute_value: lookup dim_student_profile by the combination of its codes (insert new combinations)",code set: exchange_status
+B24,gold.fact_student_school_year,student_profile_sk,"silver.district_student_enrollment.exchange_status_code, silver.student_attribute_history.attribute_value: lookup dim_student_profile by the combination of its codes (insert new combinations)",code set: exchange_status
+B25,INACTIVE,,,Element inactive in manual v19.0
+B26,gold.fact_student_school_year,graduation_requirements_year,"silver.district_student_enrollment.graduation_requirements_year, silver.student_attribute_history.attribute_value -> INT",
+B27,gold.fact_student_school_year,expected_graduation_year,"silver.district_student_enrollment.expected_graduation_year, silver.student_attribute_history.attribute_value -> INT",
+B28,gold.fact_student_school_year,cumulative_gpa,"silver.district_student_enrollment.cumulative_gpa, silver.student_attribute_history.attribute_value -> DECIMAL(4,3)",
+B29,gold.fact_student_school_year,cumulative_credits_attempted,"silver.district_student_enrollment.cumulative_credits_attempted, silver.student_attribute_history.attribute_value -> DECIMAL(6,2)",
+B30,gold.fact_student_school_year,cumulative_credits_earned,"silver.district_student_enrollment.cumulative_credits_earned, silver.student_attribute_history.attribute_value -> DECIMAL(6,2)",
+B31,INACTIVE,,,Element inactive in manual v19.0; NULL seam column kept for backload: dim_student_profile.is_immigrant
+B32,gold.dim_student,initial_us_school_enrollment_date,"silver.district_student_enrollment.initial_us_school_enrollment_date, silver.student_attribute_history.attribute_value -> initial_us_school_enrollment_date (SCD2)",
+B33,INACTIVE,,,Element inactive in manual v19.0
+B34,gold.dim_student,months_non_us_attendance,"silver.district_student_enrollment.months_non_us_attendance, silver.student_attribute_history.attribute_value -> months_non_us_attendance (SCD2)",
+B35,gold.dim_student_profile,military_parent_code,"silver.district_student_enrollment.military_parent_code, silver.student_attribute_history.attribute_value -> military_parent_code",code set: military_parent
+B35,gold.fact_district_enrollment,student_profile_sk,"silver.district_student_enrollment.military_parent_code, silver.student_attribute_history.attribute_value: lookup dim_student_profile by the combination of its codes (insert new combinations)",code set: military_parent
+B35,gold.fact_school_enrollment,student_profile_sk,"silver.district_student_enrollment.military_parent_code, silver.student_attribute_history.attribute_value: lookup dim_student_profile by the combination of its codes (insert new combinations)",code set: military_parent
+B35,gold.fact_student_school_year,student_profile_sk,"silver.district_student_enrollment.military_parent_code, silver.student_attribute_history.attribute_value: lookup dim_student_profile by the combination of its codes (insert new combinations)",code set: military_parent
+B36,gold.dim_student_pii,preferred_last_name,"silver.district_student_enrollment.preferred_last_name, silver.student_pii_history.attribute_value -> preferred_last_name",
+B37,gold.dim_student_pii,preferred_first_name,"silver.district_student_enrollment.preferred_first_name, silver.student_pii_history.attribute_value -> preferred_first_name",
+B38,gold.dim_student_pii,preferred_middle_name,"silver.district_student_enrollment.preferred_middle_name, silver.student_pii_history.attribute_value -> preferred_middle_name",
+B39,gold.fact_student_school_year,asvab_test_status_code,"silver.district_student_enrollment.asvab_test_status_code, silver.student_attribute_history.attribute_value -> STRING",code set: asvab_status
+B40,gold.fact_student_school_year,asvab_test_score,"silver.district_student_enrollment.asvab_test_score, silver.student_attribute_history.attribute_value -> INT",
+B41,gold.fact_student_school_year,asvab_school_year,"silver.district_student_enrollment.asvab_school_year, silver.student_attribute_history.attribute_value -> INT",
+B42,gold.fact_student_school_year,credit_waiver_code,"silver.district_student_enrollment.credit_waiver_code, silver.student_attribute_history.attribute_value -> STRING",code set: credit_waiver
+B43,gold.bridge_family_language_group,family_language_group_sk,"silver.district_student_enrollment.family_language_codes, silver.student_attribute_history.attribute_value: sort + de-duplicate members -> lookup dim_family_language_group by group_codes; none -> -2",code set: language; multi-valued (comma)
+B43,gold.bridge_family_language_group,language_sk,"silver.district_student_enrollment.family_language_codes, silver.student_attribute_history.attribute_value: lookup dim_language by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: language; multi-valued (comma)
+B43,gold.dim_family_language_group,group_codes,"silver.district_student_enrollment.family_language_codes, silver.student_attribute_history.attribute_value: distinct member codes, sorted, joined with ','",code set: language; multi-valued (comma)
+B43,gold.dim_family_language_group,member_count,"silver.district_student_enrollment.family_language_codes, silver.student_attribute_history.attribute_value: number of distinct member codes",code set: language; multi-valued (comma)
+B43,gold.dim_language,code,ref.ref_code -> code,code set: language; multi-valued (comma)
+B43,gold.dim_language,description,ref.ref_code -> description,code set: language; multi-valued (comma)
+B43,gold.dim_language,recommended_language,ref.ref_code -> recommended_language,code set: language; multi-valued (comma)
+B43,gold.fact_district_enrollment,family_language_group_sk,"silver.district_student_enrollment.family_language_codes, silver.student_attribute_history.attribute_value: sort + de-duplicate members -> lookup dim_family_language_group by group_codes; none -> -2",code set: language; multi-valued (comma)
+B43,gold.fact_student_school_year,family_language_group_sk,"silver.district_student_enrollment.family_language_codes, silver.student_attribute_history.attribute_value: sort + de-duplicate members -> lookup dim_family_language_group by group_codes; none -> -2",code set: language; multi-valued (comma)
+B44,gold.fact_student_school_year,ela_pathway_completed_school_year,"silver.district_student_enrollment.ela_pathway_completed_school_year, silver.student_attribute_history.attribute_value -> INT",
+B45,gold.fact_student_school_year,math_pathway_completed_school_year,"silver.district_student_enrollment.math_pathway_completed_school_year, silver.student_attribute_history.attribute_value -> INT",
+C01,gold.fact_school_enrollment,school_year_sk,silver.school_student_enrollment.school_year: school year (ending year) -> school_year_sk,
+C02,gold.fact_school_enrollment,district_sk,"silver.school_student_enrollment.county_district_code: lookup dim_district by county_district_code, SCD2 row current for the school year; unmatched -> -1, NULL -> -2",code set: county_district
+C03,silver.xref_student,district_student_id,silver.school_student_enrollment.district_student_id -> silver.xref_student.district_student_id,Collected with the SSID into xref_student; not carried into gold (SSID is the durable key)
+C04,gold.fact_school_enrollment,student_sk,"silver.school_student_enrollment.ssid: lookup dim_student by SSID, SCD2 row current at the fact's effective date; unmatched -> -1, NULL -> -2",
+C05,gold.fact_school_enrollment,school_sk,"silver.school_student_enrollment.location_id: lookup dim_school by county_district_code + OSPI school code (silver school_code); H26 9999 -> -3; unmatched -> -1, NULL -> -2",
+C05,gold.fact_sped_program,school_sk,"silver.school_student_enrollment.location_id: lookup dim_school by county_district_code + OSPI school code (silver school_code); H26 9999 -> -3; unmatched -> -1, NULL -> -2",
+C05,gold.fact_student_school_year,primary_school_sk,"silver.school_student_enrollment.location_id: lookup dim_school by county_district_code + OSPI school code (silver school_code); H26 9999 -> -3; unmatched -> -1, NULL -> -2",
+C06,gold.fact_school_enrollment,enrolled_days,"Derived: days present + full-day absences, bounded by A07/A08 (approximation, design §6)",
+C06,gold.fact_school_enrollment,entry_date_sk,silver.school_student_enrollment.school_enrollment_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+C07,INACTIVE,,,Element inactive in manual v19.0
+C08,gold.fact_school_enrollment,enrolled_days,"Derived: days present + full-day absences, bounded by A07/A08 (approximation, design §6)",
+C08,gold.fact_school_enrollment,exit_date_sk,silver.school_student_enrollment.school_exit_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+C09,gold.dim_enrollment_junk,school_withdrawal_code,silver.school_student_enrollment.school_withdrawal_code -> school_withdrawal_code,code set: school_withdrawal
+C09,gold.dim_enrollment_junk,school_withdrawal_description,silver.school_student_enrollment.school_withdrawal_code -> school_withdrawal_description,code set: school_withdrawal
+C09,gold.dim_enrollment_junk,withdrawal_status_group,silver.school_student_enrollment.school_withdrawal_code -> withdrawal_status_group,code set: school_withdrawal
+C09,gold.fact_school_enrollment,enrollment_junk_sk,silver.school_student_enrollment.school_withdrawal_code: lookup dim_enrollment_junk by the combination of its codes (insert new combinations),code set: school_withdrawal
+C09,gold.fact_student_school_year,is_dropout,Derived: a withdrawal code in a Dropout status group (Appendix M),code set: school_withdrawal
+C09,gold.fact_student_school_year,is_graduate,Derived: a withdrawal code in the Graduate status group (Appendix M),code set: school_withdrawal
+C10,gold.dim_enrollment_junk,is_primary_school,silver.school_student_enrollment.is_primary_school -> is_primary_school,code set: yes_no
+C10,gold.fact_school_enrollment,enrollment_junk_sk,silver.school_student_enrollment.is_primary_school: lookup dim_enrollment_junk by the combination of its codes (insert new combinations),code set: yes_no
+C10,gold.fact_sped_program,school_sk,"silver.school_student_enrollment.is_primary_school: lookup dim_school by county_district_code + OSPI school code (silver school_code); H26 9999 -> -3; unmatched -> -1, NULL -> -2",code set: yes_no
+C10,gold.fact_student_school_year,primary_school_sk,"silver.school_student_enrollment.is_primary_school: lookup dim_school by county_district_code + OSPI school code (silver school_code); H26 9999 -> -3; unmatched -> -1, NULL -> -2",code set: yes_no
+C11,gold.dim_enrollment_junk,school_choice_code,silver.school_student_enrollment.school_choice_code -> school_choice_code,code set: school_choice
+C11,gold.dim_enrollment_junk,school_choice_description,silver.school_student_enrollment.school_choice_code -> school_choice_description,code set: school_choice
+C11,gold.fact_school_enrollment,enrollment_junk_sk,silver.school_student_enrollment.school_choice_code: lookup dim_enrollment_junk by the combination of its codes (insert new combinations),code set: school_choice
+C12,gold.fact_school_enrollment,days_present,silver.school_student_enrollment.days_present -> INT,
+C12,gold.fact_school_enrollment,enrolled_days,"Derived: days present + full-day absences, bounded by A07/A08 (approximation, design §6)",
+C12,gold.fact_student_school_year,days_present,Derived: sum of C12 over the year's school enrollments,
+C12,gold.fact_student_school_year,enrolled_days,"Derived: sum of school-enrollment enrolled_days (approximation, design §6)",
+C13,INACTIVE,,,Element inactive in manual v19.0
+C14,gold.dim_enrollment_junk,confirmed_transfer_in_code,silver.school_student_enrollment.confirmed_transfer_in_code -> confirmed_transfer_in_code,code set: confirmed_transfer_in
+C14,gold.dim_enrollment_junk,confirmed_transfer_in_description,silver.school_student_enrollment.confirmed_transfer_in_code -> confirmed_transfer_in_description,code set: confirmed_transfer_in
+C14,gold.fact_school_enrollment,enrollment_junk_sk,silver.school_student_enrollment.confirmed_transfer_in_code: lookup dim_enrollment_junk by the combination of its codes (insert new combinations),code set: confirmed_transfer_in
+D01,gold.dim_course,school_year_sk,silver.course_catalog.school_year: school year (ending year) -> school_year_sk,
+D02,gold.dim_course,county_district_code,silver.course_catalog.county_district_code -> county_district_code,code set: county_district
+D03,gold.dim_course,school_code,silver.course_catalog.location_id -> school_code,
+D03,gold.dim_course,school_sk,"silver.course_catalog.location_id: lookup dim_school by county_district_code + OSPI school code (silver school_code); H26 9999 -> -3; unmatched -> -1, NULL -> -2",
+D04,gold.bridge_course_designation,course_sk,"silver.course_catalog.course_id: lookup dim_course by school year + district + school + course ID (catalog_source D, else H/T-inferred member); unmatched -> -1, NULL -> -2",
+D04,gold.bridge_course_higher_ed_institution,course_sk,"silver.course_catalog.course_id: lookup dim_course by school year + district + school + course ID (catalog_source D, else H/T-inferred member); unmatched -> -1, NULL -> -2",
+D04,gold.bridge_course_industry_cert_offered,course_sk,"silver.course_catalog.course_id: lookup dim_course by school year + district + school + course ID (catalog_source D, else H/T-inferred member); unmatched -> -1, NULL -> -2",
+D04,gold.bridge_course_wbl_offered,course_sk,"silver.course_catalog.course_id: lookup dim_course by school year + district + school + course ID (catalog_source D, else H/T-inferred member); unmatched -> -1, NULL -> -2",
+D04,gold.dim_course,course_id,silver.course_catalog.course_id -> course_id,
+D05,gold.dim_course,course_title,silver.course_catalog.course_title -> course_title,
+D06,gold.dim_course,content_area_code,silver.course_catalog.content_area_code -> content_area_code,code set: content_area
+D06,gold.dim_course,content_area_description,silver.course_catalog.content_area_code -> content_area_description,code set: content_area
+D07,gold.bridge_course_designation,course_designation_sk,"silver.course_catalog.course_designation_codes: lookup dim_course_designation by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: course_designation; multi-valued (concatenated)
+D07,gold.dim_course_designation,code,ref.ref_code -> code,code set: course_designation; multi-valued (concatenated)
+D07,gold.dim_course_designation,description,ref.ref_code -> description,code set: course_designation; multi-valued (concatenated)
+D08,gold.dim_course,state_course_sk,"silver.course_catalog.state_course_code: lookup dim_state_course by state_course_code; unmatched -> -1, NULL -> -2","code set: avid_school, state_course"
+D08,gold.dim_state_course,ap_ib_type,silver.course_catalog.state_course_code -> ap_ib_type,"code set: avid_school, state_course"
+D08,gold.dim_state_course,is_computer_science,silver.course_catalog.state_course_code -> is_computer_science,"code set: avid_school, state_course"
+D08,gold.dim_state_course,is_wa_state_only,silver.course_catalog.state_course_code -> is_wa_state_only,"code set: avid_school, state_course"
+D08,gold.dim_state_course,recoded_from,silver.course_catalog.state_course_code -> recoded_from,"code set: avid_school, state_course"
+D08,gold.dim_state_course,state_course_code,silver.course_catalog.state_course_code -> state_course_code,"code set: avid_school, state_course"
+D08,gold.dim_state_course,state_course_description,silver.course_catalog.state_course_code -> state_course_description,"code set: avid_school, state_course"
+D08,gold.dim_state_course,state_course_name,silver.course_catalog.state_course_code -> state_course_name,"code set: avid_school, state_course"
+D08,gold.dim_state_course,subject_area_code,silver.course_catalog.state_course_code -> subject_area_code,"code set: avid_school, state_course"
+D08,gold.dim_state_course,subject_area_name,silver.course_catalog.state_course_code -> subject_area_name,"code set: avid_school, state_course"
+D09,gold.dim_ap_ib_cambridge,abbreviation,ref.ref_code -> abbreviation,code set: ap_ib_cambridge_course
+D09,gold.dim_ap_ib_cambridge,code,ref.ref_code -> code,code set: ap_ib_cambridge_course
+D09,gold.dim_ap_ib_cambridge,description,ref.ref_code -> description,code set: ap_ib_cambridge_course
+D09,gold.dim_ap_ib_cambridge,program,ref.ref_code -> program,code set: ap_ib_cambridge_course
+D09,gold.dim_ap_ib_cambridge,subject,ref.ref_code -> subject,code set: ap_ib_cambridge_course
+D09,gold.dim_course,ap_ib_cambridge_sk,"silver.course_catalog.ap_ib_ci_course_code: lookup dim_ap_ib_cambridge by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: ap_ib_cambridge_course
+D10,gold.dim_cip,career_cluster,ref.ref_code -> career_cluster,code set: cip
+D10,gold.dim_cip,cluster_pathway,ref.ref_code -> cluster_pathway,code set: cip
+D10,gold.dim_cip,code,ref.ref_code -> code,code set: cip
+D10,gold.dim_cip,ctso,ref.ref_code -> ctso,code set: cip
+D10,gold.dim_cip,description,ref.ref_code -> description,code set: cip
+D10,gold.dim_cip,exploratory_or_preparatory,ref.ref_code -> exploratory_or_preparatory,code set: cip
+D10,gold.dim_cip,program_area,ref.ref_code -> program_area,code set: cip
+D10,gold.dim_course,cip_sk,"silver.course_catalog.cip_code: lookup dim_cip by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: cip
+D11,INACTIVE,,,Element inactive in manual v19.0
+D12,gold.dim_course,cte_equivalency_id_code,silver.course_catalog.cte_equivalency_id_code -> cte_equivalency_id_code,code set: cte_equivalency_identification
+D13,gold.dim_course,cte_equivalency_code,silver.course_catalog.cte_equivalency_code -> cte_equivalency_code,code set: cte_equivalency
+D13,gold.dim_course,cte_equivalency_description,silver.course_catalog.cte_equivalency_code -> cte_equivalency_description,code set: cte_equivalency
+D14,gold.dim_course,dual_language_type_code,silver.course_catalog.dual_language_type_code -> dual_language_type_code,code set: dual_language_type
+D15,gold.dim_course,dual_language_language_sk,"silver.course_catalog.dual_language_language_code: lookup dim_language by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: language
+D15,gold.dim_language,code,ref.ref_code -> code,code set: language
+D15,gold.dim_language,description,ref.ref_code -> description,code set: language
+D15,gold.dim_language,recommended_language,ref.ref_code -> recommended_language,code set: language
+D16,gold.dim_course,course_level_code,silver.course_catalog.course_level_code -> course_level_code,code set: course_level
+D16,gold.dim_course,course_level_description,silver.course_catalog.course_level_code -> course_level_description,code set: course_level
+D17,gold.bridge_course_industry_cert_offered,industry_certification_sk,"silver.course_catalog.industry_certification_codes_offered: lookup dim_industry_certification by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: industry_certification; multi-valued (comma)
+D17,gold.dim_industry_certification,career_cluster,ref.ref_code -> career_cluster,code set: industry_certification; multi-valued (comma)
+D17,gold.dim_industry_certification,code,ref.ref_code -> code,code set: industry_certification; multi-valued (comma)
+D17,gold.dim_industry_certification,cte_program_area,ref.ref_code -> cte_program_area,code set: industry_certification; multi-valued (comma)
+D17,gold.dim_industry_certification,description,ref.ref_code -> description,code set: industry_certification; multi-valued (comma)
+D18,INACTIVE,,,Element inactive in manual v19.0; NULL seam column kept for backload: dim_course.sequence
+D19,INACTIVE,,,Element inactive in manual v19.0; NULL seam column kept for backload: dim_course.sequence_group
+D20,gold.bridge_course_wbl_offered,work_based_learning_sk,"silver.course_catalog.work_based_learning_codes_offered: lookup dim_work_based_learning by code_set + code; unmatched -> -1, NULL -> -2",code set: work_based_learning_offered; multi-valued (comma)
+D20,gold.dim_work_based_learning,code,ref.ref_code -> code,code set: work_based_learning_offered; multi-valued (comma)
+D20,gold.dim_work_based_learning,code_set,ref.ref_code -> code_set,code set: work_based_learning_offered; multi-valued (comma)
+D20,gold.dim_work_based_learning,description,ref.ref_code -> description,code set: work_based_learning_offered; multi-valued (comma)
+D21,gold.bridge_course_higher_ed_institution,higher_ed_institution_sk,"silver.course_catalog.higher_ed_institution_codes: lookup dim_higher_ed_institution by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: higher_ed_institution; multi-valued (comma)
+D21,gold.dim_higher_ed_institution,code,ref.ref_code -> code,code set: higher_ed_institution; multi-valued (comma)
+D21,gold.dim_higher_ed_institution,description,ref.ref_code -> description,code set: higher_ed_institution; multi-valued (comma)
+D21,gold.dim_higher_ed_institution,state,ref.ref_code -> state,code set: higher_ed_institution; multi-valued (comma)
+E01,gold.dim_section,school_year_sk,silver.student_schedule.school_year: school year (ending year) -> school_year_sk,
+E01,gold.fact_student_section,school_year_sk,silver.student_schedule.school_year: school year (ending year) -> school_year_sk,
+E02,gold.dim_section,county_district_code,silver.student_schedule.county_district_code -> county_district_code,code set: county_district
+E02,gold.fact_student_section,district_sk,"silver.student_schedule.county_district_code: lookup dim_district by county_district_code, SCD2 row current for the school year; unmatched -> -1, NULL -> -2",code set: county_district
+E03,silver.xref_student,district_student_id,silver.student_schedule.district_student_id -> silver.xref_student.district_student_id,Collected with the SSID into xref_student; not carried into gold (SSID is the durable key)
+E04,gold.fact_student_section,student_sk,"silver.student_schedule.ssid: lookup dim_student by SSID, SCD2 row current at the fact's effective date; unmatched -> -1, NULL -> -2",
+E05,gold.dim_section,school_code,silver.student_schedule.location_id -> school_code,
+E05,gold.fact_student_section,school_sk,"silver.student_schedule.location_id: lookup dim_school by county_district_code + OSPI school code (silver school_code); H26 9999 -> -3; unmatched -> -1, NULL -> -2",
+E06,gold.dim_section,course_id,silver.student_schedule.course_id -> course_id,
+E06,gold.dim_section,course_sk,"silver.student_schedule.course_id: lookup dim_course by school year + district + school + course ID (catalog_source D, else H/T-inferred member); unmatched -> -1, NULL -> -2",
+E06,gold.fact_student_section,course_sk,"silver.student_schedule.course_id: lookup dim_course by school year + district + school + course ID (catalog_source D, else H/T-inferred member); unmatched -> -1, NULL -> -2",
+E07,gold.dim_section,section_id,silver.student_schedule.section_id -> section_id,
+E07,gold.fact_student_section,section_sk,"silver.student_schedule.section_id: lookup dim_section by school year + district + school + course ID + section ID + term; unmatched -> -1, NULL -> -2",
+E08,gold.dim_section,term_code,silver.student_schedule.term -> term_code,code set: term
+E08,gold.dim_section,term_description,silver.student_schedule.term -> term_description,code set: term
+E08,gold.fact_student_section,section_sk,"silver.student_schedule.term: lookup dim_section by school year + district + school + course ID + section ID + term; unmatched -> -1, NULL -> -2",code set: term
+E09,gold.dim_ale_course_type,code,ref.ref_code -> code,code set: ale_course_type
+E09,gold.dim_ale_course_type,description,ref.ref_code -> description,code set: ale_course_type
+E09,gold.fact_student_section,ale_course_type_sk,"silver.student_schedule.ale_course_type_code: lookup dim_ale_course_type by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: ale_course_type
+E10,gold.dim_online_provider,code,ref.ref_code -> code,code set: online_provider
+E10,gold.dim_online_provider,description,ref.ref_code -> description,code set: online_provider
+E10,gold.fact_student_section,online_provider_sk,"silver.student_schedule.online_provider_code: lookup dim_online_provider by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: online_provider
+E11,gold.dim_online_program,code,ref.ref_code -> code,code set: online_program
+E11,gold.dim_online_program,description,ref.ref_code -> description,code set: online_program
+E11,gold.dim_online_program,resident_district,ref.ref_code -> resident_district,code set: online_program
+E11,gold.fact_student_section,online_program_sk,"silver.student_schedule.online_program_code: lookup dim_online_program by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: online_program
+E12,INACTIVE,,,"Element inactive in manual v19.0; NULL seam column kept for backload: dim_letter_grade.code, dim_letter_grade.description, dim_letter_grade.grade_points, fact_student_section.letter_grade_sk"
+E13,INACTIVE,,,Element inactive in manual v19.0; NULL seam column kept for backload: fact_student_section.credits_attempted
+E14,INACTIVE,,,Element inactive in manual v19.0; NULL seam column kept for backload: fact_student_section.credits_earned
+E15,INACTIVE,,,Element inactive in manual v19.0
+E16,INACTIVE,,,Element inactive in manual v19.0
+F01,gold.bridge_staff_type,school_year_sk,silver.staff.school_year: school year (ending year) -> school_year_sk,
+F02,gold.dim_staff,county_district_code,silver.staff.county_district_code -> county_district_code,code set: county_district
+F03,gold.bridge_staff_type,staff_sk,"silver.staff.staff_id: lookup dim_staff by county_district_code + staff_id; unmatched -> -1, NULL -> -2",
+F03,gold.dim_staff,staff_id,silver.staff.staff_id -> staff_id,
+F03,gold.dim_staff_pii,staff_sk,"silver.staff.staff_id: lookup dim_staff by county_district_code + staff_id; unmatched -> -1, NULL -> -2",
+F04,gold.bridge_staff_type,staff_type_sk,"silver.staff.staff_type_code: lookup dim_staff_type by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: staff_type
+F04,gold.dim_staff_type,code,ref.ref_code -> code,code set: staff_type
+F04,gold.dim_staff_type,description,ref.ref_code -> description,code set: staff_type
+F04,gold.dim_staff_type,staff_type_group,ref.ref_code -> staff_type_group,code set: staff_type
+F04,gold.dim_staff_type,suffix_description,ref.ref_code -> suffix_description,code set: staff_type
+F05,gold.dim_staff,certification_number,"silver.staff.certification_number, silver.xref_staff.certification_number -> certification_number (SCD2)",
+F05,gold.dim_staff,is_certificated,"silver.staff.certification_number, silver.xref_staff.certification_number -> is_certificated (SCD2)",
+F06,gold.dim_staff_pii,legal_last_name,silver.staff.legal_last_name -> legal_last_name,
+F07,gold.dim_staff_pii,legal_first_name,silver.staff.legal_first_name -> legal_first_name,
+F08,gold.dim_staff_pii,legal_middle_name,silver.staff.legal_middle_name -> legal_middle_name,
+F09,gold.dim_staff_pii,birth_date,silver.staff.birth_date -> birth_date,
+G01,gold.dim_section,school_year_sk,silver.staff_schedule.school_year: school year (ending year) -> school_year_sk,
+G01,gold.fact_staff_section,school_year_sk,silver.staff_schedule.school_year: school year (ending year) -> school_year_sk,
+G02,gold.dim_section,county_district_code,silver.staff_schedule.county_district_code -> county_district_code,code set: county_district
+G02,gold.fact_staff_section,district_sk,"silver.staff_schedule.county_district_code: lookup dim_district by county_district_code, SCD2 row current for the school year; unmatched -> -1, NULL -> -2",code set: county_district
+G03,gold.dim_section,school_code,silver.staff_schedule.location_id -> school_code,
+G03,gold.fact_staff_section,school_sk,"silver.staff_schedule.location_id: lookup dim_school by county_district_code + OSPI school code (silver school_code); H26 9999 -> -3; unmatched -> -1, NULL -> -2",
+G04,gold.fact_staff_section,staff_sk,"silver.staff_schedule.staff_id: lookup dim_staff by county_district_code + staff_id; unmatched -> -1, NULL -> -2",
+G05,gold.dim_section,course_id,silver.staff_schedule.course_id -> course_id,
+G05,gold.dim_section,course_sk,"silver.staff_schedule.course_id: lookup dim_course by school year + district + school + course ID (catalog_source D, else H/T-inferred member); unmatched -> -1, NULL -> -2",
+G05,gold.fact_staff_section,course_sk,"silver.staff_schedule.course_id: lookup dim_course by school year + district + school + course ID (catalog_source D, else H/T-inferred member); unmatched -> -1, NULL -> -2",
+G06,gold.dim_section,section_id,silver.staff_schedule.section_id -> section_id,
+G06,gold.fact_staff_section,section_sk,"silver.staff_schedule.section_id: lookup dim_section by school year + district + school + course ID + section ID + term; unmatched -> -1, NULL -> -2",
+G07,gold.dim_section,term_code,silver.staff_schedule.term -> term_code,code set: term
+G07,gold.dim_section,term_description,silver.staff_schedule.term -> term_description,code set: term
+G07,gold.fact_staff_section,section_sk,"silver.staff_schedule.term: lookup dim_section by school year + district + school + course ID + section ID + term; unmatched -> -1, NULL -> -2",code set: term
+G08,gold.fact_staff_section,instruction_days,Derived: calendar days from G08 to G09 (or G12 term end),
+G08,gold.fact_staff_section,instruction_start_date_sk,silver.staff_schedule.instruction_start_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+G09,gold.fact_staff_section,instruction_days,Derived: calendar days from G08 to G09 (or G12 term end),
+G09,gold.fact_staff_section,instruction_end_date_sk,silver.staff_schedule.instruction_end_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+G10,gold.dim_teacher_indicator,code,ref.ref_code -> code,code set: teacher_indicator
+G10,gold.dim_teacher_indicator,description,ref.ref_code -> description,code set: teacher_indicator
+G10,gold.fact_staff_section,teacher_indicator_sk,"silver.staff_schedule.teacher_indicator_code: lookup dim_teacher_indicator by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: teacher_indicator
+G11,gold.dim_section,term_start_date,silver.staff_schedule.term_start_date -> term_start_date,
+G12,gold.dim_section,term_end_date,silver.staff_schedule.term_end_date -> term_end_date,
+G12,gold.fact_staff_section,instruction_days,Derived: calendar days from G08 to G09 (or G12 term end),
+H01,gold.fact_transcript_course,school_year_sk,silver.student_grade_history.school_year: school year (ending year) -> school_year_sk,
+H02,gold.dim_course,county_district_code,silver.student_grade_history.county_district_code -> county_district_code,code set: county_district
+H02,gold.fact_transcript_course,district_sk,"silver.student_grade_history.county_district_code: lookup dim_district by county_district_code, SCD2 row current for the school year; unmatched -> -1, NULL -> -2",code set: county_district
+H03,silver.xref_student,district_student_id,silver.student_grade_history.district_student_id -> silver.xref_student.district_student_id,Collected with the SSID into xref_student; not carried into gold (SSID is the durable key)
+H04,gold.fact_transcript_course,student_sk,"silver.student_grade_history.ssid: lookup dim_student by SSID, SCD2 row current at the fact's effective date; unmatched -> -1, NULL -> -2",
+H05,INACTIVE,,,Element inactive in manual v19.0
+H06,INACTIVE,,,Element inactive in manual v19.0
+H07,gold.dim_course,course_id,silver.student_grade_history.course_id -> course_id,
+H07,gold.fact_transcript_course,course_sk,"silver.student_grade_history.course_id: lookup dim_course by school year + district + school + course ID (catalog_source D, else H/T-inferred member); unmatched -> -1, NULL -> -2",
+H08,gold.dim_course,course_title,silver.student_grade_history.course_title -> course_title,
+H08,gold.fact_transcript_course,course_sk,"silver.student_grade_history.course_title: lookup dim_course by school year + district + school + course ID (catalog_source D, else H/T-inferred member); unmatched -> -1, NULL -> -2",
+H09,gold.dim_grade_level,grade_level_code,silver.student_grade_history.grade_level_code -> grade_level_code,code set: grade_level
+H09,gold.fact_transcript_course,grade_level_sk,"silver.student_grade_history.grade_level_code: lookup dim_grade_level by grade_level_code; unmatched -> -1, NULL -> -2",code set: grade_level
+H10,gold.dim_letter_grade,code,ref.ref_code -> code,code set: letter_grade
+H10,gold.dim_letter_grade,description,ref.ref_code -> description,code set: letter_grade
+H10,gold.dim_letter_grade,grade_points,ref.ref_code -> grade_points,code set: letter_grade
+H10,gold.fact_transcript_course,letter_grade_sk,"silver.student_grade_history.letter_grade: lookup dim_letter_grade by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: letter_grade
+H11,gold.fact_student_school_year,year_credits_attempted,Derived: sum of H11 for H30 = the school year (current versions),
+H11,gold.fact_transcript_course,credits_attempted,"silver.student_grade_history.credits_attempted -> DECIMAL(4,2)",
+H12,gold.fact_student_school_year,year_credits_earned,Derived: sum of H12 for H30 = the school year (current versions),
+H12,gold.fact_transcript_course,credits_earned,"silver.student_grade_history.credits_earned -> DECIMAL(4,2)",
+H13,gold.bridge_course_designation_group,course_designation_group_sk,silver.student_grade_history.course_designation_codes: sort + de-duplicate members -> lookup dim_course_designation_group by group_codes; none -> -2,code set: course_designation; multi-valued (concatenated)
+H13,gold.bridge_course_designation_group,course_designation_sk,"silver.student_grade_history.course_designation_codes: lookup dim_course_designation by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: course_designation; multi-valued (concatenated)
+H13,gold.dim_course_designation,code,ref.ref_code -> code,code set: course_designation; multi-valued (concatenated)
+H13,gold.dim_course_designation,description,ref.ref_code -> description,code set: course_designation; multi-valued (concatenated)
+H13,gold.dim_course_designation_group,group_codes,"silver.student_grade_history.course_designation_codes: distinct member codes, sorted, joined with ','",code set: course_designation; multi-valued (concatenated)
+H13,gold.dim_course_designation_group,member_count,silver.student_grade_history.course_designation_codes: number of distinct member codes,code set: course_designation; multi-valued (concatenated)
+H13,gold.fact_transcript_course,course_designation_group_sk,silver.student_grade_history.course_designation_codes: sort + de-duplicate members -> lookup dim_course_designation_group by group_codes; none -> -2,code set: course_designation; multi-valued (concatenated)
+H13,gold.fact_transcript_course,course_sk,"silver.student_grade_history.course_designation_codes: lookup dim_course by school year + district + school + course ID (catalog_source D, else H/T-inferred member); unmatched -> -1, NULL -> -2",code set: course_designation; multi-valued (concatenated)
+H14,gold.dim_course,content_area_code,silver.student_grade_history.content_area_code -> content_area_code,code set: content_area
+H14,gold.dim_course,content_area_description,silver.student_grade_history.content_area_code -> content_area_description,code set: content_area
+H14,gold.fact_transcript_course,course_sk,"silver.student_grade_history.content_area_code: lookup dim_course by school year + district + school + course ID (catalog_source D, else H/T-inferred member); unmatched -> -1, NULL -> -2",code set: content_area
+H15,gold.dim_course,state_course_sk,"silver.student_grade_history.state_course_code: lookup dim_state_course by state_course_code; unmatched -> -1, NULL -> -2","code set: avid_school, state_course"
+H15,gold.dim_state_course,state_course_code,silver.student_grade_history.state_course_code -> state_course_code,"code set: avid_school, state_course"
+H15,gold.fact_transcript_course,course_sk,"silver.student_grade_history.state_course_code: lookup dim_course by school year + district + school + course ID (catalog_source D, else H/T-inferred member); unmatched -> -1, NULL -> -2","code set: avid_school, state_course"
+H16,gold.dim_ap_ib_cambridge,abbreviation,ref.ref_code -> abbreviation,code set: ap_ib_cambridge_course
+H16,gold.dim_ap_ib_cambridge,code,ref.ref_code -> code,code set: ap_ib_cambridge_course
+H16,gold.dim_ap_ib_cambridge,description,ref.ref_code -> description,code set: ap_ib_cambridge_course
+H16,gold.dim_ap_ib_cambridge,program,ref.ref_code -> program,code set: ap_ib_cambridge_course
+H16,gold.dim_ap_ib_cambridge,subject,ref.ref_code -> subject,code set: ap_ib_cambridge_course
+H16,gold.dim_course,ap_ib_cambridge_sk,"silver.student_grade_history.ap_ib_ci_course_code: lookup dim_ap_ib_cambridge by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: ap_ib_cambridge_course
+H16,gold.fact_transcript_course,course_sk,"silver.student_grade_history.ap_ib_ci_course_code: lookup dim_course by school year + district + school + course ID (catalog_source D, else H/T-inferred member); unmatched -> -1, NULL -> -2",code set: ap_ib_cambridge_course
+H17,gold.dim_cip,career_cluster,ref.ref_code -> career_cluster,code set: cip
+H17,gold.dim_cip,cluster_pathway,ref.ref_code -> cluster_pathway,code set: cip
+H17,gold.dim_cip,code,ref.ref_code -> code,code set: cip
+H17,gold.dim_cip,ctso,ref.ref_code -> ctso,code set: cip
+H17,gold.dim_cip,description,ref.ref_code -> description,code set: cip
+H17,gold.dim_cip,exploratory_or_preparatory,ref.ref_code -> exploratory_or_preparatory,code set: cip
+H17,gold.dim_cip,program_area,ref.ref_code -> program_area,code set: cip
+H17,gold.dim_course,cip_sk,"silver.student_grade_history.cip_code: lookup dim_cip by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: cip
+H17,gold.fact_transcript_course,course_sk,"silver.student_grade_history.cip_code: lookup dim_course by school year + district + school + course ID (catalog_source D, else H/T-inferred member); unmatched -> -1, NULL -> -2",code set: cip
+H18,gold.fact_transcript_course,term_end_date_sk,silver.student_grade_history.term_end_month: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+H19,gold.fact_transcript_course,term_code,silver.student_grade_history.term -> STRING,code set: term
+H20,INACTIVE,,,Element inactive in manual v19.0
+H21,INACTIVE,,,Element inactive in manual v19.0
+H22,INACTIVE,,,Element inactive in manual v19.0
+H23,INACTIVE,,,Element inactive in manual v19.0
+H24,gold.dim_transcript_junk,cte_assessment_code,silver.student_grade_history.cte_assessment_code -> cte_assessment_code,code set: cte_assessment
+H24,gold.dim_transcript_junk,cte_assessment_description,silver.student_grade_history.cte_assessment_code -> cte_assessment_description,code set: cte_assessment
+H24,gold.fact_transcript_course,transcript_junk_sk,silver.student_grade_history.cte_assessment_code: lookup dim_transcript_junk by the combination of its codes (insert new combinations),code set: cte_assessment
+H25,gold.fact_transcript_course,teacher_certification_number,silver.student_grade_history.teacher_certification_number -> STRING,
+H26,gold.dim_course,school_code,silver.student_grade_history.school_code -> school_code,code set: school
+H26,gold.dim_course,school_sk,"silver.student_grade_history.school_code: lookup dim_school by county_district_code + OSPI school code (silver school_code); H26 9999 -> -3; unmatched -> -1, NULL -> -2",code set: school
+H26,gold.dim_school,is_out_of_district,silver.student_grade_history.school_code -> is_out_of_district (SCD2),code set: school
+H26,gold.dim_school,school_code,silver.student_grade_history.school_code -> school_code,code set: school
+H26,gold.dim_transcript_junk,is_out_of_district,silver.student_grade_history.school_code -> is_out_of_district,code set: school
+H26,gold.fact_transcript_course,school_sk,"silver.student_grade_history.school_code: lookup dim_school by county_district_code + OSPI school code (silver school_code); H26 9999 -> -3; unmatched -> -1, NULL -> -2",code set: school
+H26,gold.fact_transcript_course,transcript_junk_sk,silver.student_grade_history.school_code: lookup dim_transcript_junk by the combination of its codes (insert new combinations),code set: school
+H27,gold.dim_ale_course_type,code,ref.ref_code -> code,code set: ale_course_type
+H27,gold.dim_ale_course_type,description,ref.ref_code -> description,code set: ale_course_type
+H27,gold.dim_transcript_junk,ale_course_type_code,silver.student_grade_history.ale_course_type_code -> ale_course_type_code,code set: ale_course_type
+H27,gold.dim_transcript_junk,ale_course_type_description,silver.student_grade_history.ale_course_type_code -> ale_course_type_description,code set: ale_course_type
+H27,gold.fact_transcript_course,transcript_junk_sk,silver.student_grade_history.ale_course_type_code: lookup dim_transcript_junk by the combination of its codes (insert new combinations),code set: ale_course_type
+H28,INACTIVE,,,Element inactive in manual v19.0
+H29,INACTIVE,,,Element inactive in manual v19.0
+H30,gold.dim_course,school_year_sk,silver.student_grade_history.course_school_year: school year (ending year) -> school_year_sk,
+H30,gold.fact_transcript_course,course_school_year_sk,silver.student_grade_history.course_school_year: school year (ending year) -> school_year_sk,
+H31,gold.bridge_industry_certification_group,industry_certification_group_sk,silver.student_grade_history.industry_certification_codes_earned: sort + de-duplicate members -> lookup dim_industry_certification_group by group_codes; none -> -2,code set: industry_certification; multi-valued (comma)
+H31,gold.bridge_industry_certification_group,industry_certification_sk,"silver.student_grade_history.industry_certification_codes_earned: lookup dim_industry_certification by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: industry_certification; multi-valued (comma)
+H31,gold.dim_industry_certification,career_cluster,ref.ref_code -> career_cluster,code set: industry_certification; multi-valued (comma)
+H31,gold.dim_industry_certification,code,ref.ref_code -> code,code set: industry_certification; multi-valued (comma)
+H31,gold.dim_industry_certification,cte_program_area,ref.ref_code -> cte_program_area,code set: industry_certification; multi-valued (comma)
+H31,gold.dim_industry_certification,description,ref.ref_code -> description,code set: industry_certification; multi-valued (comma)
+H31,gold.dim_industry_certification_group,group_codes,"silver.student_grade_history.industry_certification_codes_earned: distinct member codes, sorted, joined with ','",code set: industry_certification; multi-valued (comma)
+H31,gold.dim_industry_certification_group,member_count,silver.student_grade_history.industry_certification_codes_earned: number of distinct member codes,code set: industry_certification; multi-valued (comma)
+H31,gold.fact_transcript_course,industry_certification_group_sk,silver.student_grade_history.industry_certification_codes_earned: sort + de-duplicate members -> lookup dim_industry_certification_group by group_codes; none -> -2,code set: industry_certification; multi-valued (comma)
+H32,gold.bridge_work_based_learning_group,work_based_learning_group_sk,silver.student_grade_history.work_based_learning_codes: sort + de-duplicate members -> lookup dim_work_based_learning_group by group_codes; none -> -2,code set: work_based_learning_activity; multi-valued (comma)
+H32,gold.bridge_work_based_learning_group,work_based_learning_sk,"silver.student_grade_history.work_based_learning_codes: lookup dim_work_based_learning by code_set + code; unmatched -> -1, NULL -> -2",code set: work_based_learning_activity; multi-valued (comma)
+H32,gold.dim_work_based_learning,code,ref.ref_code -> code,code set: work_based_learning_activity; multi-valued (comma)
+H32,gold.dim_work_based_learning,code_set,ref.ref_code -> code_set,code set: work_based_learning_activity; multi-valued (comma)
+H32,gold.dim_work_based_learning,description,ref.ref_code -> description,code set: work_based_learning_activity; multi-valued (comma)
+H32,gold.dim_work_based_learning_group,group_codes,"silver.student_grade_history.work_based_learning_codes: distinct member codes, sorted, joined with ','",code set: work_based_learning_activity; multi-valued (comma)
+H32,gold.dim_work_based_learning_group,member_count,silver.student_grade_history.work_based_learning_codes: number of distinct member codes,code set: work_based_learning_activity; multi-valued (comma)
+H32,gold.fact_transcript_course,work_based_learning_group_sk,silver.student_grade_history.work_based_learning_codes: sort + de-duplicate members -> lookup dim_work_based_learning_group by group_codes; none -> -2,code set: work_based_learning_activity; multi-valued (comma)
+I01,gold.fact_program_participation,school_year_sk,silver.student_program.school_year: school year (ending year) -> school_year_sk,
+I02,gold.fact_program_participation,district_sk,"silver.student_program.county_district_code: lookup dim_district by county_district_code, SCD2 row current for the school year; unmatched -> -1, NULL -> -2",code set: county_district
+I03,silver.xref_student,district_student_id,silver.student_program.district_student_id -> silver.xref_student.district_student_id,Collected with the SSID into xref_student; not carried into gold (SSID is the durable key)
+I04,gold.fact_program_participation,student_sk,"silver.student_program.ssid: lookup dim_student by SSID, SCD2 row current at the fact's effective date; unmatched -> -1, NULL -> -2",
+I05,gold.fact_program_participation,school_sk,"silver.student_program.location_id: lookup dim_school by county_district_code + OSPI school code (silver school_code); H26 9999 -> -3; unmatched -> -1, NULL -> -2",
+I06,gold.dim_program,category,silver.student_program.program_code -> category (SCD2),code set: attribute_program
+I06,gold.dim_program,program_code,silver.student_program.program_code -> program_code (SCD2),code set: attribute_program
+I06,gold.dim_program,program_family,silver.student_program.program_code -> program_family (SCD2),code set: attribute_program
+I06,gold.dim_program,program_name,silver.student_program.program_code -> program_name (SCD2),code set: attribute_program
+I06,gold.dim_program,record_type,silver.student_program.program_code -> record_type (SCD2),code set: attribute_program
+I06,gold.dim_program_participation_junk,qualification_code_set,silver.student_program.program_code -> qualification_code_set,code set: attribute_program
+I06,gold.dim_student_profile,is_gifted,silver.student_program.program_code -> is_gifted,code set: attribute_program
+I06,gold.dim_student_profile,is_low_income,silver.student_program.program_code -> is_low_income,code set: attribute_program
+I06,gold.dim_student_profile,is_section_504,silver.student_program.program_code -> is_section_504,code set: attribute_program
+I06,gold.dim_student_profile,is_sensory_disability,silver.student_program.program_code -> is_sensory_disability,code set: attribute_program
+I06,gold.dim_student_profile,is_special_education,silver.student_program.program_code -> is_special_education,code set: attribute_program
+I06,gold.dim_student_profile,is_unaccompanied_youth,silver.student_program.program_code -> is_unaccompanied_youth,code set: attribute_program
+I06,gold.fact_district_enrollment,student_profile_sk,silver.student_program.program_code: lookup dim_student_profile by the combination of its codes (insert new combinations),code set: attribute_program
+I06,gold.fact_program_participation,program_sk,"silver.student_program.program_code: lookup dim_program by program_family + program_code; unmatched -> -1, NULL -> -2",code set: attribute_program
+I06,gold.fact_school_enrollment,student_profile_sk,silver.student_program.program_code: lookup dim_student_profile by the combination of its codes (insert new combinations),code set: attribute_program
+I06,gold.fact_student_school_year,student_profile_sk,silver.student_program.program_code: lookup dim_student_profile by the combination of its codes (insert new combinations),code set: attribute_program
+I07,gold.fact_program_participation,participation_days,Derived: calendar days from I07 to I08 (or A08),
+I07,gold.fact_program_participation,start_date_sk,silver.student_program.program_start_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+I08,gold.fact_program_participation,exit_date_sk,silver.student_program.program_exit_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+I08,gold.fact_program_participation,participation_days,Derived: calendar days from I07 to I08 (or A08),
+I09,gold.dim_program_participation_junk,exit_reason_code,silver.student_program.exit_reason_code -> exit_reason_code,code set: program_exit_reason
+I09,gold.dim_program_participation_junk,exit_reason_description,silver.student_program.exit_reason_code -> exit_reason_description,code set: program_exit_reason
+I09,gold.fact_program_participation,program_participation_junk_sk,silver.student_program.exit_reason_code: lookup dim_program_participation_junk by the combination of its codes (insert new combinations),code set: program_exit_reason
+I10,gold.dim_disability,code,ref.ref_code -> code,"code set: disability, language, reengagement_program, frl_qualification, district_issued_device, career_launch_program, sensory_disability, i10_gifted_referral, i10_grads_qualification"
+I10,gold.dim_disability,description,ref.ref_code -> description,"code set: disability, language, reengagement_program, frl_qualification, district_issued_device, career_launch_program, sensory_disability, i10_gifted_referral, i10_grads_qualification"
+I10,gold.dim_language,code,ref.ref_code -> code,"code set: disability, language, reengagement_program, frl_qualification, district_issued_device, career_launch_program, sensory_disability, i10_gifted_referral, i10_grads_qualification"
+I10,gold.dim_language,description,ref.ref_code -> description,"code set: disability, language, reengagement_program, frl_qualification, district_issued_device, career_launch_program, sensory_disability, i10_gifted_referral, i10_grads_qualification"
+I10,gold.dim_language,recommended_language,ref.ref_code -> recommended_language,"code set: disability, language, reengagement_program, frl_qualification, district_issued_device, career_launch_program, sensory_disability, i10_gifted_referral, i10_grads_qualification"
+I10,gold.dim_program_participation_junk,qualification_code,silver.student_program.qualification_code -> qualification_code,"code set: disability, language, reengagement_program, frl_qualification, district_issued_device, career_launch_program, sensory_disability, i10_gifted_referral, i10_grads_qualification"
+I10,gold.dim_program_participation_junk,qualification_code_set,silver.student_program.qualification_code -> qualification_code_set,"code set: disability, language, reengagement_program, frl_qualification, district_issued_device, career_launch_program, sensory_disability, i10_gifted_referral, i10_grads_qualification"
+I10,gold.dim_program_participation_junk,qualification_description,silver.student_program.qualification_code -> qualification_description,"code set: disability, language, reengagement_program, frl_qualification, district_issued_device, career_launch_program, sensory_disability, i10_gifted_referral, i10_grads_qualification"
+I10,gold.fact_program_participation,disability_sk,"silver.student_program.qualification_code: lookup dim_disability by code (row valid for the school year); unmatched -> -1, NULL -> -2","code set: disability, language, reengagement_program, frl_qualification, district_issued_device, career_launch_program, sensory_disability, i10_gifted_referral, i10_grads_qualification"
+I10,gold.fact_program_participation,program_participation_junk_sk,silver.student_program.qualification_code: lookup dim_program_participation_junk by the combination of its codes (insert new combinations),"code set: disability, language, reengagement_program, frl_qualification, district_issued_device, career_launch_program, sensory_disability, i10_gifted_referral, i10_grads_qualification"
+J01,gold.fact_el_program,school_year_sk,silver.english_learner_program.school_year: school year (ending year) -> school_year_sk,
+J02,gold.fact_el_program,district_sk,"silver.english_learner_program.county_district_code: lookup dim_district by county_district_code, SCD2 row current for the school year; unmatched -> -1, NULL -> -2",code set: county_district
+J03,silver.xref_student,district_student_id,silver.english_learner_program.district_student_id -> silver.xref_student.district_student_id,Collected with the SSID into xref_student; not carried into gold (SSID is the durable key)
+J04,gold.fact_el_program,student_sk,"silver.english_learner_program.ssid: lookup dim_student by SSID, SCD2 row current at the fact's effective date; unmatched -> -1, NULL -> -2",
+J05,gold.fact_el_program,school_sk,"silver.english_learner_program.location_id: lookup dim_school by county_district_code + OSPI school code (silver school_code); H26 9999 -> -3; unmatched -> -1, NULL -> -2",
+J06,gold.dim_el_junk,instructional_model_code,silver.english_learner_program.instructional_model_code -> instructional_model_code,code set: el_instructional_model
+J06,gold.dim_el_junk,instructional_model_description,silver.english_learner_program.instructional_model_code -> instructional_model_description,code set: el_instructional_model
+J06,gold.fact_el_program,el_junk_sk,silver.english_learner_program.instructional_model_code: lookup dim_el_junk by the combination of its codes (insert new combinations),code set: el_instructional_model
+J07,gold.dim_student_profile,is_english_learner,silver.english_learner_program.program_start_date -> is_english_learner,
+J07,gold.fact_district_enrollment,student_profile_sk,silver.english_learner_program.program_start_date: lookup dim_student_profile by the combination of its codes (insert new combinations),
+J07,gold.fact_el_program,participation_days,Derived: calendar days from J07 to J08 (or A08),
+J07,gold.fact_el_program,start_date_sk,silver.english_learner_program.program_start_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+J07,gold.fact_school_enrollment,student_profile_sk,silver.english_learner_program.program_start_date: lookup dim_student_profile by the combination of its codes (insert new combinations),
+J07,gold.fact_student_school_year,student_profile_sk,silver.english_learner_program.program_start_date: lookup dim_student_profile by the combination of its codes (insert new combinations),
+J08,gold.fact_el_program,exit_date_sk,silver.english_learner_program.program_exit_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+J08,gold.fact_el_program,participation_days,Derived: calendar days from J07 to J08 (or A08),
+J09,gold.dim_el_junk,exit_reason_code,silver.english_learner_program.exit_reason_code -> exit_reason_code,code set: el_exit_reason
+J09,gold.dim_el_junk,exit_reason_description,silver.english_learner_program.exit_reason_code -> exit_reason_description,code set: el_exit_reason
+J09,gold.fact_el_program,el_junk_sk,silver.english_learner_program.exit_reason_code: lookup dim_el_junk by the combination of its codes (insert new combinations),code set: el_exit_reason
+J10,INACTIVE,,,Element inactive in manual v19.0
+J11,INACTIVE,,,Element inactive in manual v19.0
+J12,INACTIVE,,,Element inactive in manual v19.0
+J13,gold.fact_el_program,initial_wa_placement_test_date_sk,silver.english_learner_program.initial_wa_placement_test_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+J14,INACTIVE,,,Element inactive in manual v19.0
+J15,INACTIVE,,,Element inactive in manual v19.0
+J16,INACTIVE,,,Element inactive in manual v19.0
+J17,gold.dim_program,program_code,silver.english_learner_program.program_designation_code -> program_code (SCD2),code set: el_program_designation
+J17,gold.dim_program,program_family,silver.english_learner_program.program_designation_code -> program_family (SCD2),code set: el_program_designation
+J17,gold.dim_program,program_name,silver.english_learner_program.program_designation_code -> program_name (SCD2),code set: el_program_designation
+J17,gold.dim_student_profile,is_english_learner,silver.english_learner_program.program_designation_code -> is_english_learner,code set: el_program_designation
+J17,gold.fact_el_program,program_sk,"silver.english_learner_program.program_designation_code: lookup dim_program by program_family + program_code; unmatched -> -1, NULL -> -2",code set: el_program_designation
+J18,gold.dim_el_junk,placement_status_description,silver.english_learner_program.placement_test_code -> placement_status_description,code set: el_placement_test
+J18,gold.dim_el_junk,placement_test_code,silver.english_learner_program.placement_test_code -> placement_test_code,code set: el_placement_test
+J18,gold.dim_el_junk,placement_test_description,silver.english_learner_program.placement_test_code -> placement_test_description,code set: el_placement_test
+J18,gold.fact_el_program,el_junk_sk,silver.english_learner_program.placement_test_code: lookup dim_el_junk by the combination of its codes (insert new combinations),code set: el_placement_test
+J19,gold.dim_grade_level,grade_level_code,silver.english_learner_program.grade_level_at_placement -> grade_level_code,code set: grade_level
+J19,gold.fact_el_program,grade_level_sk,"silver.english_learner_program.grade_level_at_placement: lookup dim_grade_level by grade_level_code; unmatched -> -1, NULL -> -2",code set: grade_level
+J20,gold.fact_el_program,placement_test_scale_score,silver.english_learner_program.placement_test_scale_score -> INT,
+J21,gold.dim_el_junk,placement_status_code,silver.english_learner_program.placement_status_code -> placement_status_code,code set: el_placement_status
+J21,gold.dim_el_junk,placement_status_description,silver.english_learner_program.placement_status_code -> placement_status_description,code set: el_placement_status
+J21,gold.fact_el_program,el_junk_sk,silver.english_learner_program.placement_status_code: lookup dim_el_junk by the combination of its codes (insert new combinations),code set: el_placement_status
+J22,gold.fact_el_program,placement_test_date_sk,silver.english_learner_program.placement_test_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+J23,gold.fact_el_program,placement_test_level_score,"silver.english_learner_program.placement_test_level_score -> DECIMAL(2,1)",code set: el_placement_level_score
+K01,gold.fact_sped_program,school_year_sk,silver.special_education_program.school_year: school year (ending year) -> school_year_sk,
+K02,gold.fact_sped_program,district_sk,"silver.special_education_program.county_district_code: lookup dim_district by county_district_code, SCD2 row current for the school year; unmatched -> -1, NULL -> -2",code set: county_district
+K03,silver.xref_student,district_student_id,silver.special_education_program.district_student_id -> silver.xref_student.district_student_id,Collected with the SSID into xref_student; not carried into gold (SSID is the durable key)
+K04,gold.fact_sped_program,student_sk,"silver.special_education_program.ssid: lookup dim_student by SSID, SCD2 row current at the fact's effective date; unmatched -> -1, NULL -> -2",
+K05,INACTIVE,,,Element inactive in manual v19.0
+K06,gold.dim_lre,age_group,ref.ref_code -> age_group,code set: lre
+K06,gold.dim_lre,code,ref.ref_code -> code,code set: lre
+K06,gold.dim_lre,description,ref.ref_code -> description,code set: lre
+K06,gold.fact_sped_program,lre_sk,"silver.special_education_program.lre_code: lookup dim_lre by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: lre
+K07,INACTIVE,,,Element inactive in manual v19.0
+K08,gold.fact_sped_program,exit_date_sk,silver.special_education_program.exit_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+K08,gold.fact_sped_program,participation_days,Derived: calendar days from K14 to K08 (or A08),
+K09,gold.dim_sped_junk,exit_reason_code,silver.special_education_program.exit_reason_code -> exit_reason_code,code set: sped_exit_reason
+K09,gold.dim_sped_junk,exit_reason_description,silver.special_education_program.exit_reason_code -> exit_reason_description,code set: sped_exit_reason
+K09,gold.fact_sped_program,sped_junk_sk,silver.special_education_program.exit_reason_code: lookup dim_sped_junk by the combination of its codes (insert new combinations),code set: sped_exit_reason
+K10,INACTIVE,,,Element inactive in manual v19.0
+K11,INACTIVE,,,Element inactive in manual v19.0
+K12,INACTIVE,,,Element inactive in manual v19.0
+K13,INACTIVE,,,Element inactive in manual v19.0
+K14,gold.dim_program,program_family,silver.special_education_program.program_start_date -> program_family (SCD2),
+K14,gold.dim_student_profile,is_special_education,silver.special_education_program.program_start_date -> is_special_education,
+K14,gold.fact_district_enrollment,student_profile_sk,silver.special_education_program.program_start_date: lookup dim_student_profile by the combination of its codes (insert new combinations),
+K14,gold.fact_school_enrollment,student_profile_sk,silver.special_education_program.program_start_date: lookup dim_student_profile by the combination of its codes (insert new combinations),
+K14,gold.fact_sped_program,participation_days,Derived: calendar days from K14 to K08 (or A08),
+K14,gold.fact_sped_program,program_sk,"silver.special_education_program.program_start_date: lookup dim_program by program_family + program_code; unmatched -> -1, NULL -> -2",
+K14,gold.fact_sped_program,start_date_sk,silver.special_education_program.program_start_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+K14,gold.fact_student_school_year,student_profile_sk,silver.special_education_program.program_start_date: lookup dim_student_profile by the combination of its codes (insert new combinations),
+K15,gold.dim_non_public_agency,code,ref.ref_code -> code,code set: non_public_agency
+K15,gold.dim_non_public_agency,description,ref.ref_code -> description,code set: non_public_agency
+K15,gold.fact_sped_program,non_public_agency_sk,"silver.special_education_program.non_public_agency_code: lookup dim_non_public_agency by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: non_public_agency
+K16,gold.dim_prek_outcome_junk,social_emotional_entry_code,silver.special_education_program.prek_social_emotional_entry_code -> social_emotional_entry_code,code set: prek_outcome_entry_exit
+K16,gold.fact_sped_program,prek_outcome_junk_sk,silver.special_education_program.prek_social_emotional_entry_code: lookup dim_prek_outcome_junk by the combination of its codes (insert new combinations),code set: prek_outcome_entry_exit
+K17,gold.dim_prek_outcome_junk,knowledge_skills_entry_code,silver.special_education_program.prek_knowledge_skills_entry_code -> knowledge_skills_entry_code,code set: prek_outcome_entry_exit
+K17,gold.fact_sped_program,prek_outcome_junk_sk,silver.special_education_program.prek_knowledge_skills_entry_code: lookup dim_prek_outcome_junk by the combination of its codes (insert new combinations),code set: prek_outcome_entry_exit
+K18,gold.dim_prek_outcome_junk,behaviors_entry_code,silver.special_education_program.prek_behaviors_entry_code -> behaviors_entry_code,code set: prek_outcome_entry_exit
+K18,gold.fact_sped_program,prek_outcome_junk_sk,silver.special_education_program.prek_behaviors_entry_code: lookup dim_prek_outcome_junk by the combination of its codes (insert new combinations),code set: prek_outcome_entry_exit
+K19,gold.dim_prek_outcome_junk,social_emotional_exit_code,silver.special_education_program.prek_social_emotional_exit_code -> social_emotional_exit_code,code set: prek_outcome_entry_exit
+K19,gold.fact_sped_program,prek_outcome_junk_sk,silver.special_education_program.prek_social_emotional_exit_code: lookup dim_prek_outcome_junk by the combination of its codes (insert new combinations),code set: prek_outcome_entry_exit
+K20,gold.dim_prek_outcome_junk,social_emotional_progress_code,silver.special_education_program.prek_social_emotional_progress_code -> social_emotional_progress_code,code set: prek_outcome_progress
+K20,gold.fact_sped_program,prek_outcome_junk_sk,silver.special_education_program.prek_social_emotional_progress_code: lookup dim_prek_outcome_junk by the combination of its codes (insert new combinations),code set: prek_outcome_progress
+K21,gold.dim_prek_outcome_junk,knowledge_skills_exit_code,silver.special_education_program.prek_knowledge_skills_exit_code -> knowledge_skills_exit_code,code set: prek_outcome_entry_exit
+K21,gold.fact_sped_program,prek_outcome_junk_sk,silver.special_education_program.prek_knowledge_skills_exit_code: lookup dim_prek_outcome_junk by the combination of its codes (insert new combinations),code set: prek_outcome_entry_exit
+K22,gold.dim_prek_outcome_junk,knowledge_skills_progress_code,silver.special_education_program.prek_knowledge_skills_progress_code -> knowledge_skills_progress_code,code set: prek_outcome_progress
+K22,gold.fact_sped_program,prek_outcome_junk_sk,silver.special_education_program.prek_knowledge_skills_progress_code: lookup dim_prek_outcome_junk by the combination of its codes (insert new combinations),code set: prek_outcome_progress
+K23,gold.dim_prek_outcome_junk,behaviors_exit_code,silver.special_education_program.prek_behaviors_exit_code -> behaviors_exit_code,code set: prek_outcome_entry_exit
+K23,gold.fact_sped_program,prek_outcome_junk_sk,silver.special_education_program.prek_behaviors_exit_code: lookup dim_prek_outcome_junk by the combination of its codes (insert new combinations),code set: prek_outcome_entry_exit
+K24,gold.dim_prek_outcome_junk,behaviors_progress_code,silver.special_education_program.prek_behaviors_progress_code -> behaviors_progress_code,code set: prek_outcome_progress
+K24,gold.fact_sped_program,prek_outcome_junk_sk,silver.special_education_program.prek_behaviors_progress_code: lookup dim_prek_outcome_junk by the combination of its codes (insert new combinations),code set: prek_outcome_progress
+K25,gold.fact_sped_program,annual_iep_meeting_date_sk,silver.special_education_program.annual_iep_meeting_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+K26,gold.dim_sped_junk,interpreter_annual_iep_code,silver.special_education_program.interpreter_annual_iep_code -> interpreter_annual_iep_code,code set: interpreter_annual_iep
+K26,gold.fact_sped_program,sped_junk_sk,silver.special_education_program.interpreter_annual_iep_code: lookup dim_sped_junk by the combination of its codes (insert new combinations),code set: interpreter_annual_iep
+K27,gold.dim_sped_junk,transition_consent_code,silver.special_education_program.transition_consent_code -> transition_consent_code,code set: transition_consent
+K27,gold.fact_sped_program,sped_junk_sk,silver.special_education_program.transition_consent_code: lookup dim_sped_junk by the combination of its codes (insert new combinations),code set: transition_consent
+L01,gold.bridge_student_ethnicity,school_year_sk,silver.student_ethnicity.school_year: school year (ending year) -> school_year_sk,
+L02,gold.bridge_student_ethnicity,district_sk,"silver.student_ethnicity.county_district_code: lookup dim_district by county_district_code, SCD2 row current for the school year; unmatched -> -1, NULL -> -2",code set: county_district
+L03,silver.xref_student,district_student_id,silver.student_ethnicity.district_student_id -> silver.xref_student.district_student_id,Collected with the SSID into xref_student; not carried into gold (SSID is the durable key)
+L04,gold.bridge_student_ethnicity,student_sk,"silver.student_ethnicity.ssid: lookup dim_student by SSID, SCD2 row current at the fact's effective date; unmatched -> -1, NULL -> -2",
+L05,gold.bridge_student_ethnicity,ethnicity_sk,"silver.student_ethnicity.ethnicity_code: lookup dim_ethnicity by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: ethnicity
+L05,gold.dim_ethnicity,aggregate,ref.ref_code -> aggregate,code set: ethnicity
+L05,gold.dim_ethnicity,code,ref.ref_code -> code,code set: ethnicity
+L05,gold.dim_ethnicity,description,ref.ref_code -> description,code set: ethnicity
+L05,gold.fact_student_school_year,federal_race_ethnicity,Derived: Hispanic if any ethnicity aggregate is Hispanic/Latino; else the single race_category; else Two or More Races (Appendices Y/Z),code set: ethnicity
+L05,gold.fact_student_school_year,ospi_race_ethnicity,Derived: OSPI reporting category (same rule; Appendix Z race_category values),code set: ethnicity
+L06,gold.bridge_student_ethnicity,ethnicity_collection_method_code,silver.student_ethnicity.ethnicity_collection_method_code: one row per member,
+M01,gold.bridge_student_race,school_year_sk,silver.student_race.school_year: school year (ending year) -> school_year_sk,
+M02,gold.bridge_student_race,district_sk,"silver.student_race.county_district_code: lookup dim_district by county_district_code, SCD2 row current for the school year; unmatched -> -1, NULL -> -2",code set: county_district
+M03,silver.xref_student,district_student_id,silver.student_race.district_student_id -> silver.xref_student.district_student_id,Collected with the SSID into xref_student; not carried into gold (SSID is the durable key)
+M04,gold.bridge_student_race,student_sk,"silver.student_race.ssid: lookup dim_student by SSID, SCD2 row current at the fact's effective date; unmatched -> -1, NULL -> -2",
+M05,gold.bridge_student_race,race_sk,"silver.student_race.race_code: lookup dim_race by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: race
+M05,gold.dim_race,aggregate,ref.ref_code -> aggregate,code set: race
+M05,gold.dim_race,code,ref.ref_code -> code,code set: race
+M05,gold.dim_race,description,ref.ref_code -> description,code set: race
+M05,gold.dim_race,race_category,ref.ref_code -> race_category,code set: race
+M05,gold.fact_student_school_year,federal_race_ethnicity,Derived: Hispanic if any ethnicity aggregate is Hispanic/Latino; else the single race_category; else Two or More Races (Appendices Y/Z),code set: race
+M05,gold.fact_student_school_year,ospi_race_ethnicity,Derived: OSPI reporting category (same rule; Appendix Z race_category values),code set: race
+M06,gold.bridge_student_race,race_collection_method_code,silver.student_race.race_collection_method_code: one row per member,
+N01,gold.fact_absence,school_year_sk,silver.student_absence.school_year: school year (ending year) -> school_year_sk,
+N02,gold.fact_absence,district_sk,"silver.student_absence.county_district_code: lookup dim_district by county_district_code, SCD2 row current for the school year; unmatched -> -1, NULL -> -2",code set: county_district
+N03,silver.xref_student,district_student_id,silver.student_absence.district_student_id -> silver.xref_student.district_student_id,Collected with the SSID into xref_student; not carried into gold (SSID is the durable key)
+N04,gold.fact_absence,student_sk,"silver.student_absence.ssid: lookup dim_student by SSID, SCD2 row current at the fact's effective date; unmatched -> -1, NULL -> -2",
+N05,gold.fact_absence,school_sk,"silver.student_absence.location_id: lookup dim_school by county_district_code + OSPI school code (silver school_code); H26 9999 -> -3; unmatched -> -1, NULL -> -2",
+N06,gold.fact_absence,absence_date_sk,silver.student_absence.absence_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+N07,gold.dim_absence_type,code,ref.ref_code -> code,code set: absence_code
+N07,gold.dim_absence_type,description,ref.ref_code -> description,code set: absence_code
+N07,gold.dim_absence_type,is_excused,ref.ref_code -> is_excused,code set: absence_code
+N07,gold.dim_absence_type,is_full_day,ref.ref_code -> is_full_day,code set: absence_code
+N07,gold.fact_absence,absence_count,silver.student_absence.absence_code -> INT,code set: absence_code
+N07,gold.fact_absence,absence_type_sk,"silver.student_absence.absence_code: lookup dim_absence_type by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: absence_code
+N07,gold.fact_absence,excused_flag,silver.student_absence.absence_code -> INT,code set: absence_code
+N07,gold.fact_absence,full_day_flag,silver.student_absence.absence_code -> INT,code set: absence_code
+N07,gold.fact_absence,part_day_flag,silver.student_absence.absence_code -> INT,code set: absence_code
+N07,gold.fact_school_enrollment,enrolled_days,"Derived: days present + full-day absences, bounded by A07/A08 (approximation, design §6)",code set: absence_code
+N07,gold.fact_student_school_year,enrolled_days,"Derived: sum of school-enrollment enrolled_days (approximation, design §6)",code set: absence_code
+N07,gold.fact_student_school_year,excused_full_day_absences,Derived: count of N07 = EF,code set: absence_code
+N07,gold.fact_student_school_year,excused_part_day_absences,Derived: count of N07 = EP,code set: absence_code
+N07,gold.fact_student_school_year,unexcused_full_day_absences,Derived: count of N07 = UF,code set: absence_code
+N07,gold.fact_student_school_year,unexcused_part_day_absences,Derived: count of N07 = UP,code set: absence_code
+P01,INACTIVE,,,File P retired 2018-19
+P02,INACTIVE,,,File P retired 2018-19
+P03,INACTIVE,,,File P retired 2018-19
+P04,INACTIVE,,,File P retired 2018-19
+P05,INACTIVE,,,File P retired 2018-19
+P06,INACTIVE,,,File P retired 2018-19
+P07,INACTIVE,,,File P retired 2018-19
+P08,INACTIVE,,,File P retired 2018-19
+P09,INACTIVE,,,File P retired 2018-19
+P10,INACTIVE,,,File P retired 2018-19
+P11,INACTIVE,,,File P retired 2018-19
+P12,INACTIVE,,,File P retired 2018-19
+P13,INACTIVE,,,File P retired 2018-19
+P14,INACTIVE,,,File P retired 2018-19
+P15,INACTIVE,,,File P retired 2018-19
+P16,INACTIVE,,,File P retired 2018-19
+P17,INACTIVE,,,File P retired 2018-19
+P18,INACTIVE,,,File P retired 2018-19
+P19,INACTIVE,,,File P retired 2018-19
+P20,INACTIVE,,,File P retired 2018-19
+P21,INACTIVE,,,File P retired 2018-19
+P22,INACTIVE,,,File P retired 2018-19
+P23,INACTIVE,,,File P retired 2018-19
+P24,INACTIVE,,,File P retired 2018-19
+Q01,gold.fact_lap_growth,school_year_sk,silver.student_growth.school_year: school year (ending year) -> school_year_sk,
+Q02,gold.fact_lap_growth,district_sk,"silver.student_growth.county_district_code: lookup dim_district by county_district_code, SCD2 row current for the school year; unmatched -> -1, NULL -> -2",
+Q03,silver.xref_student,district_student_id,silver.student_growth.district_student_id -> silver.xref_student.district_student_id,Collected with the SSID into xref_student; not carried into gold (SSID is the durable key)
+Q04,gold.fact_lap_growth,student_sk,"silver.student_growth.ssid: lookup dim_student by SSID, SCD2 row current at the fact's effective date; unmatched -> -1, NULL -> -2",
+Q05,gold.fact_lap_growth,school_sk,"silver.student_growth.location_id: lookup dim_school by county_district_code + OSPI school code (silver school_code); H26 9999 -> -3; unmatched -> -1, NULL -> -2",
+Q06,gold.dim_program,is_lap_wrc,silver.student_growth.program_code -> is_lap_wrc (SCD2),code set: attribute_program
+Q06,gold.dim_program,program_code,silver.student_growth.program_code -> program_code (SCD2),code set: attribute_program
+Q06,gold.dim_program,program_family,silver.student_growth.program_code -> program_family (SCD2),code set: attribute_program
+Q06,gold.fact_lap_growth,program_sk,"silver.student_growth.program_code: lookup dim_program by program_family + program_code; unmatched -> -1, NULL -> -2",code set: attribute_program
+Q07,gold.fact_lap_growth,start_date_sk,silver.student_growth.program_start_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+Q08,gold.dim_growth_assessment,code,ref.ref_code -> code,code set: student_growth_assessment
+Q08,gold.dim_growth_assessment,description,ref.ref_code -> description,code set: student_growth_assessment
+Q08,gold.fact_lap_growth,identification_assessment_sk,"silver.student_growth.identification_assessment_code: lookup dim_growth_assessment by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: student_growth_assessment
+Q09,gold.dim_lap_junk,academic_growth_code,silver.student_growth.academic_growth_code -> academic_growth_code,code set: academic_growth; see decisions C-007
+Q09,gold.dim_lap_junk,academic_growth_description,silver.student_growth.academic_growth_code -> academic_growth_description,code set: academic_growth
+Q09,gold.fact_lap_growth,growth_months,Derived: Q09 as months (0-20); NULL for other codes (C-007),code set: academic_growth; see decisions C-007
+Q09,gold.fact_lap_growth,lap_junk_sk,silver.student_growth.academic_growth_code: lookup dim_lap_junk by the combination of its codes (insert new combinations),code set: academic_growth
+Q10,gold.dim_growth_assessment,code,ref.ref_code -> code,code set: student_growth_assessment
+Q10,gold.dim_growth_assessment,description,ref.ref_code -> description,code set: student_growth_assessment
+Q10,gold.fact_lap_growth,progress_monitoring_assessment_sk,"silver.student_growth.progress_monitoring_assessment_code: lookup dim_growth_assessment by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: student_growth_assessment
+Q11,gold.fact_lap_growth,beginning_score,"silver.student_growth.beginning_score -> DECIMAL(6,2)",
+Q12,gold.fact_lap_growth,beginning_score_date_sk,silver.student_growth.beginning_score_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+Q13,gold.fact_lap_growth,end_score,"silver.student_growth.end_score -> DECIMAL(6,2)",
+Q14,gold.fact_lap_growth,end_score_date_sk,silver.student_growth.end_score_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+Q15,gold.dim_lap_junk,extended_learning_intervention_code,silver.student_growth.extended_learning_intervention_code -> extended_learning_intervention_code,code set: extended_learning_intervention
+Q15,gold.dim_lap_junk,extended_learning_intervention_description,silver.student_growth.extended_learning_intervention_code -> extended_learning_intervention_description,code set: extended_learning_intervention
+Q15,gold.fact_lap_growth,lap_junk_sk,silver.student_growth.extended_learning_intervention_code: lookup dim_lap_junk by the combination of its codes (insert new combinations),code set: extended_learning_intervention
+Q16,gold.dim_lap_junk,regular_day_intervention_code,silver.student_growth.regular_day_intervention_code -> regular_day_intervention_code,code set: regular_day_intervention
+Q16,gold.dim_lap_junk,regular_day_intervention_description,silver.student_growth.regular_day_intervention_code -> regular_day_intervention_description,code set: regular_day_intervention
+Q16,gold.fact_lap_growth,lap_junk_sk,silver.student_growth.regular_day_intervention_code: lookup dim_lap_junk by the combination of its codes (insert new combinations),code set: regular_day_intervention
+Q17,gold.dim_lap_junk,at_grade_level,silver.student_growth.at_grade_level -> at_grade_level,code set: yes_no
+Q17,gold.fact_lap_growth,lap_junk_sk,silver.student_growth.at_grade_level: lookup dim_lap_junk by the combination of its codes (insert new combinations),code set: yes_no
+R01,gold.fact_exclusionary_action,school_year_sk,silver.exclusionary_discipline.school_year: school year (ending year) -> school_year_sk,
+R02,gold.fact_exclusionary_action,district_sk,"silver.exclusionary_discipline.county_district_code: lookup dim_district by county_district_code, SCD2 row current for the school year; unmatched -> -1, NULL -> -2",code set: county_district
+R02,gold.fact_exclusionary_action,incident_key,silver.exclusionary_discipline.county_district_code -> STRING,code set: county_district
+R03,silver.xref_student,district_student_id,silver.exclusionary_discipline.district_student_id -> silver.xref_student.district_student_id,Collected with the SSID into xref_student; not carried into gold (SSID is the durable key)
+R04,gold.fact_exclusionary_action,student_sk,"silver.exclusionary_discipline.ssid: lookup dim_student by SSID, SCD2 row current at the fact's effective date; unmatched -> -1, NULL -> -2",
+R05,gold.fact_exclusionary_action,school_sk,"silver.exclusionary_discipline.location_id: lookup dim_school by county_district_code + OSPI school code (silver school_code); H26 9999 -> -3; unmatched -> -1, NULL -> -2",
+R06,gold.fact_exclusionary_action,incident_id,silver.exclusionary_discipline.incident_id -> STRING,
+R06,gold.fact_exclusionary_action,incident_key,silver.exclusionary_discipline.incident_id -> STRING,
+R07,gold.fact_exclusionary_action,incident_date_sk,silver.exclusionary_discipline.incident_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+R08,gold.dim_behavior,code,ref.ref_code -> code,code set: behavior
+R08,gold.dim_behavior,definition,ref.ref_code -> definition,code set: behavior
+R08,gold.dim_behavior,description,ref.ref_code -> description,code set: behavior
+R08,gold.fact_exclusionary_action,behavior_sk,"silver.exclusionary_discipline.behavior_code: lookup dim_behavior by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: behavior
+R09,gold.bridge_other_behavior,behavior_sk,"silver.exclusionary_discipline.other_behavior_codes: lookup dim_behavior by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: behavior; multi-valued (comma)
+R09,gold.bridge_other_behavior,other_behavior_group_sk,silver.exclusionary_discipline.other_behavior_codes: sort + de-duplicate members -> lookup dim_other_behavior_group by group_codes; none -> -2,code set: behavior; multi-valued (comma)
+R09,gold.dim_behavior,code,ref.ref_code -> code,code set: behavior; multi-valued (comma)
+R09,gold.dim_behavior,definition,ref.ref_code -> definition,code set: behavior; multi-valued (comma)
+R09,gold.dim_behavior,description,ref.ref_code -> description,code set: behavior; multi-valued (comma)
+R09,gold.dim_other_behavior_group,group_codes,"silver.exclusionary_discipline.other_behavior_codes: distinct member codes, sorted, joined with ','",code set: behavior; multi-valued (comma)
+R09,gold.dim_other_behavior_group,member_count,silver.exclusionary_discipline.other_behavior_codes: number of distinct member codes,code set: behavior; multi-valued (comma)
+R09,gold.fact_exclusionary_action,other_behavior_group_sk,silver.exclusionary_discipline.other_behavior_codes: sort + de-duplicate members -> lookup dim_other_behavior_group by group_codes; none -> -2,code set: behavior; multi-valued (comma)
+R10,gold.dim_weapon,code,ref.ref_code -> code,code set: weapon
+R10,gold.dim_weapon,definition,ref.ref_code -> definition,code set: weapon
+R10,gold.dim_weapon,description,ref.ref_code -> description,code set: weapon
+R10,gold.fact_exclusionary_action,weapon_sk,"silver.exclusionary_discipline.weapon_type_code: lookup dim_weapon by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: weapon
+R11,gold.dim_exclusionary_action,code,ref.ref_code -> code,code set: exclusionary_action
+R11,gold.dim_exclusionary_action,description,ref.ref_code -> description,code set: exclusionary_action
+R11,gold.fact_exclusionary_action,exclusionary_action_sk,"silver.exclusionary_discipline.exclusionary_action_code: lookup dim_exclusionary_action by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: exclusionary_action
+R12,gold.fact_exclusionary_action,action_date_sk,silver.exclusionary_discipline.exclusionary_action_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+R13,gold.fact_exclusionary_action,duration_days,"silver.exclusionary_discipline.duration_days -> DECIMAL(4,1)",
+R14,gold.fact_exclusionary_action,total_exclusionary_time,"silver.exclusionary_discipline.total_exclusionary_time -> DECIMAL(4,1)",
+R15,gold.dim_discipline_junk,iaes_code,silver.exclusionary_discipline.iaes_code -> iaes_code,code set: iaes
+R15,gold.fact_exclusionary_action,discipline_junk_sk,silver.exclusionary_discipline.iaes_code: lookup dim_discipline_junk by the combination of its codes (insert new combinations),code set: iaes
+R16,gold.dim_discipline_junk,academic_services_code,silver.exclusionary_discipline.academic_services_code -> academic_services_code,code set: academic_services
+R16,gold.fact_exclusionary_action,discipline_junk_sk,silver.exclusionary_discipline.academic_services_code: lookup dim_discipline_junk by the combination of its codes (insert new combinations),code set: academic_services
+R17,gold.dim_discipline_junk,behavior_services_code,silver.exclusionary_discipline.behavior_services_code -> behavior_services_code,code set: behavior_services
+R17,gold.fact_exclusionary_action,discipline_junk_sk,silver.exclusionary_discipline.behavior_services_code: lookup dim_discipline_junk by the combination of its codes (insert new combinations),code set: behavior_services
+R18,gold.fact_exclusionary_action,readmission_petition_submitted_date_sk,silver.exclusionary_discipline.readmission_petition_submitted_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+R19,gold.fact_exclusionary_action,readmission_petition_granted_date_sk,silver.exclusionary_discipline.readmission_petition_granted_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+R20,gold.dim_discipline_junk,expulsion_extension_petition_code,silver.exclusionary_discipline.expulsion_extension_petition_code -> expulsion_extension_petition_code,code set: expulsion_extension_petition
+R20,gold.fact_exclusionary_action,discipline_junk_sk,silver.exclusionary_discipline.expulsion_extension_petition_code: lookup dim_discipline_junk by the combination of its codes (insert new combinations),code set: expulsion_extension_petition
+R21,gold.dim_discipline_junk,reengagement_plan_code,silver.exclusionary_discipline.reengagement_plan_code -> reengagement_plan_code,code set: reengagement_plan
+R21,gold.fact_exclusionary_action,discipline_junk_sk,silver.exclusionary_discipline.reengagement_plan_code: lookup dim_discipline_junk by the combination of its codes (insert new combinations),code set: reengagement_plan
+R22,gold.fact_exclusionary_action,reengagement_meeting_date_sk,silver.exclusionary_discipline.reengagement_meeting_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+R23,gold.dim_discipline_junk,appeal_code,silver.exclusionary_discipline.appeal_code -> appeal_code,code set: appeal_code
+R23,gold.fact_exclusionary_action,discipline_junk_sk,silver.exclusionary_discipline.appeal_code: lookup dim_discipline_junk by the combination of its codes (insert new combinations),code set: appeal_code
+R24,gold.dim_discipline_junk,safety_staff_involvement_code,silver.exclusionary_discipline.safety_staff_involvement_code -> safety_staff_involvement_code,code set: safety_staff_involvement
+R24,gold.fact_exclusionary_action,discipline_junk_sk,silver.exclusionary_discipline.safety_staff_involvement_code: lookup dim_discipline_junk by the combination of its codes (insert new combinations),code set: safety_staff_involvement
+R25,gold.dim_discipline_junk,safety_staff_used_force_code,silver.exclusionary_discipline.safety_staff_used_force_code -> safety_staff_used_force_code,code set: safety_staff_force
+R25,gold.fact_exclusionary_action,discipline_junk_sk,silver.exclusionary_discipline.safety_staff_used_force_code: lookup dim_discipline_junk by the combination of its codes (insert new combinations),code set: safety_staff_force
+R26,gold.dim_discipline_junk,safety_staff_arrest_code,silver.exclusionary_discipline.safety_staff_arrest_code -> safety_staff_arrest_code,code set: student_arrested
+R26,gold.fact_exclusionary_action,discipline_junk_sk,silver.exclusionary_discipline.safety_staff_arrest_code: lookup dim_discipline_junk by the combination of its codes (insert new combinations),code set: student_arrested
+R27,gold.dim_discipline_junk,interpreter_reengagement_meeting_code,silver.exclusionary_discipline.interpreter_reengagement_meeting_code -> interpreter_reengagement_meeting_code,code set: interpreter_reengagement_meeting
+R27,gold.fact_exclusionary_action,discipline_junk_sk,silver.exclusionary_discipline.interpreter_reengagement_meeting_code: lookup dim_discipline_junk by the combination of its codes (insert new combinations),code set: interpreter_reengagement_meeting
+S01,gold.fact_restraint_isolation,school_year_sk,silver.restraint_isolation.school_year: school year (ending year) -> school_year_sk,
+S02,gold.fact_restraint_isolation,action_key,silver.restraint_isolation.county_district_code -> STRING,code set: county_district
+S02,gold.fact_restraint_isolation,district_sk,"silver.restraint_isolation.county_district_code: lookup dim_district by county_district_code, SCD2 row current for the school year; unmatched -> -1, NULL -> -2",code set: county_district
+S03,silver.xref_student,district_student_id,silver.restraint_isolation.district_student_id -> silver.xref_student.district_student_id,Collected with the SSID into xref_student; not carried into gold (SSID is the durable key)
+S04,gold.fact_restraint_isolation,student_sk,"silver.restraint_isolation.ssid: lookup dim_student by SSID, SCD2 row current at the fact's effective date; unmatched -> -1, NULL -> -2",
+S05,gold.fact_restraint_isolation,school_sk,"silver.restraint_isolation.location_id: lookup dim_school by county_district_code + OSPI school code (silver school_code); H26 9999 -> -3; unmatched -> -1, NULL -> -2",
+S06,gold.fact_restraint_isolation,action_id,silver.restraint_isolation.action_id -> STRING,
+S06,gold.fact_restraint_isolation,action_key,silver.restraint_isolation.action_id -> STRING,
+S07,gold.fact_restraint_isolation,action_date_sk,silver.restraint_isolation.action_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+S08,gold.fact_restraint_isolation,duration_minutes,"silver.restraint_isolation.action_duration_minutes -> DECIMAL(4,1)",
+S09,gold.dim_restraint_isolation_type,code,ref.ref_code -> code,code set: restraint_isolation_type
+S09,gold.dim_restraint_isolation_type,description,ref.ref_code -> description,code set: restraint_isolation_type
+S09,gold.dim_restraint_isolation_type,value_group,ref.ref_code -> value_group,code set: restraint_isolation_type
+S09,gold.fact_restraint_isolation,restraint_isolation_type_sk,"silver.restraint_isolation.restraint_isolation_type_code: lookup dim_restraint_isolation_type by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: restraint_isolation_type
+S10,gold.dim_restraint_junk,student_injured,silver.restraint_isolation.student_injured -> student_injured,code set: yes_no
+S10,gold.fact_restraint_isolation,restraint_junk_sk,silver.restraint_isolation.student_injured: lookup dim_restraint_junk by the combination of its codes (insert new combinations),code set: yes_no
+S11,gold.fact_restraint_isolation,staff_injured_count,silver.restraint_isolation.staff_injured_count -> INT,
+S12,gold.dim_restraint_junk,safety_staff_involvement_code,silver.restraint_isolation.safety_staff_involvement_code -> safety_staff_involvement_code,code set: safety_staff_involvement
+S12,gold.fact_restraint_isolation,restraint_junk_sk,silver.restraint_isolation.safety_staff_involvement_code: lookup dim_restraint_junk by the combination of its codes (insert new combinations),code set: safety_staff_involvement
+S13,INACTIVE,,,Element inactive in manual v19.0
+S14,INACTIVE,,,Element inactive in manual v19.0
+T01,gold.dim_course,school_year_sk,silver.nontraditional_credit.school_year: school year (ending year) -> school_year_sk,
+T01,gold.fact_nontraditional_credit,school_year_sk,silver.nontraditional_credit.school_year: school year (ending year) -> school_year_sk,
+T02,gold.dim_course,county_district_code,silver.nontraditional_credit.county_district_code -> county_district_code,code set: county_district
+T02,gold.fact_nontraditional_credit,district_sk,"silver.nontraditional_credit.county_district_code: lookup dim_district by county_district_code, SCD2 row current for the school year; unmatched -> -1, NULL -> -2",code set: county_district
+T03,silver.xref_student,district_student_id,silver.nontraditional_credit.district_student_id -> silver.xref_student.district_student_id,Collected with the SSID into xref_student; not carried into gold (SSID is the durable key)
+T04,gold.fact_nontraditional_credit,student_sk,"silver.nontraditional_credit.ssid: lookup dim_student by SSID, SCD2 row current at the fact's effective date; unmatched -> -1, NULL -> -2",
+T05,gold.dim_course,school_code,silver.nontraditional_credit.location_id -> school_code,
+T05,gold.dim_course,school_sk,"silver.nontraditional_credit.location_id: lookup dim_school by county_district_code + OSPI school code (silver school_code); H26 9999 -> -3; unmatched -> -1, NULL -> -2",
+T05,gold.fact_nontraditional_credit,school_sk,"silver.nontraditional_credit.location_id: lookup dim_school by county_district_code + OSPI school code (silver school_code); H26 9999 -> -3; unmatched -> -1, NULL -> -2",
+T06,gold.dim_course,course_id,silver.nontraditional_credit.attempt_id -> course_id,
+T06,gold.fact_nontraditional_credit,attempt_id,silver.nontraditional_credit.attempt_id -> STRING,
+T07,gold.dim_course,course_id,silver.nontraditional_credit.course_id -> course_id,
+T07,gold.fact_nontraditional_credit,course_sk,"silver.nontraditional_credit.course_id: lookup dim_course by school year + district + school + course ID (catalog_source D, else H/T-inferred member); unmatched -> -1, NULL -> -2",
+T08,gold.dim_course,course_title,silver.nontraditional_credit.attempt_title -> course_title,
+T08,gold.fact_nontraditional_credit,course_sk,"silver.nontraditional_credit.attempt_title: lookup dim_course by school year + district + school + course ID (catalog_source D, else H/T-inferred member); unmatched -> -1, NULL -> -2",
+T09,gold.dim_course,content_area_code,silver.nontraditional_credit.content_area_code -> content_area_code,code set: content_area
+T09,gold.dim_course,content_area_description,silver.nontraditional_credit.content_area_code -> content_area_description,code set: content_area
+T09,gold.fact_nontraditional_credit,course_sk,"silver.nontraditional_credit.content_area_code: lookup dim_course by school year + district + school + course ID (catalog_source D, else H/T-inferred member); unmatched -> -1, NULL -> -2",code set: content_area
+T10,gold.bridge_course_designation_group,course_designation_group_sk,silver.nontraditional_credit.course_designation_codes: sort + de-duplicate members -> lookup dim_course_designation_group by group_codes; none -> -2,code set: course_designation; multi-valued (concatenated)
+T10,gold.bridge_course_designation_group,course_designation_sk,"silver.nontraditional_credit.course_designation_codes: lookup dim_course_designation by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: course_designation; multi-valued (concatenated)
+T10,gold.dim_course_designation,code,ref.ref_code -> code,code set: course_designation; multi-valued (concatenated)
+T10,gold.dim_course_designation,description,ref.ref_code -> description,code set: course_designation; multi-valued (concatenated)
+T10,gold.dim_course_designation_group,group_codes,"silver.nontraditional_credit.course_designation_codes: distinct member codes, sorted, joined with ','",code set: course_designation; multi-valued (concatenated)
+T10,gold.dim_course_designation_group,member_count,silver.nontraditional_credit.course_designation_codes: number of distinct member codes,code set: course_designation; multi-valued (concatenated)
+T10,gold.fact_nontraditional_credit,course_designation_group_sk,silver.nontraditional_credit.course_designation_codes: sort + de-duplicate members -> lookup dim_course_designation_group by group_codes; none -> -2,code set: course_designation; multi-valued (concatenated)
+T11,gold.dim_course,state_course_sk,"silver.nontraditional_credit.state_course_code: lookup dim_state_course by state_course_code; unmatched -> -1, NULL -> -2",code set: state_course
+T11,gold.dim_state_course,state_course_code,silver.nontraditional_credit.state_course_code -> state_course_code,code set: state_course
+T11,gold.fact_nontraditional_credit,course_sk,"silver.nontraditional_credit.state_course_code: lookup dim_course by school year + district + school + course ID (catalog_source D, else H/T-inferred member); unmatched -> -1, NULL -> -2",code set: state_course
+T12,gold.dim_ale_course_type,code,ref.ref_code -> code,code set: ale_course_type
+T12,gold.dim_ale_course_type,description,ref.ref_code -> description,code set: ale_course_type
+T12,gold.fact_nontraditional_credit,ale_course_type_sk,"silver.nontraditional_credit.ale_course_type_code: lookup dim_ale_course_type by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: ale_course_type
+T13,gold.dim_online_provider,code,ref.ref_code -> code,code set: online_provider
+T13,gold.dim_online_provider,description,ref.ref_code -> description,code set: online_provider
+T13,gold.fact_nontraditional_credit,online_provider_sk,"silver.nontraditional_credit.online_provider_code: lookup dim_online_provider by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: online_provider
+T14,gold.dim_online_program,code,ref.ref_code -> code,code set: online_program
+T14,gold.dim_online_program,description,ref.ref_code -> description,code set: online_program
+T14,gold.dim_online_program,resident_district,ref.ref_code -> resident_district,code set: online_program
+T14,gold.fact_nontraditional_credit,online_program_sk,"silver.nontraditional_credit.online_program_code: lookup dim_online_program by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: online_program
+T15,gold.dim_letter_grade,code,ref.ref_code -> code,code set: letter_grade
+T15,gold.dim_letter_grade,description,ref.ref_code -> description,code set: letter_grade
+T15,gold.dim_letter_grade,grade_points,ref.ref_code -> grade_points,code set: letter_grade
+T15,gold.fact_nontraditional_credit,letter_grade_sk,"silver.nontraditional_credit.letter_grade: lookup dim_letter_grade by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: letter_grade
+T16,gold.fact_nontraditional_credit,credits_attempted,"silver.nontraditional_credit.credits_attempted -> DECIMAL(4,2)",
+T17,gold.fact_nontraditional_credit,credits_earned,"silver.nontraditional_credit.credits_earned -> DECIMAL(4,2)",
+T18,gold.dim_course,course_level_code,silver.nontraditional_credit.course_level_code -> course_level_code,code set: course_level
+T18,gold.dim_course,course_level_description,silver.nontraditional_credit.course_level_code -> course_level_description,code set: course_level
+T18,gold.fact_nontraditional_credit,course_sk,"silver.nontraditional_credit.course_level_code: lookup dim_course by school year + district + school + course ID (catalog_source D, else H/T-inferred member); unmatched -> -1, NULL -> -2",code set: course_level
+T19,INACTIVE,,,Element inactive in manual v19.0
+T20,INACTIVE,,,Element inactive in manual v19.0
+U01,gold.fact_initial_evaluation,school_year_sk,silver.initial_evaluation.school_year: school year (ending year) -> school_year_sk,
+U02,gold.fact_initial_evaluation,district_sk,"silver.initial_evaluation.county_district_code: lookup dim_district by county_district_code, SCD2 row current for the school year; unmatched -> -1, NULL -> -2",code set: county_district
+U03,silver.xref_student,district_student_id,silver.initial_evaluation.district_student_id -> silver.xref_student.district_student_id,Collected with the SSID into xref_student; not carried into gold (SSID is the durable key)
+U04,gold.fact_initial_evaluation,student_sk,"silver.initial_evaluation.ssid: lookup dim_student by SSID, SCD2 row current at the fact's effective date; unmatched -> -1, NULL -> -2",
+U05,gold.fact_initial_evaluation,referral_date_sk,silver.initial_evaluation.initial_referral_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+U05,gold.fact_initial_evaluation,referral_to_consent_days,Derived: calendar days U05 -> U06,
+U05,gold.fact_initial_evaluation,referral_to_iep_days,Derived: calendar days U05 -> U11,
+U06,gold.fact_initial_evaluation,consent_date_sk,silver.initial_evaluation.consent_received_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+U06,gold.fact_initial_evaluation,consent_to_eligibility_days,Derived: calendar days U06 -> U07,
+U06,gold.fact_initial_evaluation,referral_to_consent_days,Derived: calendar days U05 -> U06,
+U07,gold.fact_initial_evaluation,consent_to_eligibility_days,Derived: calendar days U06 -> U07,
+U07,gold.fact_initial_evaluation,eligibility_determination_date_sk,silver.initial_evaluation.eligibility_determination_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+U07,gold.fact_initial_evaluation,eligibility_to_iep_days,Derived: calendar days U07 -> U11,
+U08,gold.fact_initial_evaluation,school_days_to_complete,silver.initial_evaluation.school_days_to_complete -> INT,
+U09,gold.dim_initial_evaluation_junk,is_allowable_late_evaluation,silver.initial_evaluation.late_evaluation_reason_code -> is_allowable_late_evaluation,code set: late_evaluation_reason
+U09,gold.dim_initial_evaluation_junk,late_evaluation_reason_code,silver.initial_evaluation.late_evaluation_reason_code -> late_evaluation_reason_code,code set: late_evaluation_reason
+U09,gold.dim_initial_evaluation_junk,late_evaluation_reason_description,silver.initial_evaluation.late_evaluation_reason_code -> late_evaluation_reason_description,code set: late_evaluation_reason
+U09,gold.fact_initial_evaluation,initial_evaluation_junk_sk,silver.initial_evaluation.late_evaluation_reason_code: lookup dim_initial_evaluation_junk by the combination of its codes (insert new combinations),code set: late_evaluation_reason
+U10,gold.dim_initial_evaluation_junk,evaluation_outcome_code,silver.initial_evaluation.evaluation_outcome_code -> evaluation_outcome_code,code set: initial_eval_outcome
+U10,gold.dim_initial_evaluation_junk,evaluation_outcome_description,silver.initial_evaluation.evaluation_outcome_code -> evaluation_outcome_description,code set: initial_eval_outcome
+U10,gold.dim_initial_evaluation_junk,evaluation_outcome_group,silver.initial_evaluation.evaluation_outcome_code -> evaluation_outcome_group,code set: initial_eval_outcome
+U10,gold.fact_initial_evaluation,initial_evaluation_junk_sk,silver.initial_evaluation.evaluation_outcome_code: lookup dim_initial_evaluation_junk by the combination of its codes (insert new combinations),code set: initial_eval_outcome
+U11,gold.fact_initial_evaluation,eligibility_to_iep_days,Derived: calendar days U07 -> U11,
+U11,gold.fact_initial_evaluation,initial_iep_meeting_date_sk,silver.initial_evaluation.initial_iep_meeting_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+U11,gold.fact_initial_evaluation,referral_to_iep_days,Derived: calendar days U05 -> U11,
+U12,gold.dim_initial_evaluation_junk,is_allowable_late_part_c,silver.initial_evaluation.late_part_c_transition_reason_code -> is_allowable_late_part_c,code set: late_part_c_transition_reason
+U12,gold.dim_initial_evaluation_junk,late_part_c_transition_reason_code,silver.initial_evaluation.late_part_c_transition_reason_code -> late_part_c_transition_reason_code,code set: late_part_c_transition_reason
+U12,gold.dim_initial_evaluation_junk,late_part_c_transition_reason_description,silver.initial_evaluation.late_part_c_transition_reason_code -> late_part_c_transition_reason_description,code set: late_part_c_transition_reason
+U12,gold.fact_initial_evaluation,initial_evaluation_junk_sk,silver.initial_evaluation.late_part_c_transition_reason_code: lookup dim_initial_evaluation_junk by the combination of its codes (insert new combinations),code set: late_part_c_transition_reason
+U13,gold.dim_initial_evaluation_junk,interpreter_initial_iep_code,silver.initial_evaluation.interpreter_initial_iep_code -> interpreter_initial_iep_code,code set: interpreter_initial_iep
+U13,gold.fact_initial_evaluation,initial_evaluation_junk_sk,silver.initial_evaluation.interpreter_initial_iep_code: lookup dim_initial_evaluation_junk by the combination of its codes (insert new combinations),code set: interpreter_initial_iep
+V01,gold.fact_support_screening,school_year_sk,silver.student_support.school_year: school year (ending year) -> school_year_sk,
+V02,gold.fact_support_screening,district_sk,"silver.student_support.county_district_code: lookup dim_district by county_district_code, SCD2 row current for the school year; unmatched -> -1, NULL -> -2",
+V03,silver.xref_student,district_student_id,silver.student_support.district_student_id -> silver.xref_student.district_student_id,Collected with the SSID into xref_student; not carried into gold (SSID is the durable key)
+V04,gold.fact_support_screening,student_sk,"silver.student_support.ssid: lookup dim_student by SSID, SCD2 row current at the fact's effective date; unmatched -> -1, NULL -> -2",
+V05,gold.fact_support_screening,school_sk,"silver.student_support.location_id: lookup dim_school by county_district_code + OSPI school code (silver school_code); H26 9999 -> -3; unmatched -> -1, NULL -> -2",
+V06,gold.dim_program,program_code,silver.student_support.support_code -> program_code (SCD2),code set: support_code
+V06,gold.dim_program,program_family,silver.student_support.support_code -> program_family (SCD2),code set: support_code
+V06,gold.dim_program,program_name,silver.student_support.support_code -> program_name (SCD2),code set: support_code
+V06,gold.fact_support_screening,program_sk,"silver.student_support.support_code: lookup dim_program by program_family + program_code; unmatched -> -1, NULL -> -2",code set: support_code
+V07,gold.dim_support_screening_junk,identification_assessment_code,silver.student_support.identification_assessment_code -> identification_assessment_code,code set: support_identification_assessment
+V07,gold.dim_support_screening_junk,identification_assessment_description,silver.student_support.identification_assessment_code -> identification_assessment_description,code set: support_identification_assessment
+V07,gold.fact_support_screening,support_screening_junk_sk,silver.student_support.identification_assessment_code: lookup dim_support_screening_junk by the combination of its codes (insert new combinations),code set: support_identification_assessment
+V08,gold.fact_support_screening,identification_assessment_date_sk,silver.student_support.identification_assessment_date: date -> INT YYYYMMDD; NULL -> -2 (not applicable),
+V09,gold.dim_support_screening_junk,support_determination_code,silver.student_support.support_determination_code -> support_determination_code,code set: support_determination
+V09,gold.dim_support_screening_junk,support_determination_description,silver.student_support.support_determination_code -> support_determination_description,code set: support_determination
+V09,gold.fact_support_screening,support_screening_junk_sk,silver.student_support.support_determination_code: lookup dim_support_screening_junk by the combination of its codes (insert new combinations),code set: support_determination
+V10,gold.bridge_intervention_group,intervention_group_sk,silver.student_support.intervention_codes: sort + de-duplicate members -> lookup dim_intervention_group by group_codes; none -> -2,code set: intervention; multi-valued (comma)
+V10,gold.bridge_intervention_group,intervention_sk,"silver.student_support.intervention_codes: lookup dim_intervention by code (row valid for the school year); unmatched -> -1, NULL -> -2",code set: intervention; multi-valued (comma)
+V10,gold.dim_intervention,code,ref.ref_code -> code,code set: intervention; multi-valued (comma)
+V10,gold.dim_intervention,description,ref.ref_code -> description,code set: intervention; multi-valued (comma)
+V10,gold.dim_intervention,intervention_group,ref.ref_code -> intervention_group,code set: intervention; multi-valued (comma)
+V10,gold.dim_intervention_group,group_codes,"silver.student_support.intervention_codes: distinct member codes, sorted, joined with ','",code set: intervention; multi-valued (comma)
+V10,gold.dim_intervention_group,member_count,silver.student_support.intervention_codes: number of distinct member codes,code set: intervention; multi-valued (comma)
+V10,gold.fact_support_screening,intervention_group_sk,silver.student_support.intervention_codes: sort + de-duplicate members -> lookup dim_intervention_group by group_codes; none -> -2,code set: intervention; multi-valued (comma)

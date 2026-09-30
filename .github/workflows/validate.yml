@@ -1,0 +1,24 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Rebuild all artifacts from sources/
+        run: python tools/build.py
+      - name: Committed artifacts are up to date
+        run: git diff --exit-code -- catalog seeds sql mapping docs/erd.md
+      - name: Validate (CLAUDE.md phase 6)
+        run: python tools/validate.py
+      - name: Tests
+        run: python -m pytest -q tests

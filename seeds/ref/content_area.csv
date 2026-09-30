@@ -1,0 +1,33 @@
+code,description,core_content_educator_equity,source_order,valid_from_year,valid_to_year
+ZZZ,Non-Instructional time,No,1,,
+123,More than one core content area (block class),Yes,2,,
+1,Elementary Curriculum,Yes,3,,2015
+2,English Language Arts,Yes,4,,2015
+3,Reading,Yes,5,,2015
+4,Math,Yes,6,,2015
+5,Science,Yes,7,,2015
+6,Foreign Languages,Yes,8,,2015
+7,History,Yes,9,,2015
+8,Civics and Government,Yes,10,,2015
+9,Economics,Yes,11,,2015
+10,Geography,Yes,12,,2015
+11,Visual Arts,Yes,13,,2015
+12,Theatre,Yes,14,,2015
+13,Dance,Yes,15,,2015
+14,Music,Yes,16,,2015
+107,Religious Education and Theology,Yes,17,,2015
+108,"Physical, Health and Safety Education",Yes,18,,2015
+109,Military Science,Yes,19,,2015
+110,Computer and Information Sciences,Yes,20,,2015
+111,Communications and Audio/Visual Technology,Yes,21,,2015
+112,Business and Marketing,Yes,22,,2015
+113,Manufacturing,Yes,23,,2015
+114,Health Care Sciences,Yes,24,,2015
+115,"Public, Protective, and Government Service",Yes,25,,2015
+116,Hospitality and Tourism,Yes,26,,2015
+117,Architecture and Construction,Yes,27,,2015
+118,"Agriculture, Food, and Natural Resources",Yes,28,,2015
+119,Human Services,Yes,29,,2015
+120,"Transportation, Distribution and Logistics",Yes,30,,2015
+121,Engineering and Technology,Yes,31,,2015
+122,Miscellaneous,Yes,32,,2015

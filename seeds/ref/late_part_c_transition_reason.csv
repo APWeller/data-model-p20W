@@ -1,0 +1,11 @@
+code,description,is_allowable_exception,source_order,valid_from_year,valid_to_year
+1,Parent refusal to provide consent caused delayed evaluation or initial services.,Y,1,,
+2,Parent repeatedly failed to produce the student for the evaluation.,Y,2,,
+3,"The student transferred in from another district after the consent was obtained and the evaluation had begun but not yet been completed by the sending school district, including a determination of eligibility.",Y,3,,
+4,Student was referred to Part C less than 90 days prior to student's third birthday.,Y,4,,
+5,Transition planning meeting convened by Part C did not occur at least 90 days prior to student's 3rd birthday.,N,5,,
+6,Referred to Part B less than 90 days prior to the student's third birthday.,N,6,,
+7,District scheduling/staffing issues.,N,7,,
+8,"Parent and district agreed to extend the evaluation timeline per the requirements of WAC 392-172A-03005(c), and the agreement is documented in writing.",N,8,,
+9,Data entry/tracking error(s).,N,9,,
+10,Other,N,10,,

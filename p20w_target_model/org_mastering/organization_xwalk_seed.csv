@@ -1,0 +1,14 @@
+org_xwalk_id,org_id,source_system,source_identifier_type,source_org_identifier,effective_start_period,effective_end_period,effective_start_date,effective_end_date,assignment_basis,note
+1,100110,SBCTC,SBCTC_COLLEGE_CODE,110,(start),A014,,2001-06-30,SOURCE_MASTER,Code 110 before the split
+2,100111,SBCTC,SBCTC_COLLEGE_CODE,111,A121,B903,2001-07-01,2020-03-31,SOURCE_MASTER,
+3,100112,SBCTC,SBCTC_COLLEGE_CODE,112,A121,B903,2001-07-01,2020-03-31,SOURCE_MASTER,
+4,100113,SBCTC,SBCTC_COLLEGE_CODE,110,B904,(open),2020-04-01,9999-12-31,LINEAGE_EVENT,"Code REUSE: 110 now resolves to the re-merged college, not the pre-2001 college"
+5,100120,SBCTC,SBCTC_COLLEGE_CODE,121,(start),C012,,2020-12-31,SOURCE_MASTER,Legacy Centralia code
+6,100120,SBCTC,SBCTC_COLLEGE_CODE,120,C013,(open),2021-01-01,9999-12-31,SOURCE_MASTER,"Recode only: same org_id on both sides"
+7,100065,SBCTC,SBCTC_COLLEGE_CODE,065,(start),B781,,2017-08-31,SOURCE_MASTER,
+8,100173,SBCTC,SBCTC_COLLEGE_CODE,173,A451,B234,2004-07-01,2013-06-30,SOURCE_MASTER,
+9,100300,SBCTC,SBCTC_COLLEGE_CODE,300,9902,(open),1999-09-01,9999-12-31,SOURCE_MASTER,
+10,100113,SBCTC,CTCLINK_INSTITUTION_CODE,(Pierce ctcLink INSTITUTION code),B904,(open),2020-04-01,9999-12-31,SOURCE_MASTER,Load actual 5-digit code from SBCTC; not in inventory
+11,100120,SBCTC,CTCLINK_INSTITUTION_CODE,(Centralia ctcLink INSTITUTION code),C013,(open),2021-01-01,9999-12-31,SOURCE_MASTER,Load actual 5-digit code from SBCTC
+12,100120,WSAC_URR,WSAC_INSTITUTION_CODE,(4-digit WSAC code),(start),(open),,,STEWARD_OVERRIDE,WSAC 43xx/45xx/57xx codes map to CTC orgs; steward maintains
+13,100120,NSC,OPEID_BRANCH,(OPEID for Centralia),(start),(open),,,SOURCE_MASTER,From NSC College_Code_Branch

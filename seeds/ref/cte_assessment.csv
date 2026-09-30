@@ -1,0 +1,4 @@
+code,description,source_order,valid_from_year,valid_to_year
+0,"no, did not take an assessment",1,,
+1,"yes, took the test but did not pass",2,,
+2,"yes, took the test and passed",3,,

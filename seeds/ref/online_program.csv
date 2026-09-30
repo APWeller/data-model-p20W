@@ -1,0 +1,397 @@
+code,description,resident_district,status,source_order,valid_from_year,valid_to_year
+1,AIM High School On-Line,Snohomish,active,1,,
+2,Albert Talley Sr. High School (Secondary Learning Center),Renton,active,2,,
+3,Alternative Programs: Northshore School District,Northshore,active,3,,
+4,Battle Ground High School Online,Battle Ground,active,4,,
+5,Bellingham High School,Bellingham,archived,5,,2026
+6,Bethel Elementary Learning Academy,Bethel,archived,6,,2026
+7,Bethel Virtual Academy Online,Bethel,active,7,,
+8,Bonney Lake High School,Sumner,active,8,,
+9,Bremerton School District Online Options Bremerton HS Online Options,Bremerton,active,9,,
+10,Central Valley High School,Central Valley,archived,10,,2026
+11,Quartzite Learning,Chewelah,active,11,,
+12,Chiawana High School,Pasco,active,12,,
+13,Clover Park High School ALE,Clover Park,archived,13,,2026
+14,Lakes High School ALE,Clover Park,archived,14,,2026
+15,Columbia Connected Learning,Columbia,active,15,,
+16,Columbia Virtual Academy,Valley,active,16,,
+17,Columbia Virtual Academy,Kettle Falls,active,17,,
+18,Colville High School/Panorama School,Colville,archived,18,,2026
+19,Curtis High School Alternative Program,University Place,active,19,,
+20,Deer Park High School,Deer Park,active,20,,
+21,East Valley Online (Yakima) Graduation Alliance High School,East Valley (Yakima),active,21,,
+22,Eastmont High School,Eastmont,active,22,,
+23,Eastmont Opportunities Program,Eastmont,active,23,,
+24,Eatonville Online Academy,Eatonville,active,24,,
+25,Edmonds eLearning Academy,Edmonds,active,25,,
+26,Emerson High School Online Academy,Lake Washington,archived,26,,2023
+27,Eureka Home School Alliance,Republic,active,27,,
+28,EV Online,East Valley (Spokane),active,28,,
+29,Everett Public Schools HS Online Options,Everett,active,29,,
+30,Explorer Academy,South Kitsap,active,30,,
+31,Federal Way Internet Academy,Federal Way,active,31,,
+32,Ferndale High School Graduation Alliance Ferndale,Ferndale,archived,32,,2026
+33,Foster High School,Tukwila,active,33,,
+34,Graduation Alliance: Bellevue,Bellevue,active,34,,
+35,Graduation Alliance: Bellingham,Bellingham,active,35,,
+36,Graduation Alliance: Enumclaw,Enumclaw,active,36,,
+37,Everett Reengagement Academy,Everett,active,37,,
+38,Graduation Alliance: Mount Vernon,Mount Vernon,archived,38,,2023
+39,Graduation Alliance: Sultan,Sultan,active,39,,
+40,Grays Harbor Academy,Aberdeen,active,40,,
+41,West Valley Virtual Academy Learning,West Valley (Yakima),active,41,,
+43,Griffin Bay School,San Juan Island,active,42,,
+45,Home Choice Academy,Evergreen,active,43,,
+46,Home Connection,Oak Harbor,active,44,,
+47,I Grad,South Kitsap,active,45,,
+48,iGrad Academy,Oak Harbor,active,46,,
+49,Independent Learning,Richland,archived,47,,2026
+50,Insight School of WA,Quillayute Valley,active,48,,
+51,Internet Pasco Academy of Learning (iPAL),Pasco,active,49,,
+52,Issaquah School District Online Learning,Issaquah,active,50,,
+53,Kelso Virtual Academy,Kelso,active,51,,
+54,Kent Laboratory Phoenix Academy,Kent,active,52,,
+55,Kentlake High,Kent,active,53,,
+56,Kent-Meridian High,Kent,active,54,,
+57,Kentridge High,Kent,active,55,,
+58,Kentwood High,Kent,active,56,,
+59,La Center Academy Home School,La Center,active,57,,
+61,Legacy High School,Kennewick,active,58,,
+62,Legacy Online,Evergreen,active,59,,
+63,Lewis River Academy,Woodland,active,60,,
+65,Lind-Ritzville High School--Single,Lind-Ritzville,active,61,,
+66,Lind-Ritzville High School--Affiliate,Lind-Ritzville,active,62,,
+67,Mead High School Graduation Alliance,Mead,active,63,,
+68,Mead Online Fitness,Mead,active,64,,
+69,Mercer Island High School,Mercer Island,active,65,,
+70,Mica Peak High School,Central Valley,archived,66,,2026
+71,MLSDdigital,Moses Lake,active,67,,
+72,Moses Lake High School,Moses Lake,active,68,,
+73,Mount Baker Virtual Learning,Mount Baker,archived,69,,2024
+74,Mount Si High School Online Program,Snoqualmie Valley,active,70,,
+75,SVSD Open Doors,Snoqualmie Valley,active,71,,
+76,Mount Spokane High School Graduation Alliance,Mead,active,72,,
+78,Mukilteo Re-Engagement Academy Open Doors,Mukilteo,active,73,,
+79,Naches Valley Virtual Academy,Naches Valley,active,74,,
+80,Naselle Virtual Academy,Naselle-Grays River,active,75,,
+81,New Beginnings,Eatonville,archived,76,,2023
+82,New Horizons High School,Pasco,active,77,,
+83,North Franklin Virtual Academy,North Franklin,active,78,,
+84,Northport Homelink,Northport,active,79,,
+85,Northwest Allprep,Toppenish,archived,80,,2026
+87,OASIS,Orcas Island,active,81,,
+88,Olympia Regional Learning Academy (iConnect Academy),Olympia,active,82,,
+90,Open Doors Youth Reengagement,Sultan,archived,83,,2023
+91,Options Alternative High School,Bellingham,archived,84,,2026
+92,Pacific Virtual Learning,South Bend,archived,85,,2025
+93,Panorama School,Colville,active,86,,
+94,Pasco High School,Pasco,active,87,,
+95,Peninsula Internet Academy,Peninsula,archived,88,,2025
+97,Prairie High School Online,Battle Ground,active,89,,
+98,Puyallup Digital Learning,Puyallup,active,90,,
+99,Quincy Innovation Academy,Quincy,active,91,,
+100,Ridgefield High School,Ridgefield,active,92,,
+101,River Homelink,Battle Ground,active,93,,
+102,Riverpoint Academy Graduation Alliance,Mead,archived,94,,2023
+103,Rivers Edge High School Contract Learning,Richland,active,95,,
+104,Sehome High School,Bellingham,archived,96,,2026
+105,Selah Academy Online,Selah,active,97,,
+106,Spokane Virtual Learning,Spokane,active,98,,
+107,Squalicum High School,Bellingham,archived,99,,2026
+109,Stillaguamish Valley Learning Center Online Weston Alternative Online Program,Arlington,active,100,,
+110,Sumner High School,Sumner,active,101,,
+111,Graduation Alliance Sunnyside,Sunnyside,active,102,,
+112,Swiftwater Learning Center,Cle Elum-Roslyn,active,103,,
+114,Three Rivers Homelink,Richland,active,104,,
+115,Red Comet at Toppenish School District,Toppenish,active,105,,
+117,TC Futures ESD 123 Re-Engagement Program,ESD 123,active,106,,
+118,University High School,Central Valley,archived,107,,2026
+119,Vancouver Virtual Learning Academy,Vancouver,active,108,,
+120,Washington Connections Academy (WACA),Mary M. Knight,active,109,,
+121,Washington Virtual Academies - Omak,Omak,active,110,,
+122,Wenatchee Internet Academy,Wenatchee,active,111,,
+123,West Auburn High School,Auburn,active,112,,
+124,Graduation Alliance Wenatchee,Wenatchee,active,113,,
+125,White Pass Learning Academy,White Pass,active,114,,
+126,White River Reengagement Program,White River,active,115,,
+128,Graduation Alliance Windward,Ferndale,archived,116,,2026
+129,Yakima Online,Yakima,active,117,,
+130,No Approved Program,,active,118,,
+131,New Program,,active,119,,
+132,Asotin-Anatone School District ALE,Asotin-Anatone,active,120,,
+133,Barker Creek Community School,Central Kitsap,active,121,,
+135,Capital HS Online Solutions,Olympia,archived,122,,2023
+136,CATS Remote,Toppenish,active,123,,
+137,Central Valley Virtual Learning,Central Valley,active,124,,
+138,Goldendale Alternative Program,Goldendale,active,125,,
+139,Graduation Alliance ALE,Washougal,active,126,,
+140,Home-Centered Learning,Sedro-Woolley,active,127,,
+141,Hoquiam Homelink,Hoquiam,active,128,,
+142,Kalama High School ALE,Kalama,active,129,,
+143,Lincoln Hill High School,Stanwood-Camano,active,130,,
+144,Mid-Columbia Partnership,Kennewick,active,131,,
+145,North Mason Homelink,North Mason,active,132,,
+146,Olympia HS Online Solutions,Olympia,archived,133,,2023
+147,Pacific Northwest Connections Academy at South Kitsap School District Washington Connections Academy - South Kitsap,South Kitsap,archived,134,,2023
+148,Prescott ALE,Prescott,active,135,,
+149,Saratoga School,Stanwood-Camano,active,136,,
+150,Seaview Academy,Port Angeles,active,137,,
+151,Skagit Academy,Mount Vernon,active,138,,
+152,South Whidbey Virtual Academy,South Whidbey,active,139,,
+153,Tacoma Online,Tacoma,active,140,,
+154,Washington Connections Academy at Goldendale School District,Goldendale,active,141,,
+155,Aspire Academy,Mount Vernon,active,142,,
+156,Bethel Virtual Academy,Bethel,archived,143,,2026
+157,Desert Oasis High School,Othello,active,144,,
+158,Dungeness Virtual School,Sequim,active,145,,
+159,Evergreen Open Doors,Evergreen (Clark),active,146,,
+160,Centralia Virtual Program (Futurus High School ALE),Centralia,active,147,,
+161,Graduation Alliance Washougal,Washougal,active,148,,
+162,Graduation Alliance Napavine,Napavine,active,149,,
+163,Graduation Alliance Northshore,Northshore,active,150,,
+164,Graduation Alliance Prosser,Prosser,active,151,,
+165,Kodiak Virtual Academy,Cascade,active,152,,
+166,Longview Virtual Academy,Longview,active,153,,
+167,MISD Online Remote Education (MORE),Mercer Island,archived,154,,2023
+168,Ocean Beach Options Academy,Ocean Beach,active,155,,
+169,Pateros Alternative School,Pateros,active,156,,
+170,TEAM High School,Woodland,active,157,,
+171,Union Gap Virtual Learning,Union Gap,active,158,,
+172,Winolequa Learning Academy,Winlock,archived,159,,2023
+173,Bainbridge Island School District Online K-12 Program,Bainbridge Island,active,160,,
+174,Bellingham Virtual Learning,Bellingham,active,161,,
+175,Cascadia High School Online,Tumwater,active,162,,
+176,Central Valley High School,Central Valley,archived,163,,2026
+177,Choice Academy - Parent Assisted Learning,North Kitsap,archived,164,,2026
+178,Discovery Virtual School Clarkston Home Alliance,Clarkston,active,165,,
+179,Conway Connects,Conway,active,166,,
+180,Dishman Hills High School,West Valley (Spokane),active,167,,
+181,Dropout Prevention and Reengagement Academy,ESD 121,active,168,,
+182,Elementary Virtual Academy,Eatonville,archived,169,,2023
+183,Ellensburg Virtual Academy,Ellensburg,active,170,,
+184,Granite Falls Virtual Academy,Granite Falls,archived,171,,2023
+185,Grizzly Remote Connect,Newport,archived,172,,2023
+186,Highline Public Schools Virtual Academy,Highline,active,173,,
+187,Hockinson Virtual Academy,Hockinson,active,174,,
+188,Lake Chelan Online Academy,Lake Chelan,archived,175,,2023
+189,Lakewood Online Academy,Lakewood,active,176,,
+190,Leaders in Learning High School,Monroe,active,177,,
+191,Lynden Hybrid,Lynden,archived,178,,2023
+192,Lynden Online,Lynden,archived,179,,2023
+193,Marysville Online,Marysville,active,180,,
+194,Medical Lake School District Connect +,Medical Lake,active,181,,
+195,Meridian Online Learning,Meridian,active,182,,
+196,Monroe School District,Monroe,active,183,,
+197,Monroe Virtual Learning Academy,Monroe,active,184,,
+198,Mount Baker Junior/Senior High,Mount Baker,active,185,,
+199,Mount Vernon Virtual Learning,Mount Vernon,archived,186,,2023
+200,Neighborhood Reconnect Plan,Bellingham,archived,187,,2023
+201,New Market High School,Tumwater,active,188,,
+202,North Mason Online,North Mason,active,189,,
+203,Oak Harbor Virtual Academy,Oak Harbor,active,190,,
+204,Ocean Beach Options Academy,Ocean Beach,archived,191,,2026
+205,Ocosta Online School,Ocosta,active,192,,
+206,Omak 1-8 Outreach,Omak,active,193,,
+207,Omak School District Highlands High School,Omak,active,194,,
+208,Omak School District Online,Omak,active,195,,
+209,Orondo Online Academy,Orondo,active,196,,
+210,Orting Online Academy,Orting,active,197,,
+211,Pend Oreille River School,Newport,active,198,,
+212,Riverview School District Remote Learning,Riverview,archived,199,,2023
+213,Sentinel Tech,Wahluke,active,200,,
+214,SOL - Personalized Online Learning,Yakima,active,201,,
+215,Steilacoom High School Online Programs,Steilacoom,active,202,,
+216,Sultan Virtual Academy,Sultan,active,203,,
+217,Toppenish School District Online Learning,Toppenish,active,204,,
+218,Toutle Lake Virtual Academy,Toutle Lake,archived,205,,2023
+219,Trout Lake ALE,Trout Lake,archived,206,,2026
+220,Virtual Preparatory Academy of Washington,Starbuck,active,207,,
+221,Wahluke Virtual Academy (K-8),Wahluke,active,208,,
+222,Wahluke Virtual Academy (9-12),Wahluke,active,209,,
+223,Walla Walla Online,Walla Walla,active,210,,
+224,Washougal Learning Academy,Washougal,active,211,,
+225,Waterville Online Academy,Waterville,active,212,,
+226,Tacoma Online 2.0,Tacoma,active,213,,
+227,Auburn Online School,Auburn,archived,214,,2023
+228,Enumclaw High School Online Learning Program,Enumclaw,active,215,,
+229,Everett Virtual Academy,Everett,active,216,,
+230,Hazen High School,Renton,active,217,,
+231,Lake Stevens Elementary Distance Learning Program,Lake Stevens,archived,218,,2026
+232,Lake Washington School District Online School,Lake Washington,archived,219,,2024
+233,Lindbergh High School,Renton,active,220,,
+234,Mead Virtual Program,Mead,active,221,,
+235,Pacific Crest Online Academy,Richland,active,222,,
+236,Virtual New Horizons Pasco Virtual Learning,Pasco,archived,223,,
+237,Port Townsend Online Program,Port Townsend,active,224,,
+238,Reardan Options Program,Reardan-Edwall,active,225,,
+239,Renton High School,Renton,active,226,,
+240,Rochester Virtual Academy,Rochester,archived,227,,2026
+241,Rocket Virtual School,Castle Rock,active,228,,
+242,Sedro-Woolley Virtual Academy,Sedro-Woolley,archived,229,,2023
+243,Shelton Online Learning Experience,Shelton,active,230,,
+244,Summit Virtual Academy,North Thurston,active,231,,
+245,Sumner Bonney Lake Elementary Virtual Learning Academy,Sumner-Bonney Lake,archived,232,,2023
+246,Taholah High School,Taholah,active,233,,
+247,West Valley Virtual Learning Center,West Valley (Spokane),active,234,,
+248,Wisdom Ridge Academy,Ridgefield,active,235,,
+249,Anacortes Virtual Learning,Anacortes,archived,236,,2025
+250,Bellevue Virtual Academy,Bellevue,archived,237,,2026
+251,Camas Connect Academy,Camas,active,238,,
+252,Cascade Parent Partnership 6-12 Virtual Option Pilot Program,Seattle,active,239,,
+253,Centralia Virtual Program,Centralia,archived,240,,2026
+254,CPSD K-12 Virtual Supports,Clover Park,archived,241,,2023
+255,CPSD K-5 Virtual Program,Clover Park,archived,242,,2023
+256,Darrington ALE Program,Darrington,active,243,,
+257,Eagle Sky Virtual Academy,Elma,active,244,,
+258,Edmonds K-8 Online Academy,Edmonds,active,245,,
+259,Endeavor High School,Kennewick,active,246,,
+260,Ferndale High School,Ferndale,active,247,,
+261,Ferndale Virtual Academy,Ferndale,active,248,,
+262,Franklin Pierce Online Academy,Franklin Pierce,active,249,,
+263,Global Virtual Academy,Peninsula,archived,250,,2025
+264,Grandview Online Academy,Grandview,active,251,,
+265,Griffin Online Academy,Griffin,active,252,,
+266,Harrison Prep 6-10 Virtual Program,Clover Park,archived,253,,2023
+267,Hudtloff 6-8 Virtual Program,Clover Park,archived,254,,2023
+268,Kitsap Lake Elementary - Virtual Learning Academy,Bremerton,archived,255,,2025
+269,Lake Stevens Secondary Distance Learning,Lake Stevens,active,256,,
+270,"Learning Center, New Start High School",Highline,active,257,,
+271,Lincoln County Virtual,Davenport,active,258,,
+272,Lind-Ritzville Academy,Ritzville,active,259,,
+273,Lochburn 6-8 Virtual Program,Clover Park,archived,260,,2023
+274,Montesano Virtual Academy M.O.D.E.L.,Montesano,active,261,,
+275,Mount Adams School District Online Academy,Mount Adams,active,262,,
+276,Mukilteo Virtual Academy,Mukilteo,active,263,,
+277,North Kitsap Online Academy & Parent Assisted Learning,North Kitsap,active,264,,
+278,Northshore Virtual Program,Northshore,archived,265,,2023
+279,NVSD On Line Program,Nooksack Valley,active,266,,
+280,Okanogan Outreach,Okanogan,active,267,,
+281,Pi Online,Chimacum,active,268,,
+282,Pioneer Virtual Academy,Pioneer,active,269,,
+283,PIXeL (Pasco Innovative Experience & e-Learning) Academy,Pasco,active,270,,
+284,Prosser School District Online,Prosser,active,271,,
+285,Puget Sound Online Learning Cooperative,ESD 121,active,272,,
+286,Puget Sound Regional Online Learning Cooperative - White River,White River,active,273,,
+287,Queen Anne Elementary - Virtual Option Pilot Program,Seattle,archived,274,,2026
+288,Riverview Virtual Learning (PSOLC),Riverview,archived,275,,2023
+289,Selah K-8 Virtual,Selah,active,276,,
+290,SHSD Promise Program,Steilacoom,archived,277,,2026
+291,Spokane Virtual Academy,Spokane,active,278,,
+292,Thomas 6-8 Virtual Program,Clover Park,archived,279,,2023
+293,Tukwila On-Line,Tukwila,active,280,,
+294,Tumwater Virtual Academy,Tumwater,active,281,,
+295,UPSD Online,University Place,archived,282,,2023
+296,Virtual Academy of Olympia,Olympia,active,283,,
+297,Wapato Online Academy,Wapato,active,284,,
+298,Bellingham Family Partnership Program,Bellingham,active,285,,
+299,Brewster Alternative High School,Brewster,active,286,,
+300,Brinnon Virtual Academy,Brinnon,active,287,,
+301,Clarkston High School (Charles Francis Adams High School),Clarkston,active,288,,
+302,Lincoln Middle School,Clarkston,active,289,,
+303,Dayton Secondary Online School,Dayton,active,290,,
+304,Mid-Columbia Partnership Online,Kennewick,active,291,,
+305,Kent Virtual Academy,Kent,active,292,,
+306,Engine K5: MVP Elementary,Mead,active,293,,
+307,North Beach Online,North Beach,active,294,,
+308,North Beach Online Elementary,North Beach,active,295,,
+309,Innovation Academy Virtual Campus at Interagency High School,Seattle,active,296,,
+310,Snoqualmie Valley - Meadowbrook School Online Program SD Parent Partnership Online Program,Snoqualmie Valley,active,297,,
+311,Tenino Connects,Tenino,archived,298,,2024
+312,Thorp School District Online,Thorp,active,299,,
+313,Wenatchee High School Online ALE,Wenatchee,active,300,,
+314,Bellevue Digital Discovery,Bellevue,active,301,,
+315,GATES High School,Franklin Pierce,active,302,,
+316,Chelan Digital Academy,Lake Chelan,active,303,,
+317,Alternative Graduation Pathway,Lake Quinault,active,304,,
+318,Naselle Homelink,Naselle-Grays River Valley,active,305,,
+319,Graduation Alliance North Beach,North Beach,active,306,,
+320,Oak Harbor High School - Midway,Oak Harbor,active,307,,
+321,Axe Virtual Academy,Onalaska,active,308,,
+322,Graduation Alliance Riverview,Riverview,active,309,,
+323,CLIP (CLEAR),Riverview,active,310,,
+324,WestSide High School Online ALE,Wenatchee,active,311,,
+325,Yakima School District DR ALE,Yakima,active,312,,
+326,K8 Virtual,Yakima,active,313,,
+327,Battle Ground Virtual Academy,Battle Ground,active,314,,
+328,Boistfort Online School,Boistfort,active,315,,
+329,Gravelly Lake K-12 Academy,Clover Park,active,316,,
+330,Highline Virtual at Seahurst Elementary,Highline,active,317,,
+331,Independent Scholars,Riverside,active,318,,
+332,Mary Walker Promise,Mary Walker,active,319,,
+333,Mukilteo ALE,Mukilteo,active,320,,
+334,Northshore Learning Options,Northshore,active,321,,
+335,Oroville Outreach,Oroville,active,322,,
+336,Reardan Online,Reardan-Edwall,active,323,,
+337,Riverside Achievement Center,Riverside,active,324,,
+338,RPM,Mead,active,325,,
+339,The Valley Online Academy,Wenatchee,active,326,,
+340,Touchet Online,Touchet,active,327,,
+341,WIN Academy,Cheney,active,328,,
+342,Winlock ALE,Winlock,active,329,,
+343,Snoqualmie Valley School District Parent Partnership Program,Snoqualmie Valley,archived,330,,2026
+344,Granger School District Online Program,Granger,active,331,,
+345,Summit Atlas ALE,Summit Atlas,active,332,,
+346,Vancouver Success Academy,Vancouver,active,333,,
+347,Mount Adams Graduation Alliance,Mount Adams,active,334,,
+348,Rochester Graduation Alliance,Rochester,active,335,,
+349,Blaine High School,Blaine,active,336,,
+350,Blaine Home Connections,Blaine,active,337,,
+351,White Salmon Online Academy,White Salmon,active,338,,
+352,Nespelem ALE,Nespelem,active,339,,
+353,Washington Spartan Virtual Academy,Granger,active,340,,
+354,Tenino Learning Link,Tenino,active,341,,
+355,Astravo Online,South Bend,active,342,,
+356,Washington Digital Academy,South Bend,active,343,,
+357,Washington Online School,South Bend,active,344,,
+358,Cusick Graduation Alliance,Cusick,active,345,,
+359,Mount Baker Virtual Learning,Mount Baker,active,346,,
+360,Blaine Middle School Virtual Learning,Blaine,active,347,,
+361,Soap Lake Pathways Learning Center,Soap Lake,active,348,,
+362,La Conner Learning Community,La Conner,active,349,,
+363,KSD Online,Kittitas,active,350,,
+364,Toutle Valley Virtual Academy,Toutle Lake,active,351,,
+365,Riverview Virtual Academy,Riverview,active,352,,
+366,Capital High School,Olympia,active,353,,
+367,Legacy High School,Marysville,active,354,,
+368,Graduation Alliance,Mount Vernon,active,355,,
+369,Stanwood-Camano Graduation Alliance,Stanwood-Camano,active,356,,
+370,Stanwood-Camano Graduation Alliance - Open Doors,Stanwood-Camano,active,357,,
+371,Graduation Alliance Edmonds,Edmonds,active,358,,
+372,Juanita FLEX Academy,Lake Washington,active,359,,
+373,Mossyrock Academy,Mossyrock,active,360,,
+374,Tiger Academy,Napavine,active,361,,
+375,Ephrata High School Graduation Alliance Alternative Learning Program,Ephrata,active,362,,
+376,Sky Valley Education Center,Monroe,active,363,,
+377,Northport Virtual Academy,Northport,active,364,,
+378,Freeman ConnectED,Freeman,active,365,,
+379,Burlington-Edison Alternative School,Burlington-Edison,active,366,,
+380,Zillah Alternative Program,Zillah,active,367,,
+381,Zillah Middle School - Alternative Program,Zillah,active,368,,
+382,Graduation Alliance Washtucna,Washtucna,active,369,,
+383,Oakville Homelink,Oakville,active,370,,
+384,East Valley Yakima Virtual Academy,East Valley (Yakima),active,371,,
+385,Washington Virtual Schools,Kittitas,active,372,,
+386,ABC Online Academy,Raymond,active,373,,
+387,Lake Roosevelt Schools K-12 Online Program,Grand Coulee Dam,active,374,,
+388,Fife Open Doors ALE,Fife,active,375,,
+389,Cape Flattery Online Learning,Cape Flattery,active,376,,
+390,Cowlitz Prairie Academy,Toledo,active,377,,
+391,Rosalia School District ALE,Rosalia,active,378,,
+392,Lynden Virtual Learning,Lynden,active,379,,
+393,Online Learning,Mansfield,active,380,,
+394,Pe Ell Online,Pe Ell,active,381,,
+395,Connected Cats - Wilbur,Wilbur,active,382,,
+396,Connected Cats - Creston,Creston,active,383,,
+397,Ephrata School District Online Program,Ephrata,active,384,2027,
+64,Lincoln High School,,archived,385,,2020
+77,Mount Tahoma High School,,archived,386,,2020
+86,Oakland High School,,archived,387,,2020
+89,On Track Academy (Mark Morris High School),,archived,388,,2020
+108,Stadium High School,,archived,389,,2020
+113,Tacoma School of the Arts,,archived,390,,2020
+127,Wilson High School,,archived,391,,2020
+44,Henry Foss High School,,archived,392,,2021
+60,Lake Chelan Scholars Program,,archived,393,,2021
+96,Pomeroy High School Online,,archived,394,,2021
+116,Tukwila Online Learning,,archived,395,,2021
+134,Blaine HomeConnection Virtual,,archived,396,,2021

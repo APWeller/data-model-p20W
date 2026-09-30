@@ -1,0 +1,8 @@
+code,description,source_order,valid_from_year,valid_to_year
+N,"Student/family reported no parent or guardian is currently serving as a member of the active duty U.S. Armed Forces, Reserves of the U.S. Armed Forces or the National Guard of Washington or other State",1,,
+A,Student/family reported having a parent or guardian who is a current member of the active duty U.S. Armed Forces,2,,
+R,Student/family reported having a parent or guardian who is a current member of the reserves of the U.S. Armed Forces,3,,
+G,Student/family reported having a parent or guardian who is a current member of the National Guard of Washington or other State,4,,
+M,"Student/family reported having more than one parent or guardian who is currently either a member of the active duty U.S. Armed Forces, Reserves of the U.S. Armed Forces or the National Guard of Washington or other State Examples include students who have been identified as having one parent or guardian who is a member of the active duty U.S. Armed Forces or Reserves or the National Guard of Washington or other State and the other parent or guardian is also a member of the active duty U.S. Armed Forces or Reserves or the National Guard of Washington or other State",5,,
+Z,No Response/Refused to State,6,,
+X,Data Not Available,7,,

@@ -1,0 +1,5 @@
+code,description,source_order,valid_from_year,valid_to_year
+1,Interpreter was not requested,1,,
+2,Interpreter was requested and provided,2,,
+3,"Interpreter was requested, district was unable to provide",3,,
+4,Student not enrolled in district at time of Initial IEP Meeting,4,,

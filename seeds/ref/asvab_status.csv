@@ -1,0 +1,4 @@
+code,description,source_order,valid_from_year,valid_to_year
+0,No ASVAB test score available for student,1,,
+1,Score available and student not eligible to meet graduation pathway requirement,2,,
+2,Score available and student eligible to meet graduation pathway requirement,3,,

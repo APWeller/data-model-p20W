@@ -1,0 +1,5 @@
+code,description,source_order,valid_from_year,valid_to_year
+1,"Screened, not at risk",1,,
+2,"Screened, at risk",2,,
+3,"Not screened, at risk",3,,
+4,"Multilingual Learner, risk unknown",4,,

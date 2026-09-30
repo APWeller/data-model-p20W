@@ -1,0 +1,5 @@
+code,description,source_order,valid_from_year,valid_to_year
+0,None or not applicable,1,,
+1,"Deaf/hard of hearing, D/HH",2,,
+2,"Blind/low vision, B/LV",3,,
+3,"Combination of D/HH and B/LV, or Deafblind",4,,

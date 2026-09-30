@@ -1,0 +1,7 @@
+code,description,source_order,valid_from_year,valid_to_year
+B,Basic or remedial,1,,
+G,General or regular,2,,
+E,Enriched or Advanced,3,,
+H,Honors,4,,
+C,College,5,,
+X,No specified level of rigor,6,,

@@ -1,0 +1,5 @@
+code,description,source_order,valid_from_year,valid_to_year
+EF,Excused Full Day Absence,1,,
+UF,Unexcused Full Day Absence,2,,
+EP,Excused Part Day Absence,3,,
+UP,Unexcused Part Day Absence,4,,

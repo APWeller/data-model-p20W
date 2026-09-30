@@ -1,0 +1,872 @@
+gold_table,gold_column,type,element_ids,description,fk_table
+dim_date,date_sk,INT,,"Date key YYYYMMDD (-1 unknown, -2 not applicable)",
+dim_date,full_date,DATE,,Calendar date,
+dim_date,calendar_year,INT,,Calendar year,
+dim_date,calendar_quarter,INT,,Calendar quarter 1-4,
+dim_date,calendar_month,INT,,Calendar month 1-12,
+dim_date,month_name,STRING,,Month name,
+dim_date,day_of_month,INT,,Day of month,
+dim_date,day_of_week,INT,,ISO day of week 1 (Mon) - 7 (Sun),
+dim_date,day_name,STRING,,Day name,
+dim_date,iso_week_of_year,INT,,ISO week number,
+dim_date,is_weekend,BOOLEAN,,Saturday or Sunday,
+dim_date,school_year_sk,BIGINT,,School year the date falls in (September-August; H18 rule),dim_school_year
+dim_date,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_date,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_school_year,school_year_sk,BIGINT,,"School year key = ending year (-1 unknown, -2 not applicable)",
+dim_school_year,school_year,INT,"A01,B01",School year (ending year) as reported in *01,
+dim_school_year,school_year_label,STRING,,"Label, e.g. 2026-27",
+dim_school_year,manual_version,STRING,,CEDARS manual version governing the year (19.0 for 2026-27),
+dim_school_year,start_date,DATE,,September 1 of the starting year,
+dim_school_year,end_date,DATE,,August 31 of the ending year,
+dim_school_year,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_school_year,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_district,district_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_district,county_district_code,STRING,"A02,B02,B03",County-district code (5 digits),
+dim_district,county_code,STRING,A02,County code = first 2 digits of the county-district code,
+dim_district,district_name,STRING,A03,District name as reported in File A,
+dim_district,effective_from,DATE,,SCD2: row effective from (first day of the school year it was first reported),
+dim_district,effective_to,DATE,,SCD2: row effective to (9999-12-31 while current),
+dim_district,is_current,BOOLEAN,,SCD2: current row flag,
+dim_district,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_district,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_school,school_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_school,county_district_code,STRING,A02,County-district code the school belongs to,
+dim_school,school_code,STRING,"A05,H26",OSPI school code (9999 = out-of-district),
+dim_school,school_name,STRING,A06,School name as reported in File A,
+dim_school,is_out_of_district,BOOLEAN,H26,Special member for H26 = 9999,
+dim_school,effective_from,DATE,,SCD2: row effective from (first day of the school year it was first reported),
+dim_school,effective_to,DATE,,SCD2: row effective to (9999-12-31 while current),
+dim_school,is_current,BOOLEAN,,SCD2: current row flag,
+dim_school,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_school,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_school_year_calendar,school_sk,BIGINT,A05,School,dim_school
+dim_school_year_calendar,school_year_sk,BIGINT,A01,School year of the submission,dim_school_year
+dim_school_year_calendar,first_instruction_date,DATE,A07,Initial school start date (earliest across Location IDs),
+dim_school_year_calendar,last_instruction_date,DATE,A08,Last school end date (latest across Location IDs),
+dim_school_year_calendar,calendar_days,INT,"A07,A08",Calendar days from first to last instructional date inclusive,
+dim_school_year_calendar,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_school_year_calendar,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_grade_level,grade_level_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_grade_level,grade_level_code,STRING,"B13,H09,J19",Grade level code (Appendix E),
+dim_grade_level,grade_level_description,STRING,B13,Appendix E description,
+dim_grade_level,sort_order,INT,,"Display order (Appendix E order: PK, TK, K1, K2, 1-12)",
+dim_grade_level,grade_band,STRING,,"Derived band: Early Learning (PK, TK) | Elementary (K1-5) | Middle (6-8) | High (9-12)",
+dim_grade_level,status,STRING,,Source status: active | archived | closed,
+dim_grade_level,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_grade_level,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_grade_level,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_grade_level,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_student,student_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_student,ssid,STRING,B05,State Student ID (durable key),
+dim_student,gender,STRING,B12,Gender (SCD2),
+dim_student,birth_country_code,STRING,B10,Birth country (Appendix C) (type 1),
+dim_student,birth_country_sk,BIGINT,B10,Birth country,dim_country
+dim_student,primary_language_sk,BIGINT,B17,Primary language (Appendix K) (type 1),dim_language
+dim_student,initial_us_school_enrollment_date,DATE,B32,Initial USA school enrollment date (type 1),
+dim_student,months_non_us_attendance,INT,B34,Months of non-US school attendance (type 1),
+dim_student,effective_from,DATE,,SCD2: row effective from (first day of the school year it was first reported),
+dim_student,effective_to,DATE,,SCD2: row effective to (9999-12-31 while current),
+dim_student,is_current,BOOLEAN,,SCD2: current row flag,
+dim_student,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_student,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_student_pii,ssid,STRING,B05,State Student ID,
+dim_student_pii,legal_last_name,STRING,B06,Legal last name,
+dim_student_pii,legal_first_name,STRING,B07,Legal first name,
+dim_student_pii,legal_middle_name,STRING,B08,Legal middle name,
+dim_student_pii,preferred_last_name,STRING,B36,Preferred last name,
+dim_student_pii,preferred_first_name,STRING,B37,Preferred first name,
+dim_student_pii,preferred_middle_name,STRING,B38,Preferred middle name,
+dim_student_pii,birth_date,DATE,B09,Birth date,
+dim_student_pii,residential_zip_plus4,STRING,B20,Residential ZIP+4,
+dim_student_pii,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_student_pii,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_student_profile,student_profile_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_student_profile,homeless_status_code,STRING,B21,"Homeless status (N, A-D)",
+dim_student_profile,is_homeless,BOOLEAN,B21,B21 <> N,
+dim_student_profile,is_immigrant,BOOLEAN,B31,Seam: B31 is inactive in v19; always NULL (C-002),
+dim_student_profile,military_parent_code,STRING,B35,Military parent or guardian code,
+dim_student_profile,exchange_status_code,STRING,B24,"Student exchange status (N, J, F)",
+dim_student_profile,private_school_part_time_code,STRING,B22,Approved private-school part-time code,
+dim_student_profile,home_school_part_time_code,STRING,B23,Home-based part-time code,
+dim_student_profile,is_low_income,BOOLEAN,I06,File I program 19 (Free/Reduced Meals) in the period,
+dim_student_profile,is_special_education,BOOLEAN,"I06,K14",File I program 36 (disability) or a File K spell in the period,
+dim_student_profile,is_section_504,BOOLEAN,I06,File I attribute 16 (504 Plan) in the period,
+dim_student_profile,is_english_learner,BOOLEAN,"J07,J17",File J EL program spell in the period,
+dim_student_profile,is_gifted,BOOLEAN,I06,File I programs 32-35 in the period,
+dim_student_profile,is_unaccompanied_youth,BOOLEAN,I06,File I attribute 24 in the period,
+dim_student_profile,is_sensory_disability,BOOLEAN,I06,File I attribute 80 in the period,
+dim_student_profile,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_student_profile,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_language,language_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_language,code,STRING,"B17,B18,B43,D15,I10",Code value,
+dim_language,description,STRING,"B17,B18,B43,D15,I10",Code description,
+dim_language,recommended_language,STRING,"B17,B18,B43,D15,I10",Recommended replacement language (archived codes),
+dim_language,status,STRING,,Source status: active | archived | closed,
+dim_language,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_language,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_language,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_language,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_country,country_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_country,code,STRING,B10,Code value,
+dim_country,description,STRING,B10,Code description,
+dim_country,status,STRING,,Source status: active | archived | closed,
+dim_country,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_country,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_country,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_country,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_race,race_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_race,code,STRING,M05,Code value,
+dim_race,description,STRING,M05,Code description,
+dim_race,aggregate,STRING,M05,Appendix Z aggregate,
+dim_race,race_category,STRING,M05,Federal race category (Appendix Z),
+dim_race,status,STRING,,Source status: active | archived | closed,
+dim_race,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_race,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_race,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_race,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_ethnicity,ethnicity_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_ethnicity,code,STRING,L05,Code value,
+dim_ethnicity,description,STRING,L05,Code description,
+dim_ethnicity,aggregate,STRING,L05,Hispanic/Latino | Not Hispanic (Appendix Y),
+dim_ethnicity,status,STRING,,Source status: active | archived | closed,
+dim_ethnicity,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_ethnicity,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_ethnicity,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_ethnicity,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_disability,disability_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_disability,code,STRING,I10,Code value,
+dim_disability,description,STRING,I10,Code description,
+dim_disability,status,STRING,,Source status: active | archived | closed,
+dim_disability,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_disability,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_disability,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_disability,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_behavior,behavior_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_behavior,code,STRING,"R08,R09",Code value,
+dim_behavior,description,STRING,"R08,R09",Code description,
+dim_behavior,definition,STRING,"R08,R09",Appendix B behavior description,
+dim_behavior,status,STRING,,Source status: active | archived | closed,
+dim_behavior,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_behavior,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_behavior,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_behavior,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_weapon,weapon_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_weapon,code,STRING,R10,Code value,
+dim_weapon,description,STRING,R10,Code description,
+dim_weapon,definition,STRING,R10,Appendix D description,
+dim_weapon,status,STRING,,Source status: active | archived | closed,
+dim_weapon,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_weapon,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_weapon,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_weapon,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_cip,cip_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_cip,code,STRING,"D10,H17",Code value,
+dim_cip,description,STRING,"D10,H17",Code description,
+dim_cip,career_cluster,STRING,"D10,H17",Career cluster,
+dim_cip,cluster_pathway,STRING,"D10,H17",Cluster pathway,
+dim_cip,program_area,STRING,"D10,H17",CTE program area,
+dim_cip,ctso,STRING,"D10,H17",Career and technical student organization,
+dim_cip,exploratory_or_preparatory,STRING,"D10,H17","E = exploratory, P = preparatory",
+dim_cip,status,STRING,,Source status: active | archived | closed,
+dim_cip,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_cip,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_cip,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_cip,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_ap_ib_cambridge,ap_ib_cambridge_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_ap_ib_cambridge,code,STRING,"D09,H16",Code value,
+dim_ap_ib_cambridge,description,STRING,"D09,H16",Code description,
+dim_ap_ib_cambridge,program,STRING,"D09,H16",Advanced Placement | International Baccalaureate | Cambridge International,
+dim_ap_ib_cambridge,subject,STRING,"D09,H16",Subject,
+dim_ap_ib_cambridge,abbreviation,STRING,"D09,H16",Course title abbreviation,
+dim_ap_ib_cambridge,status,STRING,,Source status: active | archived | closed,
+dim_ap_ib_cambridge,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_ap_ib_cambridge,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_ap_ib_cambridge,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_ap_ib_cambridge,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_higher_ed_institution,higher_ed_institution_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_higher_ed_institution,code,STRING,D21,Code value,
+dim_higher_ed_institution,description,STRING,D21,Code description,
+dim_higher_ed_institution,state,STRING,D21,State,
+dim_higher_ed_institution,status,STRING,,Source status: active | archived | closed,
+dim_higher_ed_institution,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_higher_ed_institution,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_higher_ed_institution,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_higher_ed_institution,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_industry_certification,industry_certification_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_industry_certification,code,STRING,"D17,H31",Code value,
+dim_industry_certification,description,STRING,"D17,H31",Code description,
+dim_industry_certification,career_cluster,STRING,"D17,H31",Career cluster,
+dim_industry_certification,cte_program_area,STRING,"D17,H31",CTE program area,
+dim_industry_certification,status,STRING,,Source status: active | archived | closed,
+dim_industry_certification,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_industry_certification,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_industry_certification,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_industry_certification,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_intervention,intervention_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_intervention,code,STRING,V10,Code value,
+dim_intervention,description,STRING,V10,Code description,
+dim_intervention,intervention_group,STRING,V10,Appendix AH section,
+dim_intervention,status,STRING,,Source status: active | archived | closed,
+dim_intervention,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_intervention,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_intervention,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_intervention,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_staff_type,staff_type_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_staff_type,code,STRING,F04,Code value,
+dim_staff_type,description,STRING,F04,Code description,
+dim_staff_type,staff_type_group,STRING,F04,"Published pattern, e.g. 31x",
+dim_staff_type,suffix_description,STRING,F04,Meaning of the third digit,
+dim_staff_type,status,STRING,,Source status: active | archived | closed,
+dim_staff_type,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_staff_type,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_staff_type,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_staff_type,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_course_designation,course_designation_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_course_designation,code,STRING,"D07,H13,T10",Code value,
+dim_course_designation,description,STRING,"D07,H13,T10",Code description,
+dim_course_designation,status,STRING,,Source status: active | archived | closed,
+dim_course_designation,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_course_designation,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_course_designation,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_course_designation,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_work_based_learning,work_based_learning_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_work_based_learning,code_set,STRING,"D20,H32","Source code set: work_based_learning_offered, work_based_learning_activity",
+dim_work_based_learning,code,STRING,"D20,H32",Code value,
+dim_work_based_learning,description,STRING,"D20,H32",Code description,
+dim_work_based_learning,status,STRING,,Source status: active | archived | closed,
+dim_work_based_learning,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_work_based_learning,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_work_based_learning,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_work_based_learning,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_letter_grade,letter_grade_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_letter_grade,code,STRING,"H10,T15,E12",Code value,
+dim_letter_grade,description,STRING,"H10,T15,E12",Code description,
+dim_letter_grade,grade_points,"DECIMAL(2,1)","H10,T15,E12",Grade points (A = 4.0); NULL for non-graded marks,
+dim_letter_grade,status,STRING,,Source status: active | archived | closed,
+dim_letter_grade,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_letter_grade,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_letter_grade,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_letter_grade,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_exclusionary_action,exclusionary_action_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_exclusionary_action,code,STRING,R11,Code value,
+dim_exclusionary_action,description,STRING,R11,Code description,
+dim_exclusionary_action,status,STRING,,Source status: active | archived | closed,
+dim_exclusionary_action,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_exclusionary_action,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_exclusionary_action,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_exclusionary_action,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_restraint_isolation_type,restraint_isolation_type_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_restraint_isolation_type,code,STRING,S09,Code value,
+dim_restraint_isolation_type,description,STRING,S09,Code description,
+dim_restraint_isolation_type,value_group,STRING,S09,Physical Restraint | Mechanical Restraint | Isolation,
+dim_restraint_isolation_type,status,STRING,,Source status: active | archived | closed,
+dim_restraint_isolation_type,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_restraint_isolation_type,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_restraint_isolation_type,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_restraint_isolation_type,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_absence_type,absence_type_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_absence_type,code,STRING,N07,Code value,
+dim_absence_type,description,STRING,N07,Code description,
+dim_absence_type,is_excused,BOOLEAN,N07,"EF, EP",
+dim_absence_type,is_full_day,BOOLEAN,N07,"EF, UF",
+dim_absence_type,status,STRING,,Source status: active | archived | closed,
+dim_absence_type,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_absence_type,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_absence_type,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_absence_type,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_lre,lre_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_lre,code,STRING,K06,Code value,
+dim_lre,description,STRING,K06,Code description,
+dim_lre,age_group,STRING,K06,Appendix W age group section,
+dim_lre,status,STRING,,Source status: active | archived | closed,
+dim_lre,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_lre,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_lre,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_lre,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_non_public_agency,non_public_agency_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_non_public_agency,code,STRING,K15,Code value,
+dim_non_public_agency,description,STRING,K15,Code description,
+dim_non_public_agency,status,STRING,,Source status: active | archived | closed,
+dim_non_public_agency,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_non_public_agency,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_non_public_agency,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_non_public_agency,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_growth_assessment,growth_assessment_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_growth_assessment,code,STRING,"Q08,Q10",Code value,
+dim_growth_assessment,description,STRING,"Q08,Q10",Code description,
+dim_growth_assessment,status,STRING,,Source status: active | archived | closed,
+dim_growth_assessment,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_growth_assessment,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_growth_assessment,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_growth_assessment,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_online_provider,online_provider_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_online_provider,code,STRING,"E10,T13",Code value,
+dim_online_provider,description,STRING,"E10,T13",Code description,
+dim_online_provider,status,STRING,,Source status: active | archived | closed,
+dim_online_provider,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_online_provider,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_online_provider,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_online_provider,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_online_program,online_program_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_online_program,code,STRING,"E11,T14",Code value,
+dim_online_program,description,STRING,"E11,T14",Code description,
+dim_online_program,resident_district,STRING,"E11,T14",Resident district,
+dim_online_program,status,STRING,,Source status: active | archived | closed,
+dim_online_program,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_online_program,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_online_program,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_online_program,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_teacher_indicator,teacher_indicator_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_teacher_indicator,code,STRING,G10,Code value,
+dim_teacher_indicator,description,STRING,G10,Code description,
+dim_teacher_indicator,status,STRING,,Source status: active | archived | closed,
+dim_teacher_indicator,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_teacher_indicator,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_teacher_indicator,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_teacher_indicator,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_ale_course_type,ale_course_type_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_ale_course_type,code,STRING,"E09,H27,T12",Code value,
+dim_ale_course_type,description,STRING,"E09,H27,T12",Code description,
+dim_ale_course_type,status,STRING,,Source status: active | archived | closed,
+dim_ale_course_type,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_ale_course_type,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_ale_course_type,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_ale_course_type,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_state_course,state_course_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_state_course,state_course_code,STRING,"D08,H15,T11","State course code (SCED, 5 digits, or WA00xx)",
+dim_state_course,state_course_name,STRING,D08,Appendix V name,
+dim_state_course,state_course_description,STRING,D08,Appendix V description,
+dim_state_course,subject_area_code,STRING,D08,SCED subject area code,
+dim_state_course,subject_area_name,STRING,D08,SCED subject area name,
+dim_state_course,ap_ib_type,STRING,D08,AP | IB | blank,
+dim_state_course,is_computer_science,BOOLEAN,D08,Appendix V computer science flag,
+dim_state_course,is_wa_state_only,BOOLEAN,D08,Washington-only code,
+dim_state_course,recoded_from,STRING,D08,Earlier code this course replaced,
+dim_state_course,status,STRING,,Source status: active | archived | closed,
+dim_state_course,valid_from_year,INT,,First valid school year (ending year); NULL = not stated,
+dim_state_course,valid_to_year,INT,,Last valid school year (ending year); NULL = open,
+dim_state_course,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_state_course,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_program,program_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_program,program_family,STRING,"I06,J17,K14,Q06,V06",attribute_program | el_program | special_education | support,
+dim_program,program_code,STRING,"I06,J17,Q06,V06",Code within the family,
+dim_program,program_name,STRING,"I06,J17,V06",Program name,
+dim_program,category,STRING,I06,attribute | program | eligibility (from Appendix F record type),
+dim_program,record_type,STRING,I06,Appendix F record type: School Program | District Program | Attribute,
+dim_program,is_lap_wrc,BOOLEAN,Q06,"LAP / Washington Reading Corps program (Q06 codes 6, 7, 37, 38, 44)",
+dim_program,effective_from,DATE,,SCD2: row effective from (first day of the school year it was first reported),
+dim_program,effective_to,DATE,,SCD2: row effective to (9999-12-31 while current),
+dim_program,is_current,BOOLEAN,,SCD2: current row flag,
+dim_program,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_program,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_staff,staff_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_staff,county_district_code,STRING,F02,District,
+dim_staff,staff_id,STRING,F03,District-assigned staff ID,
+dim_staff,certification_number,STRING,F05,Certification number (cross-district rollups where present),
+dim_staff,is_certificated,BOOLEAN,F05,F05 reported and not UNK,
+dim_staff,effective_from,DATE,,SCD2: row effective from (first day of the school year it was first reported),
+dim_staff,effective_to,DATE,,SCD2: row effective to (9999-12-31 while current),
+dim_staff,is_current,BOOLEAN,,SCD2: current row flag,
+dim_staff,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_staff,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_staff_pii,staff_sk,BIGINT,F03,Staff member,dim_staff
+dim_staff_pii,legal_last_name,STRING,F06,Last name,
+dim_staff_pii,legal_first_name,STRING,F07,First name,
+dim_staff_pii,legal_middle_name,STRING,F08,Middle name,
+dim_staff_pii,birth_date,DATE,F09,Birth date,
+dim_staff_pii,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_staff_pii,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+bridge_staff_type,staff_sk,BIGINT,F03,Staff member,dim_staff
+bridge_staff_type,school_year_sk,BIGINT,F01,School year of the submission,dim_school_year
+bridge_staff_type,staff_type_sk,BIGINT,F04,Staff type,dim_staff_type
+bridge_staff_type,weighting_factor,"DECIMAL(9,8)",,1 / number of members in the group (allocation weight for BI tools),
+bridge_staff_type,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+bridge_staff_type,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_course,course_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_course,school_year_sk,BIGINT,"D01,H30,T01",School year of the course,dim_school_year
+dim_course,school_sk,BIGINT,"D03,H26,T05",School offering the course,dim_school
+dim_course,county_district_code,STRING,"D02,H02,T02",District,
+dim_course,school_code,STRING,"D03,H26,T05",OSPI school code (via xref_location for D03/T05),
+dim_course,course_id,STRING,"D04,H07,T07,T06","District course ID (T: T07, else attempt T06)",
+dim_course,course_title,STRING,"D05,H08,T08",Course title,
+dim_course,content_area_code,STRING,"D06,H14,T09",Content area code (Appendix O),
+dim_course,content_area_description,STRING,"D06,H14,T09",Content area description,
+dim_course,state_course_sk,BIGINT,"D08,H15,T11",State course,dim_state_course
+dim_course,ap_ib_cambridge_sk,BIGINT,"D09,H16",AP/IB/Cambridge course,dim_ap_ib_cambridge
+dim_course,cip_sk,BIGINT,"D10,H17",CIP code,dim_cip
+dim_course,cte_equivalency_id_code,STRING,D12,CTE course equivalency identification (A/B/C),
+dim_course,cte_equivalency_code,STRING,D13,CTE equivalency (01-19),
+dim_course,cte_equivalency_description,STRING,D13,CTE equivalency description,
+dim_course,dual_language_type_code,STRING,D14,Dual language instruction type,
+dim_course,dual_language_language_sk,BIGINT,D15,Dual language instruction language,dim_language
+dim_course,course_level_code,STRING,"D16,T18",Course level (B/G/E/H/C/X),
+dim_course,course_level_description,STRING,"D16,T18",Course level description,
+dim_course,sequence,STRING,D18,Seam: D18 inactive in v19; NULL (C-003),
+dim_course,sequence_group,STRING,D19,Seam: D19 inactive in v19; NULL (C-003),
+dim_course,catalog_source,STRING,,"D = course catalog, H = inferred from File H, T = inferred from File T",
+dim_course,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_course,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+bridge_course_designation,course_sk,BIGINT,D04,Course,dim_course
+bridge_course_designation,course_designation_sk,BIGINT,D07,Designation,dim_course_designation
+bridge_course_designation,weighting_factor,"DECIMAL(9,8)",,1 / number of members in the group (allocation weight for BI tools),
+bridge_course_designation,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+bridge_course_designation,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+bridge_course_industry_cert_offered,course_sk,BIGINT,D04,Course,dim_course
+bridge_course_industry_cert_offered,industry_certification_sk,BIGINT,D17,Certification offered,dim_industry_certification
+bridge_course_industry_cert_offered,weighting_factor,"DECIMAL(9,8)",,1 / number of members in the group (allocation weight for BI tools),
+bridge_course_industry_cert_offered,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+bridge_course_industry_cert_offered,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+bridge_course_wbl_offered,course_sk,BIGINT,D04,Course,dim_course
+bridge_course_wbl_offered,work_based_learning_sk,BIGINT,D20,Work-based learning offered,dim_work_based_learning
+bridge_course_wbl_offered,weighting_factor,"DECIMAL(9,8)",,1 / number of members in the group (allocation weight for BI tools),
+bridge_course_wbl_offered,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+bridge_course_wbl_offered,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+bridge_course_higher_ed_institution,course_sk,BIGINT,D04,Course,dim_course
+bridge_course_higher_ed_institution,higher_ed_institution_sk,BIGINT,D21,Institution,dim_higher_ed_institution
+bridge_course_higher_ed_institution,weighting_factor,"DECIMAL(9,8)",,1 / number of members in the group (allocation weight for BI tools),
+bridge_course_higher_ed_institution,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+bridge_course_higher_ed_institution,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_section,section_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_section,school_year_sk,BIGINT,"E01,G01",School year of the submission,dim_school_year
+dim_section,course_sk,BIGINT,"E06,G05",Course,dim_course
+dim_section,county_district_code,STRING,"E02,G02",District,
+dim_section,school_code,STRING,"E05,G03",OSPI school code (via xref_location),
+dim_section,course_id,STRING,"E06,G05",District course ID,
+dim_section,section_id,STRING,"E07,G06",Section ID,
+dim_section,term_code,STRING,"E08,G07",Term (Appendix P),
+dim_section,term_description,STRING,"E08,G07",Term description,
+dim_section,term_start_date,DATE,G11,Term start date,
+dim_section,term_end_date,DATE,G12,Term end date,
+dim_section,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_section,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_course_designation_group,course_designation_group_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_course_designation_group,group_codes,STRING,"H13,T10","Member codes, sorted, comma-separated",
+dim_course_designation_group,member_count,INT,"H13,T10",Number of members,
+dim_course_designation_group,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_course_designation_group,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+bridge_course_designation_group,course_designation_group_sk,BIGINT,"H13,T10",Group,dim_course_designation_group
+bridge_course_designation_group,course_designation_sk,BIGINT,"H13,T10",Member,dim_course_designation
+bridge_course_designation_group,weighting_factor,"DECIMAL(9,8)",,1 / number of members in the group (allocation weight for BI tools),
+bridge_course_designation_group,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+bridge_course_designation_group,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_industry_certification_group,industry_certification_group_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_industry_certification_group,group_codes,STRING,H31,"Member codes, sorted, comma-separated",
+dim_industry_certification_group,member_count,INT,H31,Number of members,
+dim_industry_certification_group,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_industry_certification_group,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+bridge_industry_certification_group,industry_certification_group_sk,BIGINT,H31,Group,dim_industry_certification_group
+bridge_industry_certification_group,industry_certification_sk,BIGINT,H31,Member,dim_industry_certification
+bridge_industry_certification_group,weighting_factor,"DECIMAL(9,8)",,1 / number of members in the group (allocation weight for BI tools),
+bridge_industry_certification_group,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+bridge_industry_certification_group,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_work_based_learning_group,work_based_learning_group_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_work_based_learning_group,group_codes,STRING,H32,"Member codes, sorted, comma-separated",
+dim_work_based_learning_group,member_count,INT,H32,Number of members,
+dim_work_based_learning_group,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_work_based_learning_group,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+bridge_work_based_learning_group,work_based_learning_group_sk,BIGINT,H32,Group,dim_work_based_learning_group
+bridge_work_based_learning_group,work_based_learning_sk,BIGINT,H32,Member,dim_work_based_learning
+bridge_work_based_learning_group,weighting_factor,"DECIMAL(9,8)",,1 / number of members in the group (allocation weight for BI tools),
+bridge_work_based_learning_group,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+bridge_work_based_learning_group,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_intervention_group,intervention_group_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_intervention_group,group_codes,STRING,V10,"Member codes, sorted, comma-separated",
+dim_intervention_group,member_count,INT,V10,Number of members,
+dim_intervention_group,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_intervention_group,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+bridge_intervention_group,intervention_group_sk,BIGINT,V10,Group,dim_intervention_group
+bridge_intervention_group,intervention_sk,BIGINT,V10,Member,dim_intervention
+bridge_intervention_group,weighting_factor,"DECIMAL(9,8)",,1 / number of members in the group (allocation weight for BI tools),
+bridge_intervention_group,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+bridge_intervention_group,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_other_behavior_group,other_behavior_group_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_other_behavior_group,group_codes,STRING,R09,"Member codes, sorted, comma-separated",
+dim_other_behavior_group,member_count,INT,R09,Number of members,
+dim_other_behavior_group,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_other_behavior_group,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+bridge_other_behavior,other_behavior_group_sk,BIGINT,R09,Group,dim_other_behavior_group
+bridge_other_behavior,behavior_sk,BIGINT,R09,Member,dim_behavior
+bridge_other_behavior,weighting_factor,"DECIMAL(9,8)",,1 / number of members in the group (allocation weight for BI tools),
+bridge_other_behavior,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+bridge_other_behavior,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_family_language_group,family_language_group_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_family_language_group,group_codes,STRING,B43,"Member codes, sorted, comma-separated",
+dim_family_language_group,member_count,INT,B43,Number of members,
+dim_family_language_group,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_family_language_group,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+bridge_family_language_group,family_language_group_sk,BIGINT,B43,Group,dim_family_language_group
+bridge_family_language_group,language_sk,BIGINT,B43,Member,dim_language
+bridge_family_language_group,weighting_factor,"DECIMAL(9,8)",,1 / number of members in the group (allocation weight for BI tools),
+bridge_family_language_group,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+bridge_family_language_group,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+bridge_student_race,student_sk,BIGINT,M04,Student,dim_student
+bridge_student_race,school_year_sk,BIGINT,M01,School year of the submission,dim_school_year
+bridge_student_race,district_sk,BIGINT,M02,Reporting district,dim_district
+bridge_student_race,race_sk,BIGINT,M05,Race,dim_race
+bridge_student_race,race_collection_method_code,STRING,M06,Race collection method,
+bridge_student_race,weighting_factor,"DECIMAL(9,8)",,1 / number of members in the group (allocation weight for BI tools),
+bridge_student_race,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+bridge_student_race,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+bridge_student_ethnicity,student_sk,BIGINT,L04,Student,dim_student
+bridge_student_ethnicity,school_year_sk,BIGINT,L01,School year of the submission,dim_school_year
+bridge_student_ethnicity,district_sk,BIGINT,L02,Reporting district,dim_district
+bridge_student_ethnicity,ethnicity_sk,BIGINT,L05,Ethnicity,dim_ethnicity
+bridge_student_ethnicity,ethnicity_collection_method_code,STRING,L06,Ethnicity collection method,
+bridge_student_ethnicity,weighting_factor,"DECIMAL(9,8)",,1 / number of members in the group (allocation weight for BI tools),
+bridge_student_ethnicity,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+bridge_student_ethnicity,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_enrollment_junk,enrollment_junk_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_enrollment_junk,school_withdrawal_code,STRING,C09,School withdrawal code (Appendix M),
+dim_enrollment_junk,school_withdrawal_description,STRING,C09,Withdrawal description,
+dim_enrollment_junk,withdrawal_status_group,STRING,C09,Confirmed Transfer | Dropout | Graduate ... (Appendix M),
+dim_enrollment_junk,is_primary_school,BOOLEAN,C10,School primarily responsible for the student,
+dim_enrollment_junk,school_choice_code,STRING,C11,School choice code,
+dim_enrollment_junk,school_choice_description,STRING,C11,School choice description,
+dim_enrollment_junk,confirmed_transfer_in_code,STRING,C14,Confirmed transfer-in code,
+dim_enrollment_junk,confirmed_transfer_in_description,STRING,C14,Confirmed transfer-in description,
+dim_enrollment_junk,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_enrollment_junk,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_transcript_junk,transcript_junk_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_transcript_junk,cte_assessment_code,STRING,H24,State/national technical skill assessment taken/passed,
+dim_transcript_junk,cte_assessment_description,STRING,H24,Description,
+dim_transcript_junk,ale_course_type_code,STRING,H27,ALE course type,
+dim_transcript_junk,ale_course_type_description,STRING,H27,ALE course type description,
+dim_transcript_junk,is_out_of_district,BOOLEAN,H26,Course taken outside the serving district (H26 = 9999),
+dim_transcript_junk,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_transcript_junk,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_program_participation_junk,program_participation_junk_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_program_participation_junk,exit_reason_code,STRING,I09,Program exit reason,
+dim_program_participation_junk,exit_reason_description,STRING,I09,Exit reason description,
+dim_program_participation_junk,qualification_code_set,STRING,"I06,I10",Code set governing I10 for this program,
+dim_program_participation_junk,qualification_code,STRING,I10,Qualification code as reported,
+dim_program_participation_junk,qualification_description,STRING,I10,Qualification description from the governing code set,
+dim_program_participation_junk,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_program_participation_junk,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_el_junk,el_junk_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_el_junk,instructional_model_code,STRING,J06,Instructional model,
+dim_el_junk,instructional_model_description,STRING,J06,Instructional model description,
+dim_el_junk,exit_reason_code,STRING,J09,EL exit reason,
+dim_el_junk,exit_reason_description,STRING,J09,EL exit reason description,
+dim_el_junk,placement_test_code,STRING,J18,Placement test,
+dim_el_junk,placement_test_description,STRING,J18,Placement test description,
+dim_el_junk,placement_status_code,STRING,J21,Placement status 0-6 (meaning depends on J18),
+dim_el_junk,placement_status_description,STRING,"J18,J21",Placement status description for this test (Appendix N),
+dim_el_junk,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_el_junk,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_sped_junk,sped_junk_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_sped_junk,exit_reason_code,STRING,K09,SpEd exit reason,
+dim_sped_junk,exit_reason_description,STRING,K09,SpEd exit reason description,
+dim_sped_junk,interpreter_annual_iep_code,STRING,K26,Interpreter requested for annual IEP meeting,
+dim_sped_junk,transition_consent_code,STRING,K27,Consent to share with state transition agencies,
+dim_sped_junk,school_inference_method,STRING,,primary_enrollment | single_enrollment | none (C-005),
+dim_sped_junk,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_sped_junk,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_prek_outcome_junk,prek_outcome_junk_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_prek_outcome_junk,social_emotional_entry_code,STRING,K16,Positive social-emotional skills - entry (Appendix AD),
+dim_prek_outcome_junk,knowledge_skills_entry_code,STRING,K17,Acquisition and use of knowledge/skills - entry (AD),
+dim_prek_outcome_junk,behaviors_entry_code,STRING,K18,Appropriate behaviors and skills - entry (AD),
+dim_prek_outcome_junk,social_emotional_exit_code,STRING,K19,Positive social-emotional skills - exit (AD),
+dim_prek_outcome_junk,social_emotional_progress_code,STRING,K20,Positive social-emotional skills - progress (AE),
+dim_prek_outcome_junk,knowledge_skills_exit_code,STRING,K21,Knowledge/skills - exit (AD),
+dim_prek_outcome_junk,knowledge_skills_progress_code,STRING,K22,Knowledge/skills - progress (AE),
+dim_prek_outcome_junk,behaviors_exit_code,STRING,K23,Appropriate behaviors - exit (AD),
+dim_prek_outcome_junk,behaviors_progress_code,STRING,K24,Appropriate behaviors - progress (AE),
+dim_prek_outcome_junk,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_prek_outcome_junk,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_lap_junk,lap_junk_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_lap_junk,academic_growth_code,STRING,Q09,Amount of academic growth code (C-007),
+dim_lap_junk,academic_growth_description,STRING,Q09,Growth description,
+dim_lap_junk,extended_learning_intervention_code,STRING,Q15,Extended learning time intervention,
+dim_lap_junk,extended_learning_intervention_description,STRING,Q15,Description,
+dim_lap_junk,regular_day_intervention_code,STRING,Q16,Intervention during regular school day,
+dim_lap_junk,regular_day_intervention_description,STRING,Q16,Description,
+dim_lap_junk,at_grade_level,STRING,Q17,At grade level (Y/N),
+dim_lap_junk,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_lap_junk,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_support_screening_junk,support_screening_junk_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_support_screening_junk,identification_assessment_code,STRING,V07,Identification assessment,
+dim_support_screening_junk,identification_assessment_description,STRING,V07,Description,
+dim_support_screening_junk,support_determination_code,STRING,V09,Support determination,
+dim_support_screening_junk,support_determination_description,STRING,V09,Description,
+dim_support_screening_junk,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_support_screening_junk,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_discipline_junk,discipline_junk_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_discipline_junk,iaes_code,STRING,R15,Interim alternative education setting,
+dim_discipline_junk,academic_services_code,STRING,R16,Academic services,
+dim_discipline_junk,behavior_services_code,STRING,R17,Behavior services,
+dim_discipline_junk,expulsion_extension_petition_code,STRING,R20,Petition for extension of an expulsion,
+dim_discipline_junk,reengagement_plan_code,STRING,R21,Reengagement plan,
+dim_discipline_junk,appeal_code,STRING,R23,Appeal,
+dim_discipline_junk,safety_staff_involvement_code,STRING,R24,Safety/security staff involvement,
+dim_discipline_junk,safety_staff_used_force_code,STRING,R25,Safety/security staff used force,
+dim_discipline_junk,safety_staff_arrest_code,STRING,R26,Safety/security staff involved in arrest,
+dim_discipline_junk,interpreter_reengagement_meeting_code,STRING,R27,Interpreter requested for reengagement meeting,
+dim_discipline_junk,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_discipline_junk,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_restraint_junk,restraint_junk_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_restraint_junk,student_injured,STRING,S10,Student injured (Y/N),
+dim_restraint_junk,safety_staff_involvement_code,STRING,S12,Safety/security staff involvement,
+dim_restraint_junk,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_restraint_junk,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+dim_initial_evaluation_junk,initial_evaluation_junk_sk,BIGINT,,"Surrogate key (-1 unknown, -2 not applicable)",
+dim_initial_evaluation_junk,late_evaluation_reason_code,STRING,U09,Reason for late initial evaluation (Appendix AF),
+dim_initial_evaluation_junk,late_evaluation_reason_description,STRING,U09,Description,
+dim_initial_evaluation_junk,is_allowable_late_evaluation,BOOLEAN,U09,Appendix AF allowable exception,
+dim_initial_evaluation_junk,evaluation_outcome_code,STRING,U10,Outcome of initial evaluation/eligibility,
+dim_initial_evaluation_junk,evaluation_outcome_description,STRING,U10,Description,
+dim_initial_evaluation_junk,evaluation_outcome_group,STRING,U10,"Develop IEP | Process Complete, No IEP to Develop",
+dim_initial_evaluation_junk,late_part_c_transition_reason_code,STRING,U12,Reason for late transition from Part C (Appendix AG),
+dim_initial_evaluation_junk,late_part_c_transition_reason_description,STRING,U12,Description,
+dim_initial_evaluation_junk,is_allowable_late_part_c,BOOLEAN,U12,Appendix AG allowable exception,
+dim_initial_evaluation_junk,interpreter_initial_iep_code,STRING,U13,Interpreter requested for initial IEP meeting,
+dim_initial_evaluation_junk,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+dim_initial_evaluation_junk,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+fact_district_enrollment,school_year_sk,BIGINT,B01,School year of the submission,dim_school_year
+fact_district_enrollment,student_sk,BIGINT,B05,Student (SSID),dim_student
+fact_district_enrollment,district_sk,BIGINT,B02,Serving district,dim_district
+fact_district_enrollment,home_district_sk,BIGINT,B03,Home (resident) district,dim_district
+fact_district_enrollment,entry_date_sk,INT,B14,District enrollment date,dim_date
+fact_district_enrollment,exit_date_sk,INT,B15,District exit date (-2 while enrolled),dim_date
+fact_district_enrollment,grade_level_sk,BIGINT,B13,Grade level,dim_grade_level
+fact_district_enrollment,student_profile_sk,BIGINT,"B21,B22,B23,B24,B35,I06,J07,K14",Student profile,dim_student_profile
+fact_district_enrollment,family_language_group_sk,BIGINT,B43,Languages the family prefers to communicate in,dim_family_language_group
+fact_district_enrollment,enrolled_days,INT,"B14,B15,A07,A08","Derived: calendar days enrolled within A07-A08 bounds (approximation, design §6)",
+fact_district_enrollment,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+fact_district_enrollment,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+fact_school_enrollment,school_year_sk,BIGINT,C01,School year of the submission,dim_school_year
+fact_school_enrollment,student_sk,BIGINT,C04,Student (SSID),dim_student
+fact_school_enrollment,district_sk,BIGINT,C02,Serving district,dim_district
+fact_school_enrollment,school_sk,BIGINT,C05,School (Location ID via xref_location),dim_school
+fact_school_enrollment,entry_date_sk,INT,C06,School enrollment date,dim_date
+fact_school_enrollment,exit_date_sk,INT,C08,School exit date (-2 while enrolled),dim_date
+fact_school_enrollment,grade_level_sk,BIGINT,B13,Grade level (from the covering File B spell),dim_grade_level
+fact_school_enrollment,enrollment_junk_sk,BIGINT,"C09,C10,C11,C14","Withdrawal, primary-school, school-choice and transfer-in codes",dim_enrollment_junk
+fact_school_enrollment,student_profile_sk,BIGINT,"B21,B22,B23,B24,B35,I06,J07,K14",Student profile,dim_student_profile
+fact_school_enrollment,days_present,INT,C12,Cumulative days present this enrollment period,
+fact_school_enrollment,enrolled_days,INT,"C06,C08,C12,N07,A07,A08","Derived: days present + full-day absences, bounded by A07/A08 (approximation, design §6)",
+fact_school_enrollment,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+fact_school_enrollment,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+fact_student_school_year,school_year_sk,BIGINT,B01,School year of the submission,dim_school_year
+fact_student_school_year,student_sk,BIGINT,B05,Student (SSID),dim_student
+fact_student_school_year,district_sk,BIGINT,B02,Serving district,dim_district
+fact_student_school_year,primary_school_sk,BIGINT,"C05,C10",Primary school (C10 = Y),dim_school
+fact_student_school_year,grade_level_sk,BIGINT,B13,Grade level (latest spell in the year),dim_grade_level
+fact_student_school_year,student_profile_sk,BIGINT,"B21,B22,B23,B24,B35,I06,J07,K14",Student profile,dim_student_profile
+fact_student_school_year,home_language_sk,BIGINT,B18,Language spoken at home,dim_language
+fact_student_school_year,family_language_group_sk,BIGINT,B43,Family communication languages,dim_family_language_group
+fact_student_school_year,federal_race_ethnicity,STRING,"L05,M05",Derived: Hispanic if any ethnicity aggregate is Hispanic/Latino; else the single race_category; else Two or More Races (Appendices Y/Z),
+fact_student_school_year,ospi_race_ethnicity,STRING,"L05,M05",Derived: OSPI reporting category (same rule; Appendix Z race_category values),
+fact_student_school_year,graduation_requirements_year,INT,B26,Graduation requirements year,
+fact_student_school_year,expected_graduation_year,INT,B27,Expected year of graduation,
+fact_student_school_year,credit_waiver_code,STRING,B42,Credit waiver (0/1),
+fact_student_school_year,asvab_test_status_code,STRING,B39,ASVAB test status,
+fact_student_school_year,asvab_test_score,INT,B40,ASVAB test score,
+fact_student_school_year,asvab_school_year,INT,B41,ASVAB administration school year,
+fact_student_school_year,ela_pathway_completed_school_year,INT,B44,ELA performance-based pathway completed year,
+fact_student_school_year,math_pathway_completed_school_year,INT,B45,Math performance-based pathway completed year,
+fact_student_school_year,age_as_of_sept_1,INT,B09,Derived: age in years on September 1 of the school year,
+fact_student_school_year,is_graduate,BOOLEAN,C09,Derived: a withdrawal code in the Graduate status group (Appendix M),
+fact_student_school_year,is_dropout,BOOLEAN,C09,Derived: a withdrawal code in a Dropout status group (Appendix M),
+fact_student_school_year,cumulative_gpa,"DECIMAL(4,3)",B28,Cumulative GPA,
+fact_student_school_year,cumulative_credits_attempted,"DECIMAL(6,2)",B29,Cumulative credits attempted,
+fact_student_school_year,cumulative_credits_earned,"DECIMAL(6,2)",B30,Cumulative credits earned,
+fact_student_school_year,enrolled_days,INT,"C12,N07,A07,A08","Derived: sum of school-enrollment enrolled_days (approximation, design §6)",
+fact_student_school_year,days_present,INT,C12,Derived: sum of C12 over the year's school enrollments,
+fact_student_school_year,excused_full_day_absences,INT,N07,Derived: count of N07 = EF,
+fact_student_school_year,unexcused_full_day_absences,INT,N07,Derived: count of N07 = UF,
+fact_student_school_year,excused_part_day_absences,INT,N07,Derived: count of N07 = EP,
+fact_student_school_year,unexcused_part_day_absences,INT,N07,Derived: count of N07 = UP,
+fact_student_school_year,year_credits_attempted,"DECIMAL(6,2)",H11,Derived: sum of H11 for H30 = the school year (current versions),
+fact_student_school_year,year_credits_earned,"DECIMAL(6,2)",H12,Derived: sum of H12 for H30 = the school year (current versions),
+fact_student_school_year,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+fact_student_school_year,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+fact_student_section,school_year_sk,BIGINT,E01,School year of the submission,dim_school_year
+fact_student_section,student_sk,BIGINT,E04,Student (SSID),dim_student
+fact_student_section,district_sk,BIGINT,E02,Serving district,dim_district
+fact_student_section,school_sk,BIGINT,E05,School (Location ID via xref_location),dim_school
+fact_student_section,course_sk,BIGINT,E06,Course,dim_course
+fact_student_section,section_sk,BIGINT,"E07,E08",Section,dim_section
+fact_student_section,ale_course_type_sk,BIGINT,E09,ALE course type,dim_ale_course_type
+fact_student_section,online_provider_sk,BIGINT,E10,Approved online provider,dim_online_provider
+fact_student_section,online_program_sk,BIGINT,E11,Approved online program,dim_online_program
+fact_student_section,letter_grade_sk,BIGINT,E12,Seam: E12 inactive in v19; -2,dim_letter_grade
+fact_student_section,credits_attempted,"DECIMAL(4,2)",E13,Seam: E13 inactive in v19; NULL (C-001),
+fact_student_section,credits_earned,"DECIMAL(4,2)",E14,Seam: E14 inactive in v19; NULL (C-001),
+fact_student_section,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+fact_student_section,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+fact_staff_section,school_year_sk,BIGINT,G01,School year of the submission,dim_school_year
+fact_staff_section,district_sk,BIGINT,G02,Serving district,dim_district
+fact_staff_section,school_sk,BIGINT,G03,School (Location ID via xref_location),dim_school
+fact_staff_section,course_sk,BIGINT,G05,Course,dim_course
+fact_staff_section,section_sk,BIGINT,"G06,G07",Section,dim_section
+fact_staff_section,staff_sk,BIGINT,G04,Staff member,dim_staff
+fact_staff_section,teacher_indicator_sk,BIGINT,G10,Teacher indicator,dim_teacher_indicator
+fact_staff_section,instruction_start_date_sk,INT,G08,Instruction start date,dim_date
+fact_staff_section,instruction_end_date_sk,INT,G09,Instruction end date (-2 if still instructing),dim_date
+fact_staff_section,instruction_days,INT,"G08,G09,G12",Derived: calendar days from G08 to G09 (or G12 term end),
+fact_staff_section,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+fact_staff_section,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+fact_transcript_course,school_year_sk,BIGINT,H01,Reporting school year of the latest version,dim_school_year
+fact_transcript_course,course_school_year_sk,BIGINT,H30,School year the course was taken,dim_school_year
+fact_transcript_course,student_sk,BIGINT,H04,Student (SSID),dim_student
+fact_transcript_course,district_sk,BIGINT,H02,Serving district,dim_district
+fact_transcript_course,school_sk,BIGINT,H26,School the course was taken at (9999 = out of district),dim_school
+fact_transcript_course,course_sk,BIGINT,"H07,H08,H13,H14,H15,H16,H17",Course (catalog or H-inferred),dim_course
+fact_transcript_course,grade_level_sk,BIGINT,H09,Grade level when taken,dim_grade_level
+fact_transcript_course,letter_grade_sk,BIGINT,H10,Letter grade,dim_letter_grade
+fact_transcript_course,term_end_date_sk,INT,H18,Term end month (first day of month),dim_date
+fact_transcript_course,term_code,STRING,H19,Term (Appendix P); '' for transfer credits,
+fact_transcript_course,transcript_junk_sk,BIGINT,"H24,H26,H27",Transcript flags,dim_transcript_junk
+fact_transcript_course,course_designation_group_sk,BIGINT,H13,Course designations (bridge),dim_course_designation_group
+fact_transcript_course,industry_certification_group_sk,BIGINT,H31,Industry certifications earned (bridge),dim_industry_certification_group
+fact_transcript_course,work_based_learning_group_sk,BIGINT,H32,Work-based learning activities (bridge),dim_work_based_learning_group
+fact_transcript_course,teacher_certification_number,STRING,H25,Degenerate: certification number of the teacher,
+fact_transcript_course,credits_attempted,"DECIMAL(4,2)",H11,Credits attempted,
+fact_transcript_course,credits_earned,"DECIMAL(4,2)",H12,Credits earned,
+fact_transcript_course,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+fact_transcript_course,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+fact_nontraditional_credit,school_year_sk,BIGINT,T01,School year of the submission,dim_school_year
+fact_nontraditional_credit,student_sk,BIGINT,T04,Student (SSID),dim_student
+fact_nontraditional_credit,district_sk,BIGINT,T02,Serving district,dim_district
+fact_nontraditional_credit,school_sk,BIGINT,T05,School (Location ID via xref_location),dim_school
+fact_nontraditional_credit,course_sk,BIGINT,"T07,T08,T09,T11,T18",Course (T-inferred),dim_course
+fact_nontraditional_credit,attempt_id,STRING,T06,Degenerate: attempt ID,
+fact_nontraditional_credit,letter_grade_sk,BIGINT,T15,Letter grade,dim_letter_grade
+fact_nontraditional_credit,ale_course_type_sk,BIGINT,T12,ALE course type,dim_ale_course_type
+fact_nontraditional_credit,online_provider_sk,BIGINT,T13,Approved online provider,dim_online_provider
+fact_nontraditional_credit,online_program_sk,BIGINT,T14,Approved online program,dim_online_program
+fact_nontraditional_credit,course_designation_group_sk,BIGINT,T10,Course designations (bridge),dim_course_designation_group
+fact_nontraditional_credit,credits_attempted,"DECIMAL(4,2)",T16,Credits attempted,
+fact_nontraditional_credit,credits_earned,"DECIMAL(4,2)",T17,Credits earned,
+fact_nontraditional_credit,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+fact_nontraditional_credit,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+fact_program_participation,school_year_sk,BIGINT,I01,School year of the submission,dim_school_year
+fact_program_participation,student_sk,BIGINT,I04,Student (SSID),dim_student
+fact_program_participation,district_sk,BIGINT,I02,Serving district,dim_district
+fact_program_participation,school_sk,BIGINT,I05,School (Location ID via xref_location),dim_school
+fact_program_participation,program_sk,BIGINT,I06,Attribute or program,dim_program
+fact_program_participation,start_date_sk,INT,I07,Program start date,dim_date
+fact_program_participation,exit_date_sk,INT,I08,Program exit date (-2 while active),dim_date
+fact_program_participation,program_participation_junk_sk,BIGINT,"I09,I10",Exit reason and qualification,dim_program_participation_junk
+fact_program_participation,disability_sk,BIGINT,I10,Primary disability when I06 = 36 (-2 otherwise),dim_disability
+fact_program_participation,participation_days,INT,"I07,I08,A08",Derived: calendar days from I07 to I08 (or A08),
+fact_program_participation,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+fact_program_participation,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+fact_el_program,school_year_sk,BIGINT,J01,School year of the submission,dim_school_year
+fact_el_program,student_sk,BIGINT,J04,Student (SSID),dim_student
+fact_el_program,district_sk,BIGINT,J02,Serving district,dim_district
+fact_el_program,school_sk,BIGINT,J05,School (Location ID via xref_location),dim_school
+fact_el_program,program_sk,BIGINT,J17,EL program designation,dim_program
+fact_el_program,grade_level_sk,BIGINT,J19,Grade level at placement,dim_grade_level
+fact_el_program,start_date_sk,INT,J07,Program status start date,dim_date
+fact_el_program,exit_date_sk,INT,J08,Program exit date,dim_date
+fact_el_program,initial_wa_placement_test_date_sk,INT,J13,Initial WA placement test date,dim_date
+fact_el_program,placement_test_date_sk,INT,J22,Placement test date,dim_date
+fact_el_program,el_junk_sk,BIGINT,"J06,J09,J18,J21",EL codes,dim_el_junk
+fact_el_program,placement_test_scale_score,INT,J20,Placement test scale score,
+fact_el_program,placement_test_level_score,"DECIMAL(2,1)",J23,Overall placement test score (0.0-6.0),
+fact_el_program,participation_days,INT,"J07,J08,A08",Derived: calendar days from J07 to J08 (or A08),
+fact_el_program,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+fact_el_program,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+fact_sped_program,school_year_sk,BIGINT,K01,School year of the submission,dim_school_year
+fact_sped_program,student_sk,BIGINT,K04,Student (SSID),dim_student
+fact_sped_program,district_sk,BIGINT,K02,Serving district,dim_district
+fact_sped_program,school_sk,BIGINT,"C05,C10",School inferred from the covering File C enrollment (-1 if none),dim_school
+fact_sped_program,program_sk,BIGINT,K14,Special education (single member),dim_program
+fact_sped_program,start_date_sk,INT,K14,Program start date,dim_date
+fact_sped_program,exit_date_sk,INT,K08,Program exit date,dim_date
+fact_sped_program,annual_iep_meeting_date_sk,INT,K25,Date of annual IEP meeting,dim_date
+fact_sped_program,lre_sk,BIGINT,K06,Least restrictive environment,dim_lre
+fact_sped_program,non_public_agency_sk,BIGINT,K15,Non-public agency,dim_non_public_agency
+fact_sped_program,prek_outcome_junk_sk,BIGINT,"K16,K17,K18,K19,K20,K21,K22,K23,K24",PreK outcome ratings,dim_prek_outcome_junk
+fact_sped_program,sped_junk_sk,BIGINT,"K09,K26,K27","Exit reason, interpreter, transition consent",dim_sped_junk
+fact_sped_program,participation_days,INT,"K14,K08,A08",Derived: calendar days from K14 to K08 (or A08),
+fact_sped_program,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+fact_sped_program,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+fact_lap_growth,school_year_sk,BIGINT,Q01,School year of the submission,dim_school_year
+fact_lap_growth,student_sk,BIGINT,Q04,Student (SSID),dim_student
+fact_lap_growth,district_sk,BIGINT,Q02,Serving district,dim_district
+fact_lap_growth,school_sk,BIGINT,Q05,School (Location ID via xref_location),dim_school
+fact_lap_growth,program_sk,BIGINT,Q06,LAP / WRC program,dim_program
+fact_lap_growth,start_date_sk,INT,Q07,Program start date,dim_date
+fact_lap_growth,beginning_score_date_sk,INT,Q12,Date of beginning score,dim_date
+fact_lap_growth,end_score_date_sk,INT,Q14,Date of end score,dim_date
+fact_lap_growth,identification_assessment_sk,BIGINT,Q08,Identification assessment,dim_growth_assessment
+fact_lap_growth,progress_monitoring_assessment_sk,BIGINT,Q10,Progress monitoring assessment,dim_growth_assessment
+fact_lap_growth,lap_junk_sk,BIGINT,"Q09,Q15,Q16,Q17",Growth and intervention codes,dim_lap_junk
+fact_lap_growth,beginning_score,"DECIMAL(6,2)",Q11,Beginning score,
+fact_lap_growth,end_score,"DECIMAL(6,2)",Q13,End score,
+fact_lap_growth,growth_months,INT,Q09,Derived: Q09 as months (0-20); NULL for other codes (C-007),
+fact_lap_growth,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+fact_lap_growth,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+fact_support_screening,school_year_sk,BIGINT,V01,School year of the submission,dim_school_year
+fact_support_screening,student_sk,BIGINT,V04,Student (SSID),dim_student
+fact_support_screening,district_sk,BIGINT,V02,Serving district,dim_district
+fact_support_screening,school_sk,BIGINT,V05,School (Location ID via xref_location),dim_school
+fact_support_screening,program_sk,BIGINT,V06,Support code,dim_program
+fact_support_screening,identification_assessment_date_sk,INT,V08,Identification assessment date,dim_date
+fact_support_screening,support_screening_junk_sk,BIGINT,"V07,V09",Identification assessment and determination,dim_support_screening_junk
+fact_support_screening,intervention_group_sk,BIGINT,V10,Interventions used (bridge),dim_intervention_group
+fact_support_screening,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+fact_support_screening,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+fact_absence,school_year_sk,BIGINT,N01,School year of the submission,dim_school_year
+fact_absence,student_sk,BIGINT,N04,Student (SSID),dim_student
+fact_absence,district_sk,BIGINT,N02,Serving district,dim_district
+fact_absence,school_sk,BIGINT,N05,School (Location ID via xref_location),dim_school
+fact_absence,absence_date_sk,INT,N06,Absence date,dim_date
+fact_absence,absence_type_sk,BIGINT,N07,Absence type,dim_absence_type
+fact_absence,absence_count,INT,N07,Always 1,
+fact_absence,full_day_flag,INT,N07,1 when N07 is EF or UF,
+fact_absence,part_day_flag,INT,N07,1 when N07 is EP or UP,
+fact_absence,excused_flag,INT,N07,1 when N07 is EF or EP,
+fact_absence,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+fact_absence,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+fact_exclusionary_action,school_year_sk,BIGINT,R01,School year of the submission,dim_school_year
+fact_exclusionary_action,student_sk,BIGINT,R04,Student (SSID),dim_student
+fact_exclusionary_action,district_sk,BIGINT,R02,Serving district,dim_district
+fact_exclusionary_action,school_sk,BIGINT,R05,School (Location ID via xref_location),dim_school
+fact_exclusionary_action,incident_key,STRING,"R02,R06",Degenerate: district + incident ID,
+fact_exclusionary_action,incident_id,STRING,R06,Degenerate: incident ID,
+fact_exclusionary_action,incident_date_sk,INT,R07,Incident date,dim_date
+fact_exclusionary_action,action_date_sk,INT,R12,Exclusionary action date,dim_date
+fact_exclusionary_action,behavior_sk,BIGINT,R08,Behavior,dim_behavior
+fact_exclusionary_action,other_behavior_group_sk,BIGINT,R09,Other behaviors (bridge_other_behavior),dim_other_behavior_group
+fact_exclusionary_action,weapon_sk,BIGINT,R10,Weapon type (-2 unless R08 = 8),dim_weapon
+fact_exclusionary_action,exclusionary_action_sk,BIGINT,R11,Exclusionary action applied,dim_exclusionary_action
+fact_exclusionary_action,discipline_junk_sk,BIGINT,"R15,R16,R17,R20,R21,R23,R24,R25,R26,R27",Discipline flags,dim_discipline_junk
+fact_exclusionary_action,readmission_petition_submitted_date_sk,INT,R18,Date petition for readmission submitted,dim_date
+fact_exclusionary_action,readmission_petition_granted_date_sk,INT,R19,Date petition for readmission granted,dim_date
+fact_exclusionary_action,reengagement_meeting_date_sk,INT,R22,Date reengagement meeting held,dim_date
+fact_exclusionary_action,duration_days,"DECIMAL(4,1)",R13,Duration of exclusionary action (days),
+fact_exclusionary_action,total_exclusionary_time,"DECIMAL(4,1)",R14,Total amount of exclusionary time,
+fact_exclusionary_action,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+fact_exclusionary_action,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+fact_restraint_isolation,school_year_sk,BIGINT,S01,School year of the submission,dim_school_year
+fact_restraint_isolation,student_sk,BIGINT,S04,Student (SSID),dim_student
+fact_restraint_isolation,district_sk,BIGINT,S02,Serving district,dim_district
+fact_restraint_isolation,school_sk,BIGINT,S05,School (Location ID via xref_location),dim_school
+fact_restraint_isolation,action_key,STRING,"S02,S06",Degenerate: district + action ID,
+fact_restraint_isolation,action_id,STRING,S06,Degenerate: action ID,
+fact_restraint_isolation,action_date_sk,INT,S07,Action date,dim_date
+fact_restraint_isolation,restraint_isolation_type_sk,BIGINT,S09,Type of restraint or isolation,dim_restraint_isolation_type
+fact_restraint_isolation,restraint_junk_sk,BIGINT,"S10,S12",Injury and safety-staff flags,dim_restraint_junk
+fact_restraint_isolation,duration_minutes,"DECIMAL(4,1)",S08,Action duration (minutes),
+fact_restraint_isolation,staff_injured_count,INT,S11,Number of staff injured,
+fact_restraint_isolation,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+fact_restraint_isolation,_load_ts,TIMESTAMP,,Load metadata: load timestamp,
+fact_initial_evaluation,school_year_sk,BIGINT,U01,School year of the submission,dim_school_year
+fact_initial_evaluation,student_sk,BIGINT,U04,Student (SSID),dim_student
+fact_initial_evaluation,district_sk,BIGINT,U02,Serving district,dim_district
+fact_initial_evaluation,referral_date_sk,INT,U05,Date of initial referral,dim_date
+fact_initial_evaluation,consent_date_sk,INT,U06,Date district received consent,dim_date
+fact_initial_evaluation,eligibility_determination_date_sk,INT,U07,Date of initial evaluation/eligibility determination,dim_date
+fact_initial_evaluation,initial_iep_meeting_date_sk,INT,U11,Date of initial IEP meeting (-2 unless U10 = 1),dim_date
+fact_initial_evaluation,initial_evaluation_junk_sk,BIGINT,"U09,U10,U12,U13","Late reasons, outcome, interpreter",dim_initial_evaluation_junk
+fact_initial_evaluation,school_days_to_complete,INT,U08,School days to complete initial evaluation/eligibility,
+fact_initial_evaluation,referral_to_consent_days,INT,"U05,U06",Derived: calendar days U05 -> U06,
+fact_initial_evaluation,consent_to_eligibility_days,INT,"U06,U07",Derived: calendar days U06 -> U07,
+fact_initial_evaluation,eligibility_to_iep_days,INT,"U07,U11",Derived: calendar days U07 -> U11,
+fact_initial_evaluation,referral_to_iep_days,INT,"U05,U11",Derived: calendar days U05 -> U11,
+fact_initial_evaluation,_manual_version,STRING,,Load metadata: CEDARS manual version (backload seam),
+fact_initial_evaluation,_load_ts,TIMESTAMP,,Load metadata: load timestamp,

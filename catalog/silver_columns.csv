@@ -1,0 +1,348 @@
+element_id,silver_table,silver_column,transformation
+A01,location,school_year,cast to INT
+A01,xref_location,school_year,crosswalk
+A02,location,county_district_code,trimmed; blank -> NULL
+A02,xref_location,county_district_code,crosswalk
+A03,location,district_name,trimmed; blank -> NULL
+A03,xref_location,district_name,crosswalk
+A04,location,location_id,trimmed; blank -> NULL
+A04,xref_location,location_id,crosswalk
+A05,location,school_code,trimmed; blank -> NULL
+A05,xref_location,school_code,crosswalk
+A06,location,school_name,trimmed; blank -> NULL
+A06,xref_location,school_name,crosswalk
+A07,location,initial_school_start_date,cast to DATE
+A08,location,last_school_end_date,cast to DATE
+B01,district_student_enrollment,school_year,cast to INT
+B02,district_student_enrollment,county_district_code,trimmed; blank -> NULL
+B03,district_student_enrollment,home_county_district_code,trimmed; blank -> NULL
+B04,district_student_enrollment,district_student_id,trimmed; blank -> NULL
+B05,district_student_enrollment,ssid,trimmed; blank -> NULL
+B06,district_student_enrollment,legal_last_name,trimmed; blank -> NULL
+B06,student_pii_history,attribute_value,unpivot: attribute_element_id = B06
+B07,district_student_enrollment,legal_first_name,trimmed; blank -> NULL
+B07,student_pii_history,attribute_value,unpivot: attribute_element_id = B07
+B08,district_student_enrollment,legal_middle_name,trimmed; blank -> NULL
+B08,student_pii_history,attribute_value,unpivot: attribute_element_id = B08
+B09,district_student_enrollment,birth_date,cast to DATE
+B09,student_pii_history,attribute_value,unpivot: attribute_element_id = B09
+B10,district_student_enrollment,birth_country,trimmed; blank -> NULL
+B10,student_attribute_history,attribute_value,unpivot: attribute_element_id = B10
+B12,district_student_enrollment,gender,trimmed; blank -> NULL
+B12,student_attribute_history,attribute_value,unpivot: attribute_element_id = B12
+B13,district_student_enrollment,grade_level,trimmed; blank -> NULL
+B13,student_attribute_history,attribute_value,unpivot: attribute_element_id = B13
+B14,district_student_enrollment,district_enrollment_date,cast to DATE
+B15,district_student_enrollment,district_exit_date,cast to DATE
+B17,district_student_enrollment,primary_language_code,trimmed; blank -> NULL
+B17,student_attribute_history,attribute_value,unpivot: attribute_element_id = B17
+B18,district_student_enrollment,home_language_code,trimmed; blank -> NULL
+B18,student_attribute_history,attribute_value,unpivot: attribute_element_id = B18
+B20,district_student_enrollment,residential_zip_plus4,trimmed; blank -> NULL
+B20,student_pii_history,attribute_value,unpivot: attribute_element_id = B20
+B21,district_student_enrollment,homeless_status_code,trimmed; blank -> NULL
+B21,student_attribute_history,attribute_value,unpivot: attribute_element_id = B21
+B22,district_student_enrollment,private_school_part_time_code,trimmed; blank -> NULL
+B22,student_attribute_history,attribute_value,unpivot: attribute_element_id = B22
+B23,district_student_enrollment,home_school_part_time_code,trimmed; blank -> NULL
+B23,student_attribute_history,attribute_value,unpivot: attribute_element_id = B23
+B24,district_student_enrollment,exchange_status_code,trimmed; blank -> NULL
+B24,student_attribute_history,attribute_value,unpivot: attribute_element_id = B24
+B26,district_student_enrollment,graduation_requirements_year,cast to INT
+B26,student_attribute_history,attribute_value,unpivot: attribute_element_id = B26
+B27,district_student_enrollment,expected_graduation_year,cast to INT
+B27,student_attribute_history,attribute_value,unpivot: attribute_element_id = B27
+B28,district_student_enrollment,cumulative_gpa,"cast to DECIMAL(4,3)"
+B28,student_attribute_history,attribute_value,unpivot: attribute_element_id = B28
+B29,district_student_enrollment,cumulative_credits_attempted,"cast to DECIMAL(6,2)"
+B29,student_attribute_history,attribute_value,unpivot: attribute_element_id = B29
+B30,district_student_enrollment,cumulative_credits_earned,"cast to DECIMAL(6,2)"
+B30,student_attribute_history,attribute_value,unpivot: attribute_element_id = B30
+B32,district_student_enrollment,initial_us_school_enrollment_date,cast to DATE
+B32,student_attribute_history,attribute_value,unpivot: attribute_element_id = B32
+B34,district_student_enrollment,months_non_us_attendance,cast to INT
+B34,student_attribute_history,attribute_value,unpivot: attribute_element_id = B34
+B35,district_student_enrollment,military_parent_code,trimmed; blank -> NULL
+B35,student_attribute_history,attribute_value,unpivot: attribute_element_id = B35
+B36,district_student_enrollment,preferred_last_name,trimmed; blank -> NULL
+B36,student_pii_history,attribute_value,unpivot: attribute_element_id = B36
+B37,district_student_enrollment,preferred_first_name,trimmed; blank -> NULL
+B37,student_pii_history,attribute_value,unpivot: attribute_element_id = B37
+B38,district_student_enrollment,preferred_middle_name,trimmed; blank -> NULL
+B38,student_pii_history,attribute_value,unpivot: attribute_element_id = B38
+B39,district_student_enrollment,asvab_test_status_code,trimmed; blank -> NULL
+B39,student_attribute_history,attribute_value,unpivot: attribute_element_id = B39
+B40,district_student_enrollment,asvab_test_score,cast to INT
+B40,student_attribute_history,attribute_value,unpivot: attribute_element_id = B40
+B41,district_student_enrollment,asvab_school_year,cast to INT
+B41,student_attribute_history,attribute_value,unpivot: attribute_element_id = B41
+B42,district_student_enrollment,credit_waiver_code,trimmed; blank -> NULL
+B42,student_attribute_history,attribute_value,unpivot: attribute_element_id = B42
+B43,district_student_enrollment,family_language_codes,"multi-valued: split on comma, trimmed"
+B43,district_student_enrollment,family_language_codes_raw,as reported
+B43,student_attribute_history,attribute_value,unpivot: attribute_element_id = B43
+B44,district_student_enrollment,ela_pathway_completed_school_year,cast to INT
+B44,student_attribute_history,attribute_value,unpivot: attribute_element_id = B44
+B45,district_student_enrollment,math_pathway_completed_school_year,cast to INT
+B45,student_attribute_history,attribute_value,unpivot: attribute_element_id = B45
+C01,school_student_enrollment,school_year,cast to INT
+C02,school_student_enrollment,county_district_code,trimmed; blank -> NULL
+C03,school_student_enrollment,district_student_id,trimmed; blank -> NULL
+C04,school_student_enrollment,ssid,trimmed; blank -> NULL
+C05,school_student_enrollment,location_id,trimmed; blank -> NULL
+C06,school_student_enrollment,school_enrollment_date,cast to DATE
+C08,school_student_enrollment,school_exit_date,cast to DATE
+C09,school_student_enrollment,school_withdrawal_code,trimmed; blank -> NULL
+C10,school_student_enrollment,is_primary_school,trimmed; blank -> NULL
+C11,school_student_enrollment,school_choice_code,trimmed; blank -> NULL
+C12,school_student_enrollment,days_present,cast to INT
+C14,school_student_enrollment,confirmed_transfer_in_code,trimmed; blank -> NULL
+D01,course_catalog,school_year,cast to INT
+D02,course_catalog,county_district_code,trimmed; blank -> NULL
+D03,course_catalog,location_id,trimmed; blank -> NULL
+D04,course_catalog,course_id,trimmed; blank -> NULL
+D05,course_catalog,course_title,trimmed; blank -> NULL
+D06,course_catalog,content_area_code,trimmed; blank -> NULL
+D07,course_catalog,course_designation_codes,multi-valued: split into single characters
+D07,course_catalog,course_designation_codes_raw,as reported
+D08,course_catalog,state_course_code,trimmed; blank -> NULL
+D09,course_catalog,ap_ib_ci_course_code,trimmed; blank -> NULL
+D10,course_catalog,cip_code,trimmed; blank -> NULL
+D12,course_catalog,cte_equivalency_id_code,trimmed; blank -> NULL
+D13,course_catalog,cte_equivalency_code,trimmed; blank -> NULL
+D14,course_catalog,dual_language_type_code,trimmed; blank -> NULL
+D15,course_catalog,dual_language_language_code,trimmed; blank -> NULL
+D16,course_catalog,course_level_code,trimmed; blank -> NULL
+D17,course_catalog,industry_certification_codes_offered,"multi-valued: split on comma, trimmed"
+D17,course_catalog,industry_certification_codes_offered_raw,as reported
+D20,course_catalog,work_based_learning_codes_offered,"multi-valued: split on comma, trimmed"
+D20,course_catalog,work_based_learning_codes_offered_raw,as reported
+D21,course_catalog,higher_ed_institution_codes,"multi-valued: split on comma, trimmed"
+D21,course_catalog,higher_ed_institution_codes_raw,as reported
+E01,student_schedule,school_year,cast to INT
+E02,student_schedule,county_district_code,trimmed; blank -> NULL
+E03,student_schedule,district_student_id,trimmed; blank -> NULL
+E04,student_schedule,ssid,trimmed; blank -> NULL
+E05,student_schedule,location_id,trimmed; blank -> NULL
+E06,student_schedule,course_id,trimmed; blank -> NULL
+E07,student_schedule,section_id,trimmed; blank -> NULL
+E08,student_schedule,term,trimmed; blank -> NULL
+E09,student_schedule,ale_course_type_code,trimmed; blank -> NULL
+E10,student_schedule,online_provider_code,trimmed; blank -> NULL
+E11,student_schedule,online_program_code,trimmed; blank -> NULL
+F01,staff,school_year,cast to INT
+F02,staff,county_district_code,trimmed; blank -> NULL
+F03,staff,staff_id,trimmed; blank -> NULL
+F04,staff,staff_type_code,trimmed; blank -> NULL
+F05,staff,certification_number,trimmed; blank -> NULL
+F05,xref_staff,certification_number,UNK -> NULL
+F06,staff,legal_last_name,trimmed; blank -> NULL
+F07,staff,legal_first_name,trimmed; blank -> NULL
+F08,staff,legal_middle_name,trimmed; blank -> NULL
+F09,staff,birth_date,cast to DATE
+G01,staff_schedule,school_year,cast to INT
+G02,staff_schedule,county_district_code,trimmed; blank -> NULL
+G03,staff_schedule,location_id,trimmed; blank -> NULL
+G04,staff_schedule,staff_id,trimmed; blank -> NULL
+G05,staff_schedule,course_id,trimmed; blank -> NULL
+G06,staff_schedule,section_id,trimmed; blank -> NULL
+G07,staff_schedule,term,trimmed; blank -> NULL
+G08,staff_schedule,instruction_start_date,cast to DATE
+G09,staff_schedule,instruction_end_date,cast to DATE
+G10,staff_schedule,teacher_indicator_code,trimmed; blank -> NULL
+G11,staff_schedule,term_start_date,cast to DATE
+G12,staff_schedule,term_end_date,cast to DATE
+H01,student_grade_history,school_year,cast to INT
+H02,student_grade_history,county_district_code,trimmed; blank -> NULL
+H03,student_grade_history,district_student_id,trimmed; blank -> NULL
+H04,student_grade_history,ssid,trimmed; blank -> NULL
+H07,student_grade_history,course_id,trimmed; blank -> NULL
+H08,student_grade_history,course_title,trimmed; blank -> NULL
+H09,student_grade_history,grade_level_code,trimmed; blank -> NULL
+H10,student_grade_history,letter_grade,trimmed; blank -> NULL
+H11,student_grade_history,credits_attempted,"cast to DECIMAL(4,2)"
+H12,student_grade_history,credits_earned,"cast to DECIMAL(4,2)"
+H13,student_grade_history,course_designation_codes,multi-valued: split into single characters
+H13,student_grade_history,course_designation_codes_raw,as reported
+H14,student_grade_history,content_area_code,trimmed; blank -> NULL
+H15,student_grade_history,state_course_code,trimmed; blank -> NULL
+H16,student_grade_history,ap_ib_ci_course_code,trimmed; blank -> NULL
+H17,student_grade_history,cip_code,trimmed; blank -> NULL
+H18,student_grade_history,term_end_month,trimmed; blank -> NULL
+H19,student_grade_history,term,trimmed; blank -> NULL
+H24,student_grade_history,cte_assessment_code,trimmed; blank -> NULL
+H25,student_grade_history,teacher_certification_number,trimmed; blank -> NULL
+H26,student_grade_history,school_code,trimmed; blank -> NULL
+H27,student_grade_history,ale_course_type_code,trimmed; blank -> NULL
+H30,student_grade_history,course_school_year,cast to INT
+H31,student_grade_history,industry_certification_codes_earned,"multi-valued: split on comma, trimmed"
+H31,student_grade_history,industry_certification_codes_earned_raw,as reported
+H32,student_grade_history,work_based_learning_codes,"multi-valued: split on comma, trimmed"
+H32,student_grade_history,work_based_learning_codes_raw,as reported
+I01,student_program,school_year,cast to INT
+I02,student_program,county_district_code,trimmed; blank -> NULL
+I03,student_program,district_student_id,trimmed; blank -> NULL
+I04,student_program,ssid,trimmed; blank -> NULL
+I05,student_program,location_id,trimmed; blank -> NULL
+I06,student_program,program_code,trimmed; blank -> NULL
+I07,student_program,program_start_date,cast to DATE
+I08,student_program,program_exit_date,cast to DATE
+I09,student_program,exit_reason_code,trimmed; blank -> NULL
+I10,student_program,qualification_code,trimmed; blank -> NULL
+J01,english_learner_program,school_year,cast to INT
+J02,english_learner_program,county_district_code,trimmed; blank -> NULL
+J03,english_learner_program,district_student_id,trimmed; blank -> NULL
+J04,english_learner_program,ssid,trimmed; blank -> NULL
+J05,english_learner_program,location_id,trimmed; blank -> NULL
+J06,english_learner_program,instructional_model_code,trimmed; blank -> NULL
+J07,english_learner_program,program_start_date,cast to DATE
+J08,english_learner_program,program_exit_date,cast to DATE
+J09,english_learner_program,exit_reason_code,trimmed; blank -> NULL
+J13,english_learner_program,initial_wa_placement_test_date,cast to DATE
+J17,english_learner_program,program_designation_code,trimmed; blank -> NULL
+J18,english_learner_program,placement_test_code,trimmed; blank -> NULL
+J19,english_learner_program,grade_level_at_placement,trimmed; blank -> NULL
+J20,english_learner_program,placement_test_scale_score,cast to INT
+J21,english_learner_program,placement_status_code,trimmed; blank -> NULL
+J22,english_learner_program,placement_test_date,cast to DATE
+J23,english_learner_program,placement_test_level_score,trimmed; blank -> NULL
+K01,special_education_program,school_year,cast to INT
+K02,special_education_program,county_district_code,trimmed; blank -> NULL
+K03,special_education_program,district_student_id,trimmed; blank -> NULL
+K04,special_education_program,ssid,trimmed; blank -> NULL
+K06,special_education_program,lre_code,trimmed; blank -> NULL
+K08,special_education_program,exit_date,cast to DATE
+K09,special_education_program,exit_reason_code,trimmed; blank -> NULL
+K14,special_education_program,program_start_date,cast to DATE
+K15,special_education_program,non_public_agency_code,trimmed; blank -> NULL
+K16,special_education_program,prek_social_emotional_entry_code,trimmed; blank -> NULL
+K17,special_education_program,prek_knowledge_skills_entry_code,trimmed; blank -> NULL
+K18,special_education_program,prek_behaviors_entry_code,trimmed; blank -> NULL
+K19,special_education_program,prek_social_emotional_exit_code,trimmed; blank -> NULL
+K20,special_education_program,prek_social_emotional_progress_code,trimmed; blank -> NULL
+K21,special_education_program,prek_knowledge_skills_exit_code,trimmed; blank -> NULL
+K22,special_education_program,prek_knowledge_skills_progress_code,trimmed; blank -> NULL
+K23,special_education_program,prek_behaviors_exit_code,trimmed; blank -> NULL
+K24,special_education_program,prek_behaviors_progress_code,trimmed; blank -> NULL
+K25,special_education_program,annual_iep_meeting_date,cast to DATE
+K26,special_education_program,interpreter_annual_iep_code,trimmed; blank -> NULL
+K27,special_education_program,transition_consent_code,trimmed; blank -> NULL
+L01,student_ethnicity,school_year,cast to INT
+L02,student_ethnicity,county_district_code,trimmed; blank -> NULL
+L03,student_ethnicity,district_student_id,trimmed; blank -> NULL
+L04,student_ethnicity,ssid,trimmed; blank -> NULL
+L05,student_ethnicity,ethnicity_code,trimmed; blank -> NULL
+L06,student_ethnicity,ethnicity_collection_method_code,trimmed; blank -> NULL
+M01,student_race,school_year,cast to INT
+M02,student_race,county_district_code,trimmed; blank -> NULL
+M03,student_race,district_student_id,trimmed; blank -> NULL
+M04,student_race,ssid,trimmed; blank -> NULL
+M05,student_race,race_code,trimmed; blank -> NULL
+M06,student_race,race_collection_method_code,trimmed; blank -> NULL
+N01,student_absence,school_year,cast to INT
+N02,student_absence,county_district_code,trimmed; blank -> NULL
+N03,student_absence,district_student_id,trimmed; blank -> NULL
+N04,student_absence,ssid,trimmed; blank -> NULL
+N05,student_absence,location_id,trimmed; blank -> NULL
+N06,student_absence,absence_date,cast to DATE
+N07,student_absence,absence_code,trimmed; blank -> NULL
+Q01,student_growth,school_year,cast to INT
+Q02,student_growth,county_district_code,trimmed; blank -> NULL
+Q03,student_growth,district_student_id,trimmed; blank -> NULL
+Q04,student_growth,ssid,trimmed; blank -> NULL
+Q05,student_growth,location_id,trimmed; blank -> NULL
+Q06,student_growth,program_code,trimmed; blank -> NULL
+Q07,student_growth,program_start_date,cast to DATE
+Q08,student_growth,identification_assessment_code,trimmed; blank -> NULL
+Q09,student_growth,academic_growth_code,trimmed; blank -> NULL
+Q10,student_growth,progress_monitoring_assessment_code,trimmed; blank -> NULL
+Q11,student_growth,beginning_score,"cast to DECIMAL(6,2)"
+Q12,student_growth,beginning_score_date,cast to DATE
+Q13,student_growth,end_score,"cast to DECIMAL(6,2)"
+Q14,student_growth,end_score_date,cast to DATE
+Q15,student_growth,extended_learning_intervention_code,trimmed; blank -> NULL
+Q16,student_growth,regular_day_intervention_code,trimmed; blank -> NULL
+Q17,student_growth,at_grade_level,trimmed; blank -> NULL
+R01,exclusionary_discipline,school_year,cast to INT
+R02,exclusionary_discipline,county_district_code,trimmed; blank -> NULL
+R03,exclusionary_discipline,district_student_id,trimmed; blank -> NULL
+R04,exclusionary_discipline,ssid,trimmed; blank -> NULL
+R05,exclusionary_discipline,location_id,trimmed; blank -> NULL
+R06,exclusionary_discipline,incident_id,trimmed; blank -> NULL
+R07,exclusionary_discipline,incident_date,cast to DATE
+R08,exclusionary_discipline,behavior_code,trimmed; blank -> NULL
+R09,exclusionary_discipline,other_behavior_codes,"multi-valued: split on comma, trimmed"
+R09,exclusionary_discipline,other_behavior_codes_raw,as reported
+R10,exclusionary_discipline,weapon_type_code,trimmed; blank -> NULL
+R11,exclusionary_discipline,exclusionary_action_code,trimmed; blank -> NULL
+R12,exclusionary_discipline,exclusionary_action_date,cast to DATE
+R13,exclusionary_discipline,duration_days,"cast to DECIMAL(4,1)"
+R14,exclusionary_discipline,total_exclusionary_time,"cast to DECIMAL(4,1)"
+R15,exclusionary_discipline,iaes_code,trimmed; blank -> NULL
+R16,exclusionary_discipline,academic_services_code,trimmed; blank -> NULL
+R17,exclusionary_discipline,behavior_services_code,trimmed; blank -> NULL
+R18,exclusionary_discipline,readmission_petition_submitted_date,cast to DATE
+R19,exclusionary_discipline,readmission_petition_granted_date,cast to DATE
+R20,exclusionary_discipline,expulsion_extension_petition_code,trimmed; blank -> NULL
+R21,exclusionary_discipline,reengagement_plan_code,trimmed; blank -> NULL
+R22,exclusionary_discipline,reengagement_meeting_date,cast to DATE
+R23,exclusionary_discipline,appeal_code,trimmed; blank -> NULL
+R24,exclusionary_discipline,safety_staff_involvement_code,trimmed; blank -> NULL
+R25,exclusionary_discipline,safety_staff_used_force_code,trimmed; blank -> NULL
+R26,exclusionary_discipline,safety_staff_arrest_code,trimmed; blank -> NULL
+R27,exclusionary_discipline,interpreter_reengagement_meeting_code,trimmed; blank -> NULL
+S01,restraint_isolation,school_year,cast to INT
+S02,restraint_isolation,county_district_code,trimmed; blank -> NULL
+S03,restraint_isolation,district_student_id,trimmed; blank -> NULL
+S04,restraint_isolation,ssid,trimmed; blank -> NULL
+S05,restraint_isolation,location_id,trimmed; blank -> NULL
+S06,restraint_isolation,action_id,trimmed; blank -> NULL
+S07,restraint_isolation,action_date,cast to DATE
+S08,restraint_isolation,action_duration_minutes,"cast to DECIMAL(4,1)"
+S09,restraint_isolation,restraint_isolation_type_code,trimmed; blank -> NULL
+S10,restraint_isolation,student_injured,trimmed; blank -> NULL
+S11,restraint_isolation,staff_injured_count,cast to INT
+S12,restraint_isolation,safety_staff_involvement_code,trimmed; blank -> NULL
+T01,nontraditional_credit,school_year,cast to INT
+T02,nontraditional_credit,county_district_code,trimmed; blank -> NULL
+T03,nontraditional_credit,district_student_id,trimmed; blank -> NULL
+T04,nontraditional_credit,ssid,trimmed; blank -> NULL
+T05,nontraditional_credit,location_id,trimmed; blank -> NULL
+T06,nontraditional_credit,attempt_id,trimmed; blank -> NULL
+T07,nontraditional_credit,course_id,trimmed; blank -> NULL
+T08,nontraditional_credit,attempt_title,trimmed; blank -> NULL
+T09,nontraditional_credit,content_area_code,trimmed; blank -> NULL
+T10,nontraditional_credit,course_designation_codes,multi-valued: split into single characters
+T10,nontraditional_credit,course_designation_codes_raw,as reported
+T11,nontraditional_credit,state_course_code,trimmed; blank -> NULL
+T12,nontraditional_credit,ale_course_type_code,trimmed; blank -> NULL
+T13,nontraditional_credit,online_provider_code,trimmed; blank -> NULL
+T14,nontraditional_credit,online_program_code,trimmed; blank -> NULL
+T15,nontraditional_credit,letter_grade,trimmed; blank -> NULL
+T16,nontraditional_credit,credits_attempted,"cast to DECIMAL(4,2)"
+T17,nontraditional_credit,credits_earned,"cast to DECIMAL(4,2)"
+T18,nontraditional_credit,course_level_code,trimmed; blank -> NULL
+U01,initial_evaluation,school_year,cast to INT
+U02,initial_evaluation,county_district_code,trimmed; blank -> NULL
+U03,initial_evaluation,district_student_id,trimmed; blank -> NULL
+U04,initial_evaluation,ssid,trimmed; blank -> NULL
+U05,initial_evaluation,initial_referral_date,cast to DATE
+U06,initial_evaluation,consent_received_date,cast to DATE
+U07,initial_evaluation,eligibility_determination_date,cast to DATE
+U08,initial_evaluation,school_days_to_complete,cast to INT
+U09,initial_evaluation,late_evaluation_reason_code,trimmed; blank -> NULL
+U10,initial_evaluation,evaluation_outcome_code,trimmed; blank -> NULL
+U11,initial_evaluation,initial_iep_meeting_date,cast to DATE
+U12,initial_evaluation,late_part_c_transition_reason_code,trimmed; blank -> NULL
+U13,initial_evaluation,interpreter_initial_iep_code,trimmed; blank -> NULL
+V01,student_support,school_year,cast to INT
+V02,student_support,county_district_code,trimmed; blank -> NULL
+V03,student_support,district_student_id,trimmed; blank -> NULL
+V04,student_support,ssid,trimmed; blank -> NULL
+V05,student_support,location_id,trimmed; blank -> NULL
+V06,student_support,support_code,trimmed; blank -> NULL
+V07,student_support,identification_assessment_code,trimmed; blank -> NULL
+V08,student_support,identification_assessment_date,cast to DATE
+V09,student_support,support_determination_code,trimmed; blank -> NULL
+V10,student_support,intervention_codes,"multi-valued: split on comma, trimmed"
+V10,student_support,intervention_codes_raw,as reported

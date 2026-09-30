@@ -1,0 +1,19 @@
+org_id,organization_type,organization_name,effective_start_period,effective_end_period,satellite,parent_org_id (hierarchy on satellite),source_evidence
+900011,PS_COLLEGE_DISTRICT,Pierce College District (District 11),,,ORG_PS_COLLEGE_DISTRICT,,SBCTC College.DIST (inventory row 2240); RCW 28B.50.040
+900012,PS_COLLEGE_DISTRICT,Centralia College District (District 12),,,ORG_PS_COLLEGE_DISTRICT,,SBCTC College.DIST
+900006,PS_COLLEGE_DISTRICT,Seattle Colleges District (District 6),,,ORG_PS_COLLEGE_DISTRICT,,SBCTC College.DIST
+900017,PS_COLLEGE_DISTRICT,Community Colleges of Spokane (District 17),,,ORG_PS_COLLEGE_DISTRICT,,SBCTC College.DIST
+100110,PS_INSTITUTION,Pierce College (single college before split),(start of history),A014 (Spring 2001),ORG_PS_INSTITUTION,900011,SBCTC_college.pdf History: split Summer 2001
+100111,PS_INSTITUTION,Pierce College Fort Steilacoom,A121 (Summer 2001),B903 (Winter 2020),ORG_PS_INSTITUTION,900011,SBCTC_college.pdf History
+100112,PS_INSTITUTION,Pierce College Puyallup,A121 (Summer 2001),B903 (Winter 2020),ORG_PS_INSTITUTION,900011,SBCTC_college.pdf History
+100113,PS_INSTITUTION,Pierce College (re-merged),B904 (Spring 2020),(open),ORG_PS_INSTITUTION,900011,"SBCTC_college.pdf History: merged back Spring 2020 for all PeopleSoft pillars except HCM"
+100120,PS_INSTITUTION,Centralia College,(start of history),(open),ORG_PS_INSTITUTION,900012,"SBCTC_college.pdf History: code changed to 120 Winter 2021 (same institution)"
+100065,PS_INSTITUTION,Seattle Vocational Institute,(start of history),B781 (Summer 2017),ORG_PS_INSTITUTION,900006,SBCTC_college.pdf History: discontinued Fall 2017
+100062,PS_INSTITUTION,Seattle Central College,(start of history),(open),ORG_PS_INSTITUTION,900006,SBCTC College list
+100173,PS_INSTITUTION,Spokane Institute for Extended Learning,A451 (Summer 2004),B234 (Spring 2013),ORG_PS_INSTITUTION,900017,SBCTC_college.pdf History: added A451 through B234
+100300,PS_INSTITUTION,Cascadia College,9902 (Fall 1999),(open),ORG_PS_INSTITUTION,(district per SBCTC),SBCTC_college.pdf History: added Fall 1999
+100260,PS_INSTITUTION,Lake Washington Technical College -> Lake Washington Institute of Technology,(start of history),(open),ORG_PS_INSTITUTION,(district per SBCTC),"Rename July 2011 = Type 2 name change on ORGANIZATION (B121), NOT a lineage event"
+200101,PS_CAMPUS_SITE,Coyote Ridge Corrections Center (DOC site),,,ORG_PS_CAMPUS_SITE,"100190 until A234; 100200 from A341","SBCTC Class/StuClass DOC_SITE notes (rows 2198, 2303): moved from Columbia Basin to Walla Walla Summer 2003"
+200102,PS_CAMPUS_SITE,Ahtanum View Corrections Center (DOC site),,2010 (closed),ORG_PS_CAMPUS_SITE,"100160 until A234; 900017 from A341","DOC_SITE notes: moved from Yakima Valley to Community Colleges of Spokane Summer 2003; closed 2010"
+200103,PS_CAMPUS_SITE,Cedar Creek Corrections Center (DOC site),,,ORG_PS_CAMPUS_SITE,"Pierce (100111) until B014; 100120 from B121","DOC_SITE notes: moved from Pierce to Centralia as of B121"
+200104,PS_CAMPUS_SITE,McNeil Island Corrections Center (DOC site),,2010 (closed),ORG_PS_CAMPUS_SITE,(college per SBCTC lookup),DOC_SITE notes: closed 2010

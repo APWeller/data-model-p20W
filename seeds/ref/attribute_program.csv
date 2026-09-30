@@ -1,0 +1,75 @@
+code,description,record_type,definition,status,source_order,valid_from_year,valid_to_year
+1,21st Century Community Learning,School Program,Academic enrichment to help students meet state and local student performance standards in core academic subjects.,active,1,,
+6,LAP Math,School Program,Learning Assistance Program Math Intervention,active,2,,
+7,LAP Academic Readiness,School Program,"Learning Assistance Program pre-literacy skills (i.e., an understanding of the basic rules of grammar, print concepts, alphabetic knowledge, & phonemes); Pre-numeracy Skills (i.e., number recognition, 2-dimensional shape recognition); classroom preparedness. Transition from pre-k to k; k to 1.",active,3,,
+11,LAP Extended Learning Opportunities,School Program,"Learning Assistance Program Transition Services: Supports 8th grade students in the successful transition into high school through their 9th grade year. Learning Assistance Program Graduation Assistance: Supports 10th, 11th and 12th grade students to meet state and local graduation requirements (i.e., online instruction, alternative school attendance, credit retrieval, test preparation).",active,4,,
+16,504 Plan,Attribute,"The 504 Plan attribute identifies students who meet the definition of a person who, under Section 504 of the Rehabilitation Act of 1973, has a written plan developed by the district and the student's parent/guardian, detailing accommodations that will be made to ensure the student has access to programs and activities maintained by the district.",active,5,,
+19,Free/Reduced Meals Participation/Eligibility,District Program,This identifies students who are eligible to receive either free or reduced meals.,active,6,,
+23,Title VI Indian Education Supplemental Services,District Program,Identifies American Indian and Alaska Native students receiving supplemental school program and other activities designed to address their unique education and culturally related academic needs.,active,7,,
+24,Unaccompanied Youth,Attribute,Identifies students who are not in the physical custody of a parent or guardian. An unaccompanied youth may or may not be homeless.,active,8,,
+30,"GRADS (Graduation, Reality and Dual-Role Skills)",School Program,Program for pregnant teens and young parents that focus on work and family foundation skills.,active,9,,
+32,Gifted – services or programs provided in the general education classroom,District Program,Students identified as highly capable and receiving services in a general education classroom.,active,10,,
+33,Gifted – services or programs provided in a unique highly capable program,District Program,Students identified as highly capable and receiving services in a unique highly capable program.,active,11,,
+34,Gifted – services or programs provided through acceleration,District Program,Students identified as highly capable and receiving services through acceleration.,active,12,,
+35,Gifted – services or programs provided outside the traditional school setting,District Program,Students identified as highly capable and receiving services outside the traditional school setting.,active,13,,
+36,Student Identified with a Disability,Attribute,Identifies disability code reported for student.,active,14,,
+37,LAP Literacy English Language Arts – Reading Writing and Communication,School Program,"Learning Assistance Program K-12 Literacy: Reading, Writing, & Communication Intervention.",active,15,,
+38,LAP Behavior,School Program,Learning Assistance Program behavior services are intended to support students struggling in ELA or mathematics when the district believes addressing behavioral needs would improve their academic performance.,active,16,,
+40,Reengagement,School Program,"Open Doors Youth Reengagement provides education and services to older youth, ages 16-21, who have dropped out of school or are not expected to graduate from high school by the age of 21. Open Doors reengages disconnected youth through programs that encourage community partnerships, create multiple pathways for students to realize success, and provide an on-ramp to post-secondary achievement through a performance based, individualized support model.",active,17,,
+41,Earned - Washington State Seal of Biliteracy,Attribute,Identifies graduating high school students who have met the following criteria and have been awarded the Seal of Biliteracy: * Demonstrate proficiency in English by meeting the graduation requirements in English Language Arts & met standard on reading and writing or English language arts assessments; and * Demonstrate proficiency in one or more world languages.,active,18,,
+42,Proficient - Washington State Seal of Biliteracy,Attribute,"Identifies students who have demonstrated proficiency in one or more world languages but has not yet met the other requirements, such as meeting the English Language Arts graduation requirements, to be awarded a Seal of Biliteracy.",active,19,,
+44,Washington Reading Corps (WRC) Literacy Support,School Program,Identifies students who have received literacy support services through a WRC program in their enrolled school.,active,20,,
+50,Truancy Petition Filed in Juvenile Court,School Program,"Identifies students who have had a Truancy Petition filed on them in Juvenile Court. This code should capture all new truancy petitions in the reporting school year filed by the district responsible for the filing. This code should not capture a petition that carries over to the next school year, or a petition that has been received by another district or jurisdiction.",active,21,,
+51,Referral to a Community Engagement Board,School Program,"Identifies students who have been referred to a Community Engagement Board, regardless if the student attends.",active,22,,
+52,Truancy - Other Coordinated Means of Intervention,School Program,"Identifies students who, as a result of Truancy, have had other Coordinated Means of Intervention applied to them. Refer to the CEDARS Reporting Guidance for additional information and guidance.",active,23,,
+53,Truancy - A Hearing in the Juvenile Court,School Program,"Identifies students who, as a result of Truancy, have a Hearing in Juvenile Court and have appeared in front of a judge. Only report the first hearing, do not report pre-trial hearings",active,24,,
+54,Truancy - Other Less Restrictive Disposition,School Program,"Identifies students who, as a result of Truancy, have been assigned Other Less Restrictive Dispositions. Identify when a student is ordered to do something in place of or as an alternative to detention, when the student has been found to be in contempt of a court order.",active,25,,
+55,Truancy - Detention for Failure to Comply with Court Order,School Program,"Identifies students who, as a result of Truancy, have been assigned Detention for Failure to Comply with Court Order. Report each instance of imposition of detention for failure to comply with a court order under RCW 28A.225.090",active,26,,
+56,Special Education Preschool,District Program,Preschool funded with federal Special Education funds for services to children with disabilities ages 3–21.,active,27,,
+57,ECEAP (Early Childhood Education and Assistance Program),District Program,"State-funded preschool for low-income, at-risk children. Funds are provided through contracts and subcontracts with the Department of Children, Youth, and Families.",active,28,,
+58,Head Start,District Program,"Federally-funded preschool program for children from low-income, at-risk families.",active,29,,
+59,Title I,District Program,Title I funds can be used at the building level to support preschool for students identified as at risk of failing to meet state standards when they reach kindergarten. Schoolwide building programs are exempt from this identification requirement.,active,30,,
+60,GRADS (parenting teen) Preschool,District Program,Onsite child care/preschools for GRADS students. May be used as learning labs for Early Childhood Education.,active,31,,
+61,Family and Consumer Science Preschool,District Program,Preschool lab programs operated in coordination with an Early Childhood CTE course.,active,32,,
+62,Private Pay/Tuition-Based Preschool,District Program,Families pay to participate.,active,33,,
+63,Grant-Funded Preschool,District Program,"Sponsored by private foundations and other philanthropic entities, including local businesses.",active,34,,
+64,Working Connections Child Care Subsidy Preschool,District Program,Child care subsidy assists eligible families with child care costs. These benefits are paid to programs that provide child care services for eligible families.,active,35,,
+65,Parent Cooperatives Preschool,District Program,Preschool programs partially staffed and facilitated by parents or family members of enrolled children.,active,36,,
+66,Play & Learn Groups Preschool,District Program,"Regular, informal, drop-in preschool activities for children and their families/caregivers. For example, Kaleidoscope, 1-2-3 Grow and Learn.",active,37,,
+68,Levy-Funded Preschool,District Program,Preschool funded by levies,active,38,,
+69,Career Launch,District Program,Career Launch programs are endorsed by the State Board for Community and Technical Colleges (SBCTC) and include the CIP codes and program paths students can use to access Career Launch.,active,39,,
+73,LAP Community Partnership,School Program,x,active,40,,
+75,Truancy Referral,School Program,Identifies students with unexcused absences that have been referred to juvenile court before or without filing a truancy petition. This action is authorized under SB 5052 (2021).,active,41,,
+76,Title I Part A – Services Provided to Students Who Are Living in Neglected Institutions,School Program,"Educational services provided for students in need of care and residing in institutions for neglected children due to abandonment, neglect, or the death of their parents/guardians. SA Section 1113(c)(3)(A)(ii) and (iii)",active,42,,
+77,Title I Part A – Services Provided to Students Who Are Living or Transitioning from Delinquent Facilities,School Program,"Educational services provided for students who the courts have found to be delinquent or in need of supervision. Delinquent facilities include facilities for detention, juvenile corrections, adult corrections, or community day programs. SA Section 1113(c)(3)(A)(ii) and (iii)",active,43,,
+80,Student Sensory Disability,Attribute,Identifies if a studetn is identifed with a Sensory Disability,active,44,,
+81,Seal of Biliteracy Intermediate Earned,Attribute,Identifies graduating high school students who have met the following criteria and have been awarded the Intermediate Seal of Biliteracy: * Demonstrate proficiency in English by meeting the graduation requirements in English and * Demonstrate Intermediate proficiency in one world language.,active,45,2027,
+82,Seal of Biliteracy Intermediate Proficient,Attribute,"Identifies students who have demonstrated Intermediate Level proficiency in one world language but has not yet met the other requirements, such as meeting graduation requirements in English, to be awarded a Seal of Biliteracy.",active,46,2027,
+83,Seal of Biliteracy Advanced Earned,Attribute,"Identifies graduating high school students who have met the following criteria and have been awarded the Advanced Seal of Biliteracy: * Demonstrate proficiency in English by meeting the graduation requirements in English and * Demonstrate Advanced Level proficiency in one or more world languages OR, *Demonstrate Intermediate Level in two or more World Languages.",active,47,2027,
+84,Seal of Biliteracy Advanced Proficient,Attribute,"Identifies students who have demonstrated Advanced Level proficiency in one or more world languages but has not yet met the other requirements, such as meeting graduation requirements in English, to be awarded a Seal of Biliteracy.",active,48,2027,
+85,Title I Targeted Assistance Services,School Program,Title I Part A is a federal program under the Elementary and Secondary Education Act that provides financial assistance to districts based on the percent of students living in poverty within their geographic area. Districts allocate funds to their schools based on the number and percent of those students receiving free and reduced lunch. The intent is to provide Title I program options for students that have not met or are at-risk of not meeting state academic standards. Targeted Assistance (TAS) program serves individual students identified as eligible,active,49,2027,
+999,Other Preschool,District Program,Preschool funded by a source other than the listed programs.,active,50,,
+8,Title I Targeted Assistance Reading,School Program,,archived,51,,2017
+21,Title I Schoolwide – Additional Program Assistance in Reading,School Program,,archived,52,,2017
+22,Title I Schoolwide – Additional Program Assistance in Math,School Program,,archived,53,,2017
+25,College Bound Scholarship Application (student has applied for College Bound Scholarship),Attribute,,archived,54,,2017
+26,Title I Schoolwide – Additional Program Assistance in Language Arts,School Program,,archived,55,,2017
+27,Title I Schoolwide – Additional Program Assistance in Science,School Program,,archived,56,,2017
+39,LAP Readiness to Learn (RTL),School Program,,archived,57,,2021
+43,Truancy Action,School Program,,archived,58,,2018
+46,Title I Schoolwide Student Participant,School Program,,archived,59,,2017
+49,Title I Targeted Assistance Social Sciences,School Program,,archived,60,,2019
+31,Title I Part A – Services Provided to Local Neglected School Students,School Program,,archived,61,,2023
+45,Recruiting Washington Teachers,School Program,,archived,62,,2024
+70,Inadequate Technology Access,District Program,,archived,63,,2024
+71,District Issued Learning Device,District Program,,archived,64,,2024
+72,District Issued Hot Spot,District Program,,archived,65,,2024
+67,Transitional Kindergarten,School Program,,archived,66,,2024
+74,Continuous Learning 2.0+,School Program,,archived,67,,2025
+9,Title I Targeted Assistance Language Arts,School Program,,archived,68,,2026
+10,Title I Targeted Assistance Math,School Program,,archived,69,,2026
+12,Title I Targeted Assistance Science,School Program,,archived,70,,2026
+47,Title I Targeted Assistance Career Technical Education,School Program,,archived,71,,2026
+48,Title I Targeted Assistance Other,School Program,,archived,72,,2026
+78,Outdoor Learning Grants without Overnight,School Program,,archived,73,,2026
+79,Overnight Outdoor Educational Experiences,School Program,,archived,74,,2026

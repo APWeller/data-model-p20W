@@ -1,0 +1,7 @@
+code,description,value_group,source_order,valid_from_year,valid_to_year
+1,Determined Eligible for Special Education Services (Develop IEP),Develop IEP,1,,
+4,Determined Eligible for Special Education Services and transitioning from the State Part C Program (Develop IEP),Develop IEP,2,,
+2,"Determined NOT Eligible for Special Education Services (Process Complete, no IEP to develop)","Process Complete, No IEP to Develop",3,,
+3,"Determined Eligible for Special Education Services (Process Complete, no IEP to develop)","Process Complete, No IEP to Develop",4,,
+5,"Determined NOT Eligible for Special Education Services and transitioning from the State Part C Program (Process Complete, no IEP to develop)","Process Complete, No IEP to Develop",5,,
+6,"Determined Eligible for Special Education Services and transitioning from the State Part C Program (Process Complete, no IEP to develop)","Process Complete, No IEP to Develop",6,,

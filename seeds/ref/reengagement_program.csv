@@ -1,0 +1,667 @@
+code,description,resident_district,provider_program,site,consortium_member,path_ged,path_hs_diploma,path_college,path_career,change_status,status,source_order,valid_from_year,valid_to_year
+2,ESD113/Gravity HS – Lewis County,Adna School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,No Change,active,1,,
+3,ESD 112 Open Doors,Battle Ground School District,ESD 112 Open Doors,,Yes,Yes,No,No,No,No Change,active,2,,
+4,Graduation Alliance Bellevue Open Doors: Graduation Alliance - HS Diploma,Bellevue School District,Graduation Alliance Bellevue Open Doors: Graduation Alliance - HS Diploma,,No,No,Yes,No,No,No Change,active,3,,
+5,Graduation Alliance – Bellingham HS,Bellingham School District,Graduation Alliance,Bellingham HS,No,No,Yes,No,No,No Change,active,4,,
+6,Graduation Alliance – Sehome HS,Bellingham School District,Graduation Alliance,Sehome HS,No,No,Yes,No,No,No Change,active,5,,
+7,Graduation Alliance – Bellingham Options,Bellingham School District,Graduation Alliance,Bellingham Options,No,No,Yes,No,No,No Change,active,6,,
+8,Graduation Alliance – Squalicum and Grads,Bellingham School District,Graduation Alliance,Squalicum and Grads,No,No,Yes,No,No,No Change,active,7,,
+9,Bellingham TC Impact,Bellingham School District,Bellingham TC Impact,,No,Yes,No,Yes,No,No Change,active,8,,
+10,BAA: Bethel Acceleration Academy,Bethel School District,BAA: Bethel Acceleration Academy,,No,No,Yes,No,No,No Change,active,9,,
+11,Graduation Alliance,Central Valley School District,Graduation Alliance,,No,No,Yes,No,No,No Change,active,10,,
+12,C.A.R.E. center,Bremerton School District,C.A.R.E. center,,No,No,Yes,No,No,No Change,archived,11,,2023
+13,Yakima Valley CC Step Up to College – Yakima Valley CC,Grandview School District,Yakima Valley CC Step Up to College,Yakima Valley CC,No,No,Yes,Yes,No,No Change,active,12,,
+14,ESD113/Gravity HS – Lewis County,Centralia School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,No Change,active,13,,
+15,ESD113/Gravity HS – Lewis County,Chehalis School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,No Change,active,14,,
+17,Graduation Alliance,Eatonville School District,Graduation Alliance,,No,No,No,Yes,No,No Change,active,15,,
+18,Edmonds CC/Ed-Cap,Edmonds School District,Edmonds CC/Ed-Cap,,No,No,Yes,Yes,No,No Change,active,16,,
+19,ESD113/Gravity HS – Grays County,Elma School District,ESD113/Gravity HS,Grays County,Yes,Yes,No,No,No,No Change,active,17,,
+20,ESD113/Gravity HS – Mason County,Elma School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,18,,2027
+21,ESD113/Gravity HS – Thurston County,Elma School District,ESD113/Gravity HS,Thurston County,Yes,Yes,No,No,No,Archived,archived,19,,2027
+22,Graduation Alliance,Enumclaw School District,Graduation Alliance,,No,No,Yes,No,No,No Change,active,20,,
+23,Chimacum Open Doors Reengagement Program – Chimacum Junior Senior High,Chimacum School District,Chimacum Open Doors Reengagement Program,Chimacum Junior Senior High,No,No,Yes,No,No,No Change,active,21,,
+24,Graduation Alliance,Everett School District,Graduation Alliance,,No,No,Yes,No,No,No Change,active,22,,
+25,Atlantic Education,Federal Way School District,Atlantic Education,,No,No,Yes,No,No,No Change,active,23,,
+29,Granite Falls,Granite Falls School District,Granite Falls,,No,No,Yes,No,No,No Change,active,24,,
+30,Highline/Learning Center – North,Highline School District,Highline/Learning Center,North,No,No,Yes,No,No,Archived,archived,25,,2024
+31,Highline/Learning Center – South,Highline School District,Highline/Learning Center,South,No,No,Yes,No,No,Archived,archived,26,,2024
+32,Highline CC/ Pathways to College,Highline School District,Highline CC/ Pathways to College,,No,No,Yes,Yes,No,No Change,active,27,,
+33,Highline CC/ELL Excel,Highline School District,Highline CC/ELL Excel,,No,No,Yes,No,No,No Change,active,28,,
+34,Southwest Youth & Fam Ed Ctr/GED+,Highline School District,Southwest Youth & Fam Ed Ctr/GED+,,No,Yes,No,No,No,No Change,active,29,,
+35,ESD113/Gravity HS – Grays Harbor County,Hoquiam School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,No Change,active,30,,
+36,Green River CC/GED,Kent School District,Green River CC/GED,,No,Yes,No,No,No,No Change,active,31,,
+37,Green River CC,Kent School District,Green River CC,,No,No,Yes,Yes,No,No Change,active,32,,
+38,Kent/iGrad,Kent School District,Kent/iGrad,,No,Yes,Yes,No,No,No Change,active,33,,
+39,ESD113/Gravity HS – Grays Harbor County,Lake Quinault School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,No Change,active,34,,
+40,Bellevue CC/CEO,Lake Washington IT,Bellevue CC/CEO,,No,No,Yes,Yes,No,No Change,active,35,,
+41,Lake Washington IT/GWTC,Lake Washington IT,Lake Washington IT/GWTC,,No,No,Yes,Yes,No,No Change,active,36,,
+42,ESD113/Gravity HS – Mason County,Mary M Knight School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,No Change,active,37,,
+43,Spokane Falls CC/GWTC,Mead School District,Spokane Falls CC/GWTC,,No,No,Yes,Yes,No,No Change,active,38,,
+44,ESD101/Next Generation Zone,Mead School District,ESD101/Next Generation Zone,,Yes,Yes,No,No,No,No Change,active,39,,
+45,ESD113/Gravity HS – Grays Harbor County,Montesano School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,No Change,active,40,,
+46,ESD113/Gravity HS – Lewis County,Morton School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,No Change,active,41,,
+47,Skill Source,Moses Lake School District,Skill Source,,No,Yes,No,No,No,No Change,active,42,,
+48,ESD113/Gravity HS – Lewis County,Napavine School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,No Change,active,43,,
+49,Spokane Falls CC/GWTC,Nine Mile Falls School District,Spokane Falls CC/GWTC,,No,No,Yes,Yes,No,No Change,active,44,,
+50,ESD101/Next Generation Zone,Nine Mile Falls School District,ESD101/Next Generation Zone,,Yes,Yes,No,No,No,No Change,active,45,,
+51,ESD113/Gravity HS – Grays Harbor County,North Beach School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,No Change,active,46,,
+52,ESD113/Gravity HS – Grays Harbor County,North River School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,No Change,active,47,,
+53,ESD113/Gravity HS – Thurston County,North Thurston School District,ESD113/Gravity HS,Thurston County,Yes,Yes,No,No,No,Archived,archived,48,,2027
+54,Graduation Alliance,Northshore School District,Graduation Alliance,,No,No,Yes,No,No,No Change,active,49,,
+55,Graduation Alliance,Oak Harbor School District,Graduation Alliance,,No,No,Yes,No,No,No Change,active,50,,
+56,ESD113/Gravity HS – Lewis County,Oakville School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,No Change,active,51,,
+57,ESD113/Gravity HS – Mason County,Oakville School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,52,,2027
+58,ESD113/Gravity HS – Thurston County,Oakville School District,ESD113/Gravity HS,Thurston County,Yes,Yes,No,No,No,Archived,archived,53,,2027
+59,ESD113/Gravity HS – Grays Harbor County,Ocosta School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,No Change,active,54,,
+60,ESD113/Gravity HS – Thurston County,Olympia School District,ESD113/Gravity HS,Thurston County,Yes,Yes,No,No,No,No Change,active,55,,
+61,ESD113/Gravity HS – Lewis County,Pe Ell School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,No Change,active,56,,
+62,Puyallup/Open Doors,Puyallup School District,Puyallup/Open Doors,,No,No,Yes,No,No,No Change,active,57,,
+63,ESD113/Gravity HS – Thurston County,Rainier School District,ESD113/Gravity HS,Thurston County,Yes,Yes,No,No,No,Archived,archived,58,,2027
+64,ESD113/Gravity HS – Grays Harbor County,Raymond School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,No Change,active,59,,
+65,Renton TC/Youth Source,Renton School District,Renton TC/Youth Source,,No,Yes,No,No,No,No Change,archived,60,,2026
+66,ESD113/Gravity HS – Lewis County,Rochester School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,No Change,active,61,,
+67,ESD113/Gravity HS – Mason County,Rochester School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,62,,2027
+68,ESD113/Gravity HS – Thurston County,Rochester School District,ESD113/Gravity HS,Thurston County,Yes,Yes,No,No,No,Archived,archived,63,,2027
+69,Seattle/Interagency OD Reengagement/GED – Columbia Center,Seattle School District,Seattle/Interagency OD Reengagement/GED,Columbia Center,No,Yes,No,No,No,No Change,active,64,,
+70,Seattle/Interagency OD Reengagement/GED – Orion Center,Seattle School District,Seattle/Interagency OD Reengagement/GED,Orion Center,No,Yes,No,No,No,No Change,active,65,,
+71,Seattle/Interagency OD Reengagement/GED – 2100 Bldg,Seattle School District,Seattle/Interagency OD Reengagement/GED,2100 Bldg,No,Yes,No,No,No,No Change,active,66,,
+73,Graduation Alliance,Selah School District,Graduation Alliance,,No,No,Yes,No,No,No Change,active,67,,
+74,ESD113/Gravity HS – Mason County,Shelton School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,No Change,active,68,,
+75,Graduation Alliance,Snoqualmie Valley School District,Graduation Alliance,,No,No,Yes,No,No,No Change,active,69,,
+76,ESD113/Gravity HS – Grays Harbor County,South Bend School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,No Change,active,70,,
+77,Spokane Falls CC/GWTC,Spokane School District,Spokane Falls CC/GWTC,,No,No,Yes,Yes,No,No Change,active,71,,
+78,ESD101/Next Generation Zone,Spokane School District,ESD101/Next Generation Zone,,Yes,Yes,No,No,No,No Change,active,72,,
+79,Graduation Alliance,Sultan School District,Graduation Alliance,,No,No,Yes,No,No,No Change,active,73,,
+80,Graduation Alliance,Sunnyside School District,Graduation Alliance,,No,No,Yes,No,No,No Change,active,74,,
+81,"Willy Stewart Academy – Willie Stewart Academy 908 Broadway, Tacoma",Tacoma School District,Willy Stewart Academy,"Willie Stewart Academy 908 Broadway, Tacoma",No,No,Yes,No,No,No Change,active,75,,
+82,"Goodwill/GED – Goodwill Reach Center 3121 S. 38th St., Tacoma",Tacoma School District,Goodwill/GED,"Goodwill Reach Center 3121 S. 38th St., Tacoma",No,Yes,No,No,No,No Change,active,76,,
+83,"Tacoma CC/Fresh Start – Tacoma Community College/Fresh Start Site: 6501 S. 19th Street, Tacoma",Tacoma School District,Tacoma CC/Fresh Start,"Tacoma Community College/Fresh Start Site: 6501 S. 19th Street, Tacoma",No,No,Yes,Yes,No,No Change,active,77,,
+84,ESD113/Gravity HS – Lewis County,Tenino School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,No Change,active,78,,
+85,Renton TC/Youth Source,Tukwila School District,Renton TC/Youth Source,,No,No,No,No,No,No Change,archived,79,,2026
+86,ESD113/Gravity HS – Thurston County,Tumwater School District,ESD113/Gravity HS,Thurston County,Yes,Yes,No,No,No,Archived,archived,80,,2027
+88,ESD 112 Open Doors,Vancouver School District,ESD 112 Open Doors,,Yes,No,Yes,No,No,No Change,active,81,,
+89,Skill Source,Wenatchee School District,Skill Source,,No,Yes,Yes,No,Yes,No Change,active,82,,
+90,Spokane Falls CC/GWTC,West Valley School District,Spokane Falls CC/GWTC,,No,No,Yes,Yes,No,No Change,active,83,,
+91,ESD101/Next Generation Zone,West Valley School District,ESD101/Next Generation Zone,,Yes,Yes,No,No,No,No Change,active,84,,
+92,ESD113/Gravity HS – Lewis County,White Pass School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,No Change,active,85,,
+93,Graduation Alliance,White River School District,Graduation Alliance,,No,No,Yes,No,No,No Change,active,86,,
+94,ESD113/Gravity HS – Grays Harbor County,Willapa Valley School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,No Change,active,87,,
+95,ESD113/Gravity HS – Lewis County,Winlock School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,No Change,active,88,,
+96,ESD113/Gravity HS – Grays Harbor County,Wishkah Valley School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,No Change,active,89,,
+97,Yakima/Open Doors - High School Diploma Path,Yakima School District,Yakima/Open Doors - High School Diploma Path,,No,No,Yes,No,No,No Change,active,90,,
+98,Seattle CC/ Career Link,Highline School District,Seattle CC/ Career Link,,No,No,Yes,Yes,No,No Change,active,91,,
+99,Wolves online Open Den – Open Den Coupeviille Open Academy Building,Coupeville School District,Wolves online Open Den,Open Den Coupeviille Open Academy Building,No,No,Yes,No,No,No Change,active,92,,
+100,Lieser Open Doors,Vancouver School District,Lieser Open Doors,,No,No,Yes,No,No,No Change,active,93,,
+102,East Greys Harbor Open Doors,Elma School District,East Greys Harbor Open Doors,,No,No,Yes,No,No,No Change,active,94,,
+103,NWESD189 Youth Engagement Program GED,Lakewood School District,NWESD189 Youth Engagement Program GED,,Yes,Yes,No,No,No,No Change,active,95,,
+104,NWESD189 Youth Engagement Program HS,Lakewood School District,NWESD189 Youth Engagement Program HS,,Yes,No,Yes,No,No,No Change,active,96,,
+105,NWESD189 Youth Engagement Program GED,Marysville School District,NWESD189 Youth Engagement Program GED,,Yes,Yes,No,No,No,No Change,active,97,,
+106,NWESD189 Youth Engagement Program HS,Marysville School District,NWESD189 Youth Engagement Program HS,,Yes,No,Yes,No,No,No Change,active,98,,
+107,Spokane Falls CC/GWTC,Cheney School District,Spokane Falls CC/GWTC,,No,No,Yes,Yes,No,No Change,active,99,,
+108,ESD101/Next Generation Zone,Cheney School District,ESD101/Next Generation Zone,,Yes,Yes,No,No,No,No Change,active,100,,
+109,Spokane Falls CC/GWTC,Central Valley School District,Spokane Falls CC/GWTC,,No,No,Yes,Yes,No,No Change,active,101,,
+110,ESD101/Next Generation Zone,Central Valley School District,ESD101/Next Generation Zone,,Yes,Yes,No,No,No,No Change,active,102,,
+111,Graduation Alliance,Highline School District,Graduation Alliance,,No,No,Yes,No,No,No Change,active,103,,
+112,Lakes/Clover Park Reengagement Academy Gravelly Lake K-12 Academy Open Doors – Gravelly Lake K-12 Academy - Lakewood,Clover Park School District,Lakes/Clover Park Reengagement Academy Gravelly Lake K-12 Academy Open Doors,Gravelly Lake K-12 Academy - Lakewood,No,No,Yes,No,No,No Change,active,104,,
+113,Graduation Alliance,Clover Park School District,Graduation Alliance,,No,No,Yes,No,No,No Change,active,105,,
+114,Northwest Indian College Open Doors,Lummi Nation,Northwest Indian College Open Doors,,No,No,Yes,Yes,No,No Change,active,106,,
+115,ESD 123 U Grad/Graduation Alliance,Prescott School District,ESD 123 U Grad/Graduation Alliance,,Yes,No,Yes,No,No,No Change,active,107,,
+116,ESD 112 Open Doors,LaCenter School District,ESD 112 Open Doors,,Yes,No,Yes,No,No,No Change,active,108,,
+119,Graduation Alliance,Wenatchee School District,Graduation Alliance,,No,No,Yes,No,No,Archived,archived,109,,2024
+120,ESD 112 Open Doors,Ridgefield School District,ESD 112 Open Doors,,Yes,No,Yes,No,No,No Change,active,110,,
+121,ESD 112 Open Doors,Woodland School District,ESD 112 Open Doors,,Yes,No,Yes,No,No,No Change,active,111,,
+122,ESD 112 Open Doors,Washougal School District,ESD 112 Open Doors,,Yes,No,Yes,No,No,No Change,active,112,,
+123,Bellingham TC Impact,Blaine School District,Bellingham TC Impact,,No,Yes,No,Yes,No,No Change,active,113,,
+124,Bellingham TC Impact,Ferndale School District,Bellingham TC Impact,,No,Yes,No,Yes,No,No Change,active,114,,
+125,Bellingham TC Impact,Lynden School District,Bellingham TC Impact,,No,Yes,No,Yes,No,No Change,active,115,,
+126,Bellingham TC Impact,Meridian School District,Bellingham TC Impact,,No,Yes,No,Yes,No,No Change,active,116,,
+127,Bellingham TC Impact,Mt. Baker School District,Bellingham TC Impact,,No,Yes,No,Yes,No,No Change,active,117,,
+128,Bellingham TC Impact,Nooksack Valley School District,Bellingham TC Impact,,No,Yes,No,Yes,No,No Change,active,118,,
+129,ESD 112 Open Doors,Hockinson School District,ESD 112 Open Doors,,Yes,No,Yes,No,No,No Change,active,119,,
+130,EOC Open Doors,Clarkston School District,EOC Open Doors,,No,Yes,Yes,No,Yes,No Change,active,120,,
+131,Job Corps Connections Academy,Sedro Woolley School District,Job Corps Connections Academy,,No,No,Yes,Yes,No,Archived,archived,121,,2022
+132,ESD 123 U Grad/Graduation Alliance,North Franklin School District,ESD 123 U Grad/Graduation Alliance,,Yes,No,Yes,No,No,No Change,active,122,,
+133,ESD 123 U Grad/ GED,North Franklin School District,ESD 123 U Grad/ GED,,Yes,Yes,No,No,No,No Change,active,123,,
+134,ESD 123 U Grad/ GED,Prescott School District,ESD 123 U Grad/ GED,,Yes,Yes,No,No,No,No Change,active,124,,
+135,Eastside Reengagement Center,Lake Washington IT,Eastside Reengagement Center,,No,Yes,No,No,No,No Change,active,125,,
+139,ESD113/Gravity HS – Mason County,Aberdeen School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,126,,2027
+140,ESD113/Gravity HS – Grays Harbor County,Adna School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,Archived,archived,127,,2027
+141,ESD113/Gravity HS – Thurston County- Olympia,Adna School District,ESD113/Gravity HS,Thurston County- Olympia,Yes,Yes,No,No,No,Archived,archived,128,,2027
+142,ESD113/Gravity HS – Thurston County- Lacey,Adna School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,129,,2027
+143,ESD113/Gravity HS – Mason County,Adna School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,130,,2027
+144,ESD113/Gravity HS – Grays Harbor County,Centralia School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,Archived,archived,131,,2027
+145,ESD113/Gravity HS – Mason County,Centralia School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,132,,2027
+146,ESD113/Gravity HS – Thurston County- Olympia,Centralia School District,ESD113/Gravity HS,Thurston County- Olympia,Yes,Yes,No,No,No,Archived,archived,133,,2027
+147,ESD113/Gravity HS – Thurston County- Lacey,Centralia School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,134,,2027
+148,ESD113/Gravity HS – Mason County,Chehalis School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,135,,2027
+149,ESD113/Gravity HS – Grays Harbor County,Chehalis School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,Archived,archived,136,,2027
+150,ESD113/Gravity HS – Thurston County- Olympia,Chehalis School District,ESD113/Gravity HS,Thurston County- Olympia,Yes,Yes,No,No,No,Archived,archived,137,,2027
+151,ESD113/Gravity HS – Thurston County- Lacey,Chehalis School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,138,,2027
+152,ESD113/Gravity HS – Thurston County- Lacey,Elma School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,139,,2027
+153,ESD113/Gravity HS – Lewis County,Elma School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,Archived,archived,140,,2027
+154,ESD113/Gravity HS – Lewis County,Hoquiam School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,Archived,archived,141,,2027
+155,ESD113/Gravity HS – Mason County,Hoquiam School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,142,,2027
+156,ESD113/Gravity HS – Thurston County- Lacey,Hoquiam School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,143,,2027
+157,ESD113/Gravity HS – Thurston County - Olympia,Hoquiam School District,ESD113/Gravity HS,Thurston County - Olympia,Yes,Yes,No,No,No,Archived,archived,144,,2027
+158,ESD113/Gravity HS – Lewis County,Lake Quinault School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,Archived,archived,145,,2027
+159,ESD113/Gravity HS – Mason County,Lake Quinault School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,146,,2027
+160,ESD113/Gravity HS – Thurston County- Olympia,Lake Quinault School District,ESD113/Gravity HS,Thurston County- Olympia,Yes,Yes,No,No,No,Archived,archived,147,,2027
+161,ESD113/Gravity HS – Thurston County- Lacey,Lake Quinault School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,148,,2027
+162,ESD113/Gravity HS – Grays Harbor County,Mary M Knight School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,Archived,archived,149,,2027
+163,ESD113/Gravity HS – Lewis County,Mary M Knight School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,Archived,archived,150,,2027
+164,ESD113/Gravity HS – Thurston County- Lacey,Mary M Knight School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,151,,2027
+165,ESD113/Gravity HS – Thurston County- Olympia,Mary M Knight School District,ESD113/Gravity HS,Thurston County- Olympia,Yes,Yes,No,No,No,Archived,archived,152,,2027
+166,ESD113/Gravity HS – Lewis County,Montesano School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,Archived,archived,153,,2027
+167,ESD113/Gravity HS – Mason County,Montesano School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,154,,2027
+168,ESD113/Gravity HS – Thurston County- Olympia,Montesano School District,ESD113/Gravity HS,Thurston County- Olympia,Yes,Yes,No,No,No,Archived,archived,155,,2027
+169,ESD113/Gravity HS – Thurston County- Lacey,Montesano School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,156,,2027
+170,ESD113/Gravity HS – Mason County,Morton School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,157,,2027
+171,ESD113/Gravity HS – Grays Harbor County,Morton School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,Archived,archived,158,,2027
+172,ESD113/Gravity HS – Thurston County- Olympia,Morton School District,ESD113/Gravity HS,Thurston County- Olympia,Yes,Yes,No,No,No,Archived,archived,159,,2027
+173,ESD113/Gravity HS – Thurston County- Lacey,Morton School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,160,,2027
+174,ESD113/Gravity HS – Mason County,Napavine School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,161,,2027
+175,ESD113/Gravity HS – Grays Harbor County,Napavine School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,Archived,archived,162,,2027
+176,ESD113/Gravity HS – Thurston County- Olympia,Napavine School District,ESD113/Gravity HS,Thurston County- Olympia,Yes,Yes,No,No,No,Archived,archived,163,,2027
+177,ESD113/Gravity HS – Thurston County- Lacey,Napavine School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,164,,2027
+178,ESD113/Gravity HS – Mason County,North Beach School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,165,,2027
+179,ESD113/Gravity HS – Lewis County,North Beach School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,Archived,archived,166,,2027
+180,ESD113/Gravity HS – Thurston County- Olympia,North Beach School District,ESD113/Gravity HS,Thurston County- Olympia,Yes,Yes,No,No,No,Archived,archived,167,,2027
+181,ESD113/Gravity HS – Thurston County- Lacey,North Beach School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,168,,2027
+182,ESD113/Gravity HS – Mason County,North River School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,169,,2027
+183,ESD113/Gravity HS – Lewis County,North River School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,Archived,archived,170,,2027
+184,ESD113/Gravity HS – Thurston County- Olympia,North River School District,ESD113/Gravity HS,Thurston County- Olympia,Yes,Yes,No,No,No,Archived,archived,171,,2027
+185,ESD113/Gravity HS – Thurston County- Lacey,North River School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,172,,2027
+186,ESD113/Gravity HS – Thurston County- Lacey,North Thurston School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,173,,2027
+187,ESD113/Gravity HS – Mason County,North Thurston School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,174,,2027
+188,ESD113/Gravity HS – Lewis County,North Thurston School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,Archived,archived,175,,2027
+189,ESD113/Gravity HS – Grays Harbor County,North Thurston School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,Archived,archived,176,,2027
+190,ESD113/Gravity HS – Thurston County- Lacey,Oakville School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,177,,2027
+191,ESD113/Gravity HS – Grays Harbor County,Oakville School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,Archived,archived,178,,2027
+192,ESD113/Gravity HS – Mason County,Ocosta School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,179,,2027
+193,ESD113/Gravity HS – Lewis County,Ocosta School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,Archived,archived,180,,2027
+194,ESD113/Gravity HS – Thurston County- Olympia,Ocosta School District,ESD113/Gravity HS,Thurston County- Olympia,Yes,Yes,No,No,No,Archived,archived,181,,2027
+195,ESD113/Gravity HS – Thurston County- Lacey,Ocosta School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,182,,2027
+196,ESD113/Gravity HS – Mason County,Olympia School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,183,,2027
+197,ESD113/Gravity HS – Lewis County,Olympia School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,Archived,archived,184,,2027
+198,ESD113/Gravity HS – Grays Harbor County,Olympia School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,Archived,archived,185,,2027
+199,ESD113/Gravity HS – Thurston County- Lacey,Olympia School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,186,,2027
+200,ESD113/Gravity HS – Mason County,Pe Ell School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,187,,2027
+201,ESD113/Gravity HS – Grays Harbor County,Pe Ell School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,Archived,archived,188,,2027
+202,ESD113/Gravity HS – Thurston County- Lacey,Pe Ell School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,189,,2027
+203,ESD113/Gravity HS – Thurston County- Olympia,Pe Ell School District,ESD113/Gravity HS,Thurston County- Olympia,Yes,Yes,No,No,No,Archived,archived,190,,2027
+204,ESD113/Gravity HS – Thurston County- Lacey,Rainier School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,191,,2027
+205,ESD113/Gravity HS – Mason County,Rainier School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,192,,2027
+206,ESD113/Gravity HS – Lewis County,Rainier School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,Archived,archived,193,,2027
+207,ESD113/Gravity HS – Grays Harbor County,Rainier School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,Archived,archived,194,,2027
+208,ESD113/Gravity HS – Lewis County,Raymond School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,Archived,archived,195,,2027
+209,ESD113/Gravity HS – Mason County,Raymond School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,196,,2027
+210,ESD113/Gravity HS – Thurston County- Olympia,Raymond School District,ESD113/Gravity HS,Thurston County- Olympia,Yes,Yes,No,No,No,Archived,archived,197,,2027
+211,ESD113/Gravity HS – Thurston County- Lacey,Raymond School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,198,,2027
+212,ESD113/Gravity HS – Thurston County- Lacey,Rochester School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,199,,2027
+213,ESD113/Gravity HS – Grays Harbor County,Rochester School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,Archived,archived,200,,2027
+214,ESD113/Gravity HS – Thurston County- Olympia,Shelton School District,ESD113/Gravity HS,Thurston County- Olympia,Yes,Yes,No,No,No,Archived,archived,201,,2027
+215,ESD113/Gravity HS – Thurston County- Lacey,Shelton School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,202,,2027
+216,ESD113/Gravity HS – Lewis County,Shelton School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,Archived,archived,203,,2027
+217,ESD113/Gravity HS – Grays Harbor County,Shelton School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,Archived,archived,204,,2027
+218,ESD113/Gravity HS – Thurston County- Olympia,South Bend School District,ESD113/Gravity HS,Thurston County- Olympia,Yes,Yes,No,No,No,Archived,archived,205,,2027
+219,ESD113/Gravity HS – Thurston County- Lacey,South Bend School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,206,,2027
+220,ESD113/Gravity HS – Mason County,South Bend School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,207,,2027
+221,ESD113/Gravity HS – Lewis County,South Bend School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,Archived,archived,208,,2027
+222,ESD113/Gravity HS – Thurston County- Lacey,Tenino School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,209,,2027
+223,ESD113/Gravity HS – Thurston County- Olympia,Tenino School District,ESD113/Gravity HS,Thurston County- Olympia,Yes,Yes,No,No,No,Archived,archived,210,,2027
+224,ESD113/Gravity HS – Mason County,Tenino School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,211,,2027
+225,ESD113/Gravity HS – Grays Harbor County,Tenino School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,Archived,archived,212,,2027
+226,ESD113/Gravity HS – Thurston County- Lacey,Tumwater School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,213,,2027
+227,ESD113/Gravity HS – Lewis County,Tumwater School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,Archived,archived,214,,2027
+228,ESD113/Gravity HS – Mason County,Tumwater School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,215,,2027
+229,ESD113/Gravity HS – Grays Harbor County,Tumwater School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,Archived,archived,216,,2027
+230,ESD113/Gravity HS – Thurston County- Olympia,White Pass School District,ESD113/Gravity HS,Thurston County- Olympia,Yes,Yes,No,No,No,Archived,archived,217,,2027
+231,ESD113/Gravity HS – Thurston County- Lacey,White Pass School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,218,,2027
+232,ESD113/Gravity HS – Mason County,White Pass School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,219,,2027
+233,ESD113/Gravity HS – Grays Harbor County,White Pass School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,Archived,archived,220,,2027
+234,ESD113/Gravity HS – Thurston County- Olympia,Willapa Valley School District,ESD113/Gravity HS,Thurston County- Olympia,Yes,Yes,No,No,No,Archived,archived,221,,2027
+235,ESD113/Gravity HS – Thurston County- Lacey,Willapa Valley School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,222,,2027
+236,ESD113/Gravity HS – Mason County,Willapa Valley School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,223,,2027
+237,ESD113/Gravity HS – Lewis County,Willapa Valley School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,Archived,archived,224,,2027
+238,ESD113/Gravity HS – Thurston County- Olympia,Winlock School District,ESD113/Gravity HS,Thurston County- Olympia,Yes,Yes,No,No,No,Archived,archived,225,,2027
+239,ESD113/Gravity HS – Thurston County- Lacey,Winlock School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,226,,2027
+240,ESD113/Gravity HS – Mason County,Winlock School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,227,,2027
+241,ESD113/Gravity HS – Grays Harbor County,Winlock School District,ESD113/Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,Archived,archived,228,,2027
+242,ESD113/Gravity HS – Thurston County- Olympia,Wishkah Valley School District,ESD113/Gravity HS,Thurston County- Olympia,Yes,Yes,No,No,No,Archived,archived,229,,2027
+243,ESD113/Gravity HS – Thurston County- Lacey,Wishkah Valley School District,ESD113/Gravity HS,Thurston County- Lacey,Yes,Yes,No,No,No,Archived,archived,230,,2027
+244,ESD113/Gravity HS – Mason County,Wishkah Valley School District,ESD113/Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,231,,2027
+245,ESD113/Gravity HS – Lewis County,Wishkah Valley School District,ESD113/Gravity HS,Lewis County,Yes,Yes,No,No,No,Archived,archived,232,,2027
+246,Goodwill Open Doors Reengagement,Longview School District,Goodwill Open Doors Reengagement,,No,Yes,No,No,No,No Change,active,233,,
+249,Skagit Valley CC/ Open Doors,Sedro Woolley School District,Skagit Valley CC/ Open Doors,,No,No,Yes,Yes,No,No Change,active,234,,
+250,Bates TC/ Open Doors Youth Reengagement,Bates TC,Bates TC/ Open Doors Youth Reengagement,,No,No,Yes,Yes,No,No Change,active,235,,
+251,Skagit Valley CC /Open Doors,Mt Vernon School District,Skagit Valley CC /Open Doors,,No,No,Yes,Yes,No,No Change,active,236,,
+252,Yakima Valley CC/ Step up to College,Mabton School District,Yakima Valley CC/ Step up to College,,No,No,Yes,Yes,No,No Change,active,237,,
+253,Opportunity Reengagement Program (ORP),Walla Walla School District,Opportunity Reengagement Program (ORP),,No,No,Yes,No,No,No Change,active,238,,
+254,Seattle Central CC/ Learning Center Seattle,Seattle School District,Seattle Central CC/ Learning Center Seattle,,No,No Yes,Yes No,Yes,No,No Change,active,239,,
+255,Graduation Alliance,Lake Washington IT,Graduation Alliance,,No,No,Yes,No,No,No Change,active,240,,
+257,ESD101/Next Generation Zone,East Valley School District (Spokane),ESD101/Next Generation Zone,,Yes,Yes,No,No,No,No Change,active,241,,
+258,ESD101/Next Generation Zone,Riverside School District,ESD101/Next Generation Zone,,Yes,Yes,No,No,No,No Change,active,242,,
+259,ESD101/Next Generation Zone,Deer Park School District,ESD101/Next Generation Zone,,Yes,Yes,No,No,No,No Change,active,243,,
+260,ESD 123/U Grad/GED,Pasco School District,ESD 123/U Grad/GED,,Yes,Yes,No,No,No,No Change,active,244,,
+261,ESD 123 U Grad/ Graduation Alliance,Pasco School District,ESD 123 U Grad/ Graduation Alliance,,Yes,No,Yes,No,No,No Change,active,245,,
+262,Open Doors,Federal Way School District,Open Doors,,No,No,Yes,No,No,No Change,active,246,,
+263,Walla Walla CC/ Open Doors @ Coyote Ridge,North Franklin School District,Walla Walla CC/ Open Doors @ Coyote Ridge,,No,Yes,Yes,Yes,No,No Change,active,247,,
+264,Multi Service Center,Federal Way School District,Multi Service Center,,No,Yes,No,No,No,No Change,active,248,,
+265,Tacoma CC/Fresh Start,Federal Way School District,Tacoma CC/Fresh Start,,No,No,Yes,Yes,No,No Change,active,249,,
+266,Bates TC/ Open Doors Youth Reengagement,Federal Way School District,Bates TC/ Open Doors Youth Reengagement,,No,No,Yes,Yes,No,No Change,active,250,,
+267,Opportunity Project Open Doors,Auburn School District,Opportunity Project Open Doors,,No,No,Yes,No,No,No Change,active,251,,
+268,Project S.C.O.P.E. Highline CC,Highline School District,Project S.C.O.P.E. Highline CC,,No,No,Yes,Yes,No,Archived,archived,252,,2024
+269,ESD 123/TC Futures/GED,Kiona Benton School District,ESD 123/TC Futures/GED,,Yes,Yes,No,No,No,No Change,active,253,,
+270,ESD 123 U Grad/ Graduation Alliance,Kiona Benton School District,ESD 123 U Grad/ Graduation Alliance,,Yes,No,Yes,No,No,No Change,active,254,,
+271,ESD 101/ Next Gen Zone satellite,Colville School District,ESD 101/ Next Gen Zone satellite,,Yes,Yes,No,No,No,No Change,active,255,,
+272,ESD 113/ Gravity HS – Thurson County Lacey,Yelm School District,ESD 113/ Gravity HS,Thurson County Lacey,Yes,Yes,No,No,No,Archived,archived,256,,2027
+273,Mukilteo Reengagement Academy Open Doors/ Graduation Alliance,Mukilteo School District,Mukilteo Reengagement Academy Open Doors/ Graduation Alliance,,Yes,No,Yes,No,No,No Change,active,257,,
+274,Skagit Valley CC Open Door 1418 Youth Reengagement,Concrete School District,Skagit Valley CC Open Door 1418 Youth Reengagement,,No,No,Yes,Yes,No,No Change,active,258,,
+275,Arlington Open Doors,Arlington School District,Arlington Open Doors,,No,No,Yes,No,No,No Change,active,259,,
+276,Big Bend CC Step up to College,Ephrata School District,Big Bend CC Step up to College,,No,Yes,Yes,Yes,No,No Change,active,260,,
+277,Seattle CC Voc. Inst.-Learning Center Seattle,Lake Washington IT,Seattle CC Voc. Inst.-Learning Center Seattle,,No,No Yes,Yes No,Yes,No,No Change,active,261,,
+278,Graduation Alliance,Lummi Nation,Graduation Alliance,,No,No,Yes,No,No,No Change,active,262,,
+279,Skagit Valley CC Open Doors,La Conner School District,Skagit Valley CC Open Doors,,No,No,Yes,Yes,No,No Change,active,263,,
+280,Skagit Valley CC Open Doors,Anacortes School District,Skagit Valley CC Open Doors,,No,No,Yes,Yes,No,No Change,active,264,,
+281,Skagit Valley CC Open Doors,Burlington Edison School District,Skagit Valley CC Open Doors,,No,No,Yes,Yes,No,No Change,active,265,,
+282,Port Jobs Open Doors/ HS 21+,Highline School District,Port Jobs Open Doors/ HS 21+,,No,No,Yes,Yes,No,Archived,archived,266,,2024
+283,ESD 113 Gravity HS – Thurston County -Olympia,Yelm School District,ESD 113 Gravity HS,Thurston County -Olympia,Yes,Yes,No,No,No,Archived,archived,267,,2027
+284,ESD 113 Gravity HS – Mason County,Yelm School District,ESD 113 Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,268,,2027
+285,ESD 113 Gravity HS – Lewis County,Yelm School District,ESD 113 Gravity HS,Lewis County,Yes,Yes,No,No,No,Archived,archived,269,,2027
+286,ESD 113 Gravity HS – Greys Harbor County,Yelm School District,ESD 113 Gravity HS,Greys Harbor County,Yes,Yes,No,No,No,Archived,archived,270,,2027
+288,NWESD Open Doors GED,Stanwood School District,NWESD Open Doors GED,,Yes,Yes,No,No,No,No Change,active,271,,
+289,NWESD Open Doors HS completion,Stanwood School District,NWESD Open Doors HS completion,,Yes,No,Yes,No,No,No Change,active,272,,
+290,Lyle Student Success Academy,Lyle School District,Lyle Student Success Academy,,No,No,Yes,No,No,No Change,active,273,,
+291,Renton TC/ HS completion,Renton School District,Renton TC/ HS completion,,No,No,Yes,Yes,No,No Change,archived,274,,2026
+292,Yakima Valley CC Step Up to College,Toppenish School District,Yakima Valley CC Step Up to College,,No,No,Yes,Yes,No,No Change,active,275,,
+293,Gravity HS/ Newcomers,Shelton School District,Gravity HS/ Newcomers,,Yes,Yes,No,No,No,No Change,active,276,,
+294,Gravity HS/ Newcomers,Elma School District,Gravity HS/ Newcomers,,Yes,Yes,No,No,No,No Change,active,277,,
+295,Gravity HS/ Newcomers,Mary M. Knight School District,Gravity HS/ Newcomers,,Yes,Yes,No,No,No,No Change,active,278,,
+296,Graduation Alliance,Lakewood School District,Graduation Alliance,,No,No,Yes,No,No,No Change,active,279,,
+297,Insight and Graduation Alliance,Quillayute School District,Insight and Graduation Alliance,,No,Yes,Yes,No,No,No Change,active,280,,
+298,Pierce College,Puyallup School District,Pierce College,,No,No,Yes,Yes,No,No Change,active,281,,
+299,Graduation Alliance,Federal Way School District,Graduation Alliance,,No,No,Yes,No,No,No Change,active,282,,
+301,ESD 123 U Grad/ Graduation Alliance,Kennewick School District,ESD 123 U Grad/ Graduation Alliance,,Yes,No,Yes,No,No,No Change,active,283,,
+302,ESD 123U Grad GED,Kennewick School District,ESD 123U Grad GED,,Yes,Yes,No,No,No,No Change,active,284,,
+303,ESD 123 U Grad/ Graduation Alliance,Columbia School District,ESD 123 U Grad/ Graduation Alliance,,Yes,No,Yes,No,No,No Change,active,285,,
+304,ESD 123U Grad GED,Columbia School District,ESD 123U Grad GED,,Yes,Yes,No,No,No,No Change,active,286,,
+305,Ferry County Open Doors – Curlew job corps,Curlew School District,Ferry County Open Doors,Curlew job corps,No,Yes,Yes,Yes,No,No Change,active,287,,
+306,ESD 123U Grad GED,Walla Walla School District,ESD 123U Grad GED,,Yes,Yes,No,No,No,No Change,active,288,,
+307,Graduation Alliance,Bates TC,Graduation Alliance,,No,Yes,Yes,Yes,No,No Change,active,289,,
+308,ESD 113 Gravity HS – Olympia,Onalaska School District,ESD 113 Gravity HS,Olympia,Yes,Yes,No,No,No,Archived,archived,290,,2027
+309,ESD 113 Gravity HS – Lacey,Onalaska School District,ESD 113 Gravity HS,Lacey,Yes,Yes,No,No,No,Archived,archived,291,,2027
+310,ESD 113 Gravity HS – Mason County,Onalaska School District,ESD 113 Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,292,,2027
+311,ESD 113 Gravity HS – Lewis County,Onalaska School District,ESD 113 Gravity HS,Lewis County,Yes,Yes,No,No,No,No Change,active,293,,
+312,ESD 113 Gravity HS – Grays Harbor County,Onalaska School District,ESD 113 Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,Archived,archived,294,,2027
+313,Goodwill Open Doors Reengagement,Kelso School District,Goodwill Open Doors Reengagement,,No,Yes,No,No,No,No Change,active,295,,
+314,Graduation Alliance,Auburn School District,Graduation Alliance,,No,Yes,Yes,No,No,No Change,active,296,,
+315,Graduation Alliance,Steilacoom School District,Graduation Alliance,,No,Yes,Yes,No,No,No Change,active,297,,
+316,Green River CC/GED,Tahoma School District,Green River CC/GED,,No,Yes,No,No,No,No Change,active,298,,
+317,Green River Diploma,Tahoma School District,Green River Diploma,,No,No,Yes,No,No,No Change,active,299,,
+319,Legacy Reengagement GED,Evergreen School District (Clark),Legacy Reengagement GED,,No,Yes,No,No,No,No Change,active,300,,
+320,Legacy Reengagement HS Diploma,Evergreen School District (Clark),Legacy Reengagement HS Diploma,,No,No,Yes,No,No,No Change,active,301,,
+321,Legacy Reengagement Career,Evergreen School District (Clark),Legacy Reengagement Career,,No,No,No,No,Yes,No Change,active,302,,
+324,Walla Walla CC AEP,Walla Walla School District,Walla Walla CC AEP,,No,No,Yes,Yes,No,No Change,active,303,,
+325,Hayes Freedom HS Reengagement-GED,Camas School District,Hayes Freedom HS Reengagement-GED,,No,Yes,No,No,Yes,No Change,active,304,,
+326,Hayes Freedom HS Reengagement-Diploma,Camas School District,Hayes Freedom HS Reengagement-Diploma,,No,No,Yes,No,No,No Change,active,305,,
+327,Newcomers reengagement,Shelton School District,Newcomers reengagement,,No,Yes,Yes,No,Yes,No Change,active,306,,
+328,Chewelah Open Doors,Chewelah School District,Chewelah Open Doors,,No,Yes,Yes,No,No,No Change,active,307,,
+329,ESD 123 U Grad GED,Prosser School District,ESD 123 U Grad GED,,Yes,Yes,No,No,No,No Change,active,308,,
+330,ESD 123 U Grad HS Diploma,Prosser School District,ESD 123 U Grad HS Diploma,,Yes,No,Yes,No,No,No Change,active,309,,
+331,ESD 123 U Grad GED,Dayton School District,ESD 123 U Grad GED,,Yes,Yes,No,No,No,No Change,active,310,,
+332,ESD 123 U Grad HS Diploma,Dayton School District,ESD 123 U Grad HS Diploma,,Yes,No,Yes,No,No,No Change,active,311,,
+333,Summit View Open Doors GED,Battleground School District,Summit View Open Doors GED,,No,Yes,No,No,No,No Change,active,312,,
+334,Summit View Open Doors HS Diploma,Battleground School District,Summit View Open Doors HS Diploma,,No,No,Yes,No,No,No Change,active,313,,
+335,Excelsior Open Doors GED,Spokane School District,Excelsior Open Doors GED,,No,Yes,No,No,No,Archived,archived,314,,2027
+336,Excelsior Open Doors HS Diploma,Spokane School District,Excelsior Open Doors HS Diploma,,No,No,Yes,No,No,Archived,archived,315,,2027
+337,West Valley Open Doors GED,West Valley School District (Yakima),West Valley Open Doors GED,,No,Yes,No,No,No,No Change,active,316,,
+338,West Valley Open Doors HS Diploma,West Valley School District (Yakima),West Valley Open Doors HS Diploma,,No,No,Yes,No,No,No Change,active,317,,
+339,ESD 113 Gravity HS – Lewis County,Toledo School District,ESD 113 Gravity HS,Lewis County,Yes,Yes,No,No,No,No Change,active,318,,
+340,ESD 113 Gravity HS – Mason County,Toledo School District,ESD 113 Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,319,,2027
+341,ESD 113 Gravity HS – Grays Harbor County,Toledo School District,ESD 113 Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,Archived,archived,320,,2027
+342,ESD 113 Gravity HS – Lacey,Toledo School District,ESD 113 Gravity HS,Lacey,Yes,Yes,No,No,No,Archived,archived,321,,2027
+343,ESD 113 Gravity HS – Olympia,Toledo School District,ESD 113 Gravity HS,Olympia,Yes,Yes,No,No,No,Archived,archived,322,,2027
+344,Graduation Alliance,Evergreen (Clark) School District,Graduation Alliance,,No,Yes,Yes,No,No,No Change,active,323,,
+345,ESD 113 Gravity HS – Lewis County,Taholah School District,ESD 113 Gravity HS,Lewis County,Yes,Yes,No,No,No,Archived,archived,324,,2027
+346,ESD 113 Gravity HS – Mason County,Taholah School District,ESD 113 Gravity HS,Mason County,Yes,Yes,No,No,No,Archived,archived,325,,2027
+347,ESD 113 Gravity HS – Grays Harbor County,Taholah School District,ESD 113 Gravity HS,Grays Harbor County,Yes,Yes,No,No,No,No Change,active,326,,
+348,ESD 113 Gravity HS – Lacey,Taholah School District,ESD 113 Gravity HS,Lacey,Yes,Yes,No,No,No,Archived,archived,327,,2027
+349,ESD 113 Gravity HS – Olympia,Taholah School District,ESD 113 Gravity HS,Olympia,Yes,Yes,No,No,No,Archived,archived,328,,2027
+350,Yakima Valley CC Step Up to College - Diploma – Various/Ellensburg,Kittitas School District,Yakima Valley CC Step Up to College - Diploma,Various/Ellensburg,No,No,Yes,Yes No,No,No Change,active,329,,
+351,Yakima Valley CC Step Up to College,Ellensburg School District,Yakima Valley CC Step Up to College,,No,No,Yes,Yes,No,No Change,active,330,,
+352,Market Square Open Doors,Curlew School District,Market Square Open Doors,,No,Yes,Yes,No,No,No Change,active,331,,
+353,Northwest Indian College Open Doors -GED plus,Lummi Nation School District,Northwest Indian College Open Doors -GED plus,,No,Yes,No,Yes,No,No Change,active,332,,
+354,Northwest Indian College Open Doors- HS diploma,Lummi Nation School District,Northwest Indian College Open Doors- HS diploma,,No,No,No,No,No,No Change,active,333,,
+355,ESD 123 U Grad- GED,Richland School District,ESD 123 U Grad- GED,,Yes,Yes,No,No,No,No Change,active,334,,
+356,ESD 123 U Grad - HS diploma,Richland School District,ESD 123 U Grad - HS diploma,,Yes,No,Yes,No,No,No Change,active,335,,
+357,Graduation Alliance,Richland School District,Graduation Alliance,,No,No,Yes,No,No,No Change,active,336,,
+358,ESD 113 GroundED,Elma School District,ESD 113 GroundED,,Yes,Yes,Yes,No,No,Archived,archived,337,,2027
+359,ESD 113 GroundED,North Thurston School District,ESD 113 GroundED,,Yes,Yes,Yes,No,No,Archived,archived,338,,2027
+360,ESD 113 GroundED,Olympia School District,ESD 113 GroundED,,Yes,Yes,Yes,No,No,Archived,archived,339,,2027
+361,ESD 113 GroundED,Rainier School District,ESD 113 GroundED,,Yes,Yes,Yes,No,No,Archived,archived,340,,2027
+362,ESD 113 GroundED,Rochester School District,ESD 113 GroundED,,Yes,Yes,Yes,No,No,Archived,archived,341,,2027
+363,ESD 113 GroundED,Shelton School District,ESD 113 GroundED,,Yes,Yes,Yes,No,No,Archived,archived,342,,2027
+364,ESD 113 GroundED,Tumwater School District,ESD 113 GroundED,,Yes,Yes,Yes,No,No,Archived,archived,343,,2027
+365,ESD 113 GroundED,Yelm School District,ESD 113 GroundED,,Yes,Yes,Yes,No,No,Archived,archived,344,,2027
+366,Graduation Alliance,Washougal School District,Graduation Alliance,,No,No,Yes,No,No,No Change,active,345,,
+367,Graduation Alliance - GED Path,Ocean Beach School District,Graduation Alliance - GED Path,,No,Yes,No,No,No,No Change,active,346,,
+368,Graduation Alliance - HS Diploma Path,Ocean Beach School District,Graduation Alliance - HS Diploma Path,,No,No,Yes,No,No,No Change,active,347,,
+369,Innovation Academy Open Doors - GED Path,Quincy School District,Innovation Academy Open Doors - GED Path,,No,Yes,No,No,No,No Change,archived,348,,2023
+370,Innovation Academy Open Doors - HS Diploma Path,Quincy School District,Innovation Academy Open Doors - HS Diploma Path,,No,No,Yes,No,No,No Change,archived,349,,2023
+371,Graduation Alliance Open Doors - HS Diploma Path,Raymond School District,Graduation Alliance Open Doors - HS Diploma Path,,No,No,Yes,No,No,No Change,active,350,,
+372,Griffin Bay Open Doors - HS Diploma Path,San Juan Island School District,Griffin Bay Open Doors - HS Diploma Path,,No,No,Yes,No,No,No Change,active,351,,
+373,New Beginnings Open Doors - GED Path,North Beach School District,New Beginnings Open Doors - GED Path,,No,Yes,No,No,No,No Change,active,352,,
+374,New Beginnings Open Doors - HS Diploma Path,North Beach School District,New Beginnings Open Doors - HS Diploma Path,,No,No,Yes,No,No,No Change,active,353,,
+375,Graduation Alliance Open Doors - GED Path,Camas School District,Graduation Alliance Open Doors - GED Path,,No,Yes,No,No,No,No Change,active,354,,
+376,Graduation Alliance Open Doors - HS Diploma Path,Camas School District,Graduation Alliance Open Doors - HS Diploma Path,,No,No,Yes,No,No,No Change,active,355,,
+377,Fresh Start Tacoma CC,Clover Park School District,Fresh Start Tacoma CC,,No,No,Yes,Yes,No,No Change,active,356,,
+378,Graduation Alliance Open Doors - HS Diploma Path,Renton School District,Graduation Alliance Open Doors - HS Diploma Path,,No,No,Yes,No,No,No Change,active,357,,
+379,Clark Yakima Valley Community College Open Doors - GED Path,Stevenson-Carson School District,Clark Yakima Valley Community College Open Doors - GED Path,,No,Yes,No,Yes,No,No Change,active,358,,
+380,Yakima Valley College - HS Diploma Path,Stevenson-Carson School District,Yakima Valley College - HS Diploma Path,,No,No,Yes,Yes,No,No Change,active,359,,
+381,Clark College Open Doors - GED Path,Vancouver School District,Clark College Open Doors - GED Path,,No,No,No,No,No,No Change,active,360,,
+382,Clark College Open Doors - HS Diploma Path,Vancouver School District,Clark College Open Doors - HS Diploma Path,,No,Yes,No,No,No,No Change,active,361,,
+383,Graduation Alliance Open Doors - GED Path,Fife School District,Graduation Alliance Open Doors - GED Path,,No,Yes,Yes,No,No,No Change,active,362,,
+384,Graduation Alliance Open Doors - HS Diploma Path,Fife School District,Graduation Alliance Open Doors - HS Diploma Path,,No,No,No,No,No,No Change,active,363,,
+385,ESD 105 Open Doors - GED Path,East Valley School District (Yakima),ESD 105 Open Doors - GED Path,,Yes,Yes,No,No,No,No Change,active,364,,
+386,ESD 105 Open Doors - GED Path,Highland School District,ESD 105 Open Doors - GED Path,,Yes,Yes,No,No,No,No Change,active,365,,
+387,ESD 105 Open Doors - GED Path,Naches School District,ESD 105 Open Doors - GED Path,,Yes,Yes,No,No,No,Archived,archived,366,,
+388,ESD 105 Open Doors - GED Path,Selah School District,ESD 105 Open Doors - GED Path,,Yes,Yes,No,No,No,No Change,active,367,,
+389,ESD 105 Open Doors - GED Path,Wapato School District,ESD 105 Open Doors - GED Path,,Yes,Yes,No,No,No,No Change,active,368,,
+390,ESD 105 Open Doors - GED Path,Yakima School District,ESD 105 Open Doors - GED Path,,Yes,Yes,No,No,No,No Change,active,369,,
+391,Soar to Success Open Doors Columbia Basin CC GED,Richland School District,Soar to Success Open Doors Columbia Basin CC GED,,No,Yes,No,No,No,No Change,active,370,,
+392,Soar to Success Open Doors Columbia Basin CC HS Diploma,Richland School District,Soar to Success Open Doors Columbia Basin CC HS Diploma,,No,No,Yes,No,No,No Change,active,371,,
+393,Soar to Success Open Doors Columbia Basin CC GED,Pasco School District,Soar to Success Open Doors Columbia Basin CC GED,,No,Yes,No,No,No,No Change,active,372,,
+394,Soar to Success Open Doors Columbia Basin CC HS Diploma,Pasco School District,Soar to Success Open Doors Columbia Basin CC HS Diploma,,No,No,Yes,No,No,No Change,active,373,,
+395,Open Doors AEP Walla Walla CC GED,Walla Walla School District,Open Doors AEP Walla Walla CC GED,,No,Yes,No,No,No,No Change,active,374,,
+396,Open Doors AEP Walla Walla CC HS Diploma,Walla Walla School District,Open Doors AEP Walla Walla CC HS Diploma,,No,No,Yes,No,No,No Change,active,375,,
+397,Open Doors AEP Walla Walla CC Career and College,Walla Walla School District,Open Doors AEP Walla Walla CC Career and College,,No,No,No,Yes,Yes,No Change,active,376,,
+398,Open Doors Walla Walla CC North GED,Walla Walla School District,Open Doors Walla Walla CC North GED,,No,Yes,No,No,No,No Change,active,377,,
+399,Open Doors Walla Walla CC North HS Diploma,Walla Walla School District,Open Doors Walla Walla CC North HS Diploma,,No,No,Yes,No,No,No Change,active,378,,
+400,Open Doors Walla Walla CC North Career and College,Walla Walla School District,Open Doors Walla Walla CC North Career and College,,No,No,No,Yes,Yes,No Change,active,379,,
+401,Open Doors AEP GED – Walla Walla CC,Dayton School District,Open Doors AEP GED,Walla Walla CC,No,Yes,No,No,No,No Change,active,380,,
+402,Open Doors AEP HS Diploma – Walla Walla CC,Dayton School District,Open Doors AEP HS Diploma,Walla Walla CC,No,No,Yes,No,No,No Change,active,381,,
+403,Open Doors AEP Career and College – Walla Walla CC,Dayton School District,Open Doors AEP Career and College,Walla Walla CC,No,No,No,Yes,No,No Change,active,382,,
+404,Spokane Reengagement Academy GED,Spokane School District,Spokane Reengagement Academy GED,,No,Yes,No,No,No,No Change,active,383,,
+405,Spokane Reengagement Academy HS Diploma,Spokane School District,Spokane Reengagement Academy HS Diploma,,No,No,Yes,No,No,No Change,active,384,,
+406,Open Doors AEP,College Place School District,Open Doors AEP,,No,Yes,No,No,No,No Change,active,385,,
+407,Open Doors AEP,College Place School District,Open Doors AEP,,No,No,Yes,No,No,No Change,active,386,,
+408,Open Doors AEP,College Place School District,Open Doors AEP,,No,No,No,Yes,Yes,No Change,active,387,,
+409,ESD 113 Gravity HS – Yelm,Yelm School District,ESD 113 Gravity HS,Yelm,Yes,Yes,No,No,No,No Change,active,388,,
+410,ESD 113 Gravity HS – Yelm,Rainier School District,ESD 113 Gravity HS,Yelm,Yes,Yes,No,No,No,No Change,active,389,,
+411,ESD 113 Gravity HS – Yelm,North Thurston School District,ESD 113 Gravity HS,Yelm,Yes,Yes,No,No,No,Archived,archived,390,,2027
+412,ESD 113 Gravity HS – Yelm,Tenino School District,ESD 113 Gravity HS,Yelm,Yes,Yes,No,No,No,Archived,archived,391,,2027
+413,Soar to Success Columbia Basin CC GED,Kennewick School District,Soar to Success Columbia Basin CC GED,,No,Yes,No,No,No,No Change,active,392,,
+414,Soar to Success Open Doors Columbia Basin CC HS Diploma,Kennewick School District,Soar to Success Open Doors Columbia Basin CC HS Diploma,,No,No,Yes,No,No,No Change,active,393,,
+415,Skill Source Open Doors GED,Othello School District,Skill Source Open Doors GED,,No,Yes,No,No,No,No Change,active,394,,
+416,Skill Source Open Doors HS Diploma,Othello School District,Skill Source Open Doors HS Diploma,,No,No,Yes,No,No,No Change,active,395,,
+417,NCTA Open Doors,Mt Vernon School District,NCTA Open Doors,,No,No,Yes,No,No,No Change,active,396,,
+418,Graduation Alliance GED – Virtual,Tacoma School District,Graduation Alliance GED,Virtual,No,Yes,No,No,No,No Change,active,397,,
+419,Graduation Alliance HS diploma – Virtual,Tacoma School District,Graduation Alliance HS diploma,Virtual,No,No,Yes,No,No,No Change,active,398,,
+420,Graduation Alliance Open Doors - GED Path,Raymond School District,Graduation Alliance Open Doors - GED Path,,No,Yes,No,No,No,No Change,active,399,,
+421,Auburn Opportunity Project – Green River CC,Auburn School District,Auburn Opportunity Project,Green River CC,No,No,No,Yes,Yes,No Change,active,400,,
+422,Graduation Alliance,Prosser School District,Graduation Alliance,,No,Yes,Yes,No,No,No Change,active,401,,
+423,RTCDF High School +,Renton Technical College,RTCDF High School +,,No,No,Yes,Yes,Yes,No Change,active,402,,
+424,RTCDF GED +,Renton Technical College,RTCDF GED +,,No,Yes,No,Yes,Yes,No Change,active,403,,
+425,Renaissance GED + – Lower Columbia CC,Kelso School District,Renaissance GED +,Lower Columbia CC,No,Yes,No,Yes,Yes,No Change,active,404,,
+426,Renaissance HS + – Lower Columbia CC,Kelso School District,Renaissance HS +,Lower Columbia CC,No,No,Yes,No,No,No Change,active,405,,
+427,Renaissance GED + – Lower Columbia CC,Longview School District,Renaissance GED +,Lower Columbia CC,No,Yes,No,Yes,Yes,No Change,active,406,,
+428,Renaissance HS + – Lower Columbia CC,Longview School District,Renaissance HS +,Lower Columbia CC,No,No,Yes,Yes,Yes,No Change,active,407,,
+429,HS Success – Highline CC,Highline School District,HS Success,Highline CC,No,No,Yes,No,No,No Change,active,408,,
+430,Open Doors GED – Lincoln,Walla Walla School District,Open Doors GED,Lincoln,No,Yes,No,No,No,No Change,active,409,,
+431,Open Doors HS Diploma – Lincoln,Walla Walla School District,Open Doors HS Diploma,Lincoln,No,No,Yes,No,No,No Change,active,410,,
+432,Next Gen Zone Open Doors GED Path,Medical Lake School District,Next Gen Zone Open Doors GED Path,,Yes,Yes,No,No,No,No Change,active,411,,
+433,ESD 105 Open Doors GED Plus Pathway,Royal School District,ESD 105 Open Doors GED Plus Pathway,,Yes,Yes,No,No,No,No Change,active,412,,
+434,ESD 105 Open Doors GED Plus Pathway,Wahluke School District,ESD 105 Open Doors GED Plus Pathway,,Yes,Yes,No,No,No,No Change,active,413,,
+435,ESD 105 Open Doors GED Plus Pathway,Mount Adams School District,ESD 105 Open Doors GED Plus Pathway,,Yes,Yes,No,No,No,No Change,active,414,,
+436,Fresh Start – Tacoma CC,Peninsula School District,Fresh Start,Tacoma CC,No,No,Yes,Yes,No,No Change,active,415,,
+437,Open Doors GED Plus – Centralia CC,Morton School District,Open Doors GED Plus,Centralia CC,No,Yes,No,Yes,No,No Change,active,416,,
+438,Open Doors HS Diploma – Centralia CC,Morton School District,Open Doors HS Diploma,Centralia CC,No,No,Yes,Yes,No,No Change,active,417,,
+439,Open Doors GED Plus – Centralia CC,Mossyrock School District,Open Doors GED Plus,Centralia CC,No,Yes,No,Yes,No,No Change,active,418,,
+440,Open Doors HS Diploma – Centralia CC,Mossyrock School District,Open Doors HS Diploma,Centralia CC,No,No,Yes,Yes,No,No Change,active,419,,
+441,Bremerton Graduation Alliance GED Plus – Online,Bremerton School District,Bremerton Graduation Alliance GED Plus,Online,No,Yes,No,No,No,No Change,active,420,,
+442,Bremerton Graduation Alliance HS Diploma – Online,Bremerton School District,Bremerton Graduation Alliance HS Diploma,Online,No,No,Yes,No,No,No Change,active,421,,
+443,Napavine Graduation Alliance GED Plus – Online,Napavine School District,Napavine Graduation Alliance GED Plus,Online,No,Yes,No,No,No,No Change,active,422,,
+444,Napavine Graduation Alliance HS Diploma – Online,Napavine School District,Napavine Graduation Alliance HS Diploma,Online,No,No,Yes,No,No,No Change,active,423,,
+445,ESD 105,Goldendale School District,ESD 105,,Yes,Yes,Yes,No,No,No Change,active,424,,
+446,PSESD 121,Highline School District,PSESD 121,,Yes,Yes,Yes,No,No,Archived,archived,425,,2027
+447,Renton Technical College,Kent School District,Renton Technical College,,No,Yes,Yes,Yes,No,No Change,archived,426,,2026
+448,ESD 101,Lumen Charter,ESD 101,,Yes,Yes,Yes,No,No,No Change,active,427,,
+449,Walla Walla CC,North Franklin School District,Walla Walla CC,,No,Yes,Yes,No,No,No Change,active,428,,
+450,ESD 101,Freeman School District,ESD 101,,Yes,Yes,Yes,No,No,No Change,active,429,,
+451,Walla Walla CC – Walla Walla CC,Prescott School District,Walla Walla CC,Walla Walla CC,No,No,Yes,Yes,No,No Change,active,430,,
+452,ESD 113 Gravity HS – Mason County,North Mason School District,ESD 113 Gravity HS,Mason County,Yes,Yes,Yes,No,Yes,Archived,archived,431,,2027
+453,Columbia Basin College – Walla Walla CC,Prescott School District,Columbia Basin College,Walla Walla CC,No,No,Yes,Yes,No,No Change,active,432,,
+454,Harbor Learning Center – Harbor Learning Center,Aberdeen School District,Harbor Learning Center,Harbor Learning Center,No,Yes,Yes,No,Yes,No Change,active,433,,
+455,Moses Lake School District – Moses Lake School District,Moses Lake School District,Moses Lake School District,Moses Lake School District,No,Yes,Yes,No,No,No Change,active,434,,
+456,Renton Technical College Career – Echo Glen Children's Center,Issaquah School District,Renton Technical College Career,Echo Glen Children's Center,No,No,No,No,Yes,No Change,active,435,,
+457,ESD 123 uGrad HS Diploma – Finley High School,Finley School District,ESD 123 uGrad HS Diploma,Finley High School,Yes,No,Yes,No,No,No Change,active,436,,
+458,Renton Technical College GED – Echo Glen Children's Center,Issaquah School District,Renton Technical College GED,Echo Glen Children's Center,No,Yes,No,No,No,No Change,active,437,,
+459,"Wellpinit Open Doors High School – Wellpinit HS, Fort Simcoe Job Corps, & Columbia Basin Job Corps",Wellpinit School District,Wellpinit Open Doors High School,"Wellpinit HS, Fort Simcoe Job Corps, & Columbia Basin Job Corps",No,Yes,Yes,No,Yes,No Change,active,438,,
+460,Renton Technical College HS Diploma – Echo Glen Children's Center,Issaquah School District,Renton Technical College HS Diploma,Echo Glen Children's Center,No,No,Yes,No,No,No Change,active,439,,
+461,ESD 123 uGrad GED Plus – Finley High School,Finley School District,ESD 123 uGrad GED Plus,Finley High School,Yes,Yes,No,No,No,No Change,active,440,,
+462,NWESD – Next Generation Zone Spokane,Pullman School District,NWESD,Next Generation Zone Spokane,Yes,Yes,Yes,No,No,No Change,active,441,,
+463,Orting Open Doors – Graduation Alliance Online Local Meetups,Orting School District,Orting Open Doors,Graduation Alliance Online Local Meetups,No,Yes,Yes,No,No,No Change,active,442,,
+464,Gravity – Mossyrock High School,Mossyrock School District,Gravity,Mossyrock High School,Yes,Yes,No,No,No,Archived,archived,443,,2027
+465,ESD 112 Open Doors - HS Diploma,Battle Ground School District,ESD 112 Open Doors - HS Diploma,,Yes,No,Yes,No,No,No Change,active,444,,
+466,ESD 112 Open Doors - GED,Washougal School District,ESD 112 Open Doors - GED,,Yes,Yes,No,No,No,No Change,active,445,,
+467,"ESD 105 Open Doors - GED Path – ESD 105 Annex, Yakima County",Granger School District,ESD 105 Open Doors - GED Path,"ESD 105 Annex, Yakima County",Yes,Yes,No,No,No,No Change,active,446,,
+468,Centralia College Open Doors Program - HS Diploma – Centralia College and Centralia College East,Centralia School District,Centralia College Open Doors Program - HS Diploma,Centralia College and Centralia College East,No,No,Yes,No,No,No Change,active,447,,
+469,Centralia College Open Doors Program - College – Centralia College and Centralia College East,Centralia School District,Centralia College Open Doors Program - College,Centralia College and Centralia College East,No,No,No,Yes,No,No Change,active,448,,
+470,"Willie Steward Academy, Tacoma Open Doors - GED-Plus Path – Willie Steward Academy 908 Broadway, Tacoma",Tacoma School District,"Willie Steward Academy, Tacoma Open Doors - GED-Plus Path","Willie Steward Academy 908 Broadway, Tacoma",No,Yes,No,No,No,No Change,active,449,,
+471,Innovation High School Open Doors – The Next Generation Zone,Spokane Public Schools PRIDE Prep Charter,Innovation High School Open Doors,The Next Generation Zone,Yes,Yes,Yes,No,Yes,No Change,active,450,,
+472,Graduation Alliance – Pacific County,South Bend School District,Graduation Alliance,Pacific County,No,Yes,Yes,No,No,No Change,active,451,,
+473,Graduation Alliance – Longview,Longview School District,Graduation Alliance,Longview,No,Yes,Yes,No,No,No Change,active,452,,
+474,Sumner-Bonney Lake Open Doors,Sumner - Bonney Lake School District,Sumner-Bonney Lake Open Doors,,No,Yes,Yes,No,No,No Change,active,453,,
+475,Yakima Open Doors - GED Path,Yakima School District,Yakima Open Doors - GED Path,,No,Yes,No,No,No,No Change,active,454,,
+476,Open Doors - High School Diploma,Adna School District,Open Doors - High School Diploma,,No,No,Yes,No,No,No Change,active,455,,
+477,Open Doors - GED Program,Adna School District,Open Doors - GED Program,,No,Yes,No,No,No,No Change,active,456,,
+478,El Centro de la Raza Reengagement Program,Renton Technical College,El Centro de la Raza Reengagement Program,,No,Yes,No,No,No,No Change,active,457,,
+479,CECO at Shoreline Community College - GED,Lake Washington IT,CECO at Shoreline Community College - GED,,No,Yes,No,No,No,No Change,active,458,,
+480,CECO at Shoreline Community College - Diploma,Lake Washington IT,CECO at Shoreline Community College - Diploma,,No,No,Yes,No,No,No Change,active,459,,
+481,CECO at Shoreline Community College - College,Lake Washington IT,CECO at Shoreline Community College - College,,No,No,No,Yes,No,No Change,active,460,,
+482,CECO at Shoreline Community College - Career,Lake Washington IT,CECO at Shoreline Community College - Career,,No,No,No,No,Yes,No Change,active,461,,
+483,Graduation Alliance - GED Path,Vancouver School District,Graduation Alliance - GED Path,,No,Yes,No,No,No,No Change,active,462,,
+484,Graduation Alliance - HS Diploma Path,Vancouver School District,Graduation Alliance - HS Diploma Path,,No,No,Yes,No,No,No Change,active,463,,
+485,Everett Community College,Lake Stevens SD,Everett Community College,,No,Yes,No,No,No,No Change,active,464,,
+486,Everett Community College,Lake Stevens SD,Everett Community College,,No,No,Yes,No,No,No Change,active,465,,
+487,Everett Community College,Lake Stevens SD,Everett Community College,,No,No,No,Yes,No,No Change,active,466,,
+488,Everett Community College,Lake Stevens SD,Everett Community College,,No,No,No,No,Yes,No Change,active,467,,
+489,Everett Community College,Darrington SD,Everett Community College,,No,Yes,No,No,No,No Change,active,468,,
+490,Everett Community College,Darrington SD,Everett Community College,,No,No,Yes,No,No,No Change,active,469,,
+491,Everett Community College,Darrington SD,Everett Community College,,No,No,No,Yes,No,No Change,active,470,,
+492,Everett Community College,Darrington SD,Everett Community College,,No,No,No,No,Yes,No Change,active,471,,
+493,Everett Community College,Lakewood SD,Everett Community College,,No,Yes,No,No,No,No Change,active,472,,
+494,Everett Community College,Lakewood SD,Everett Community College,,No,No,Yes,No,No,No Change,active,473,,
+495,Everett Community College,Lakewood SD,Everett Community College,,No,No,No,Yes,No,No Change,active,474,,
+496,Everett Community College,Lakewood SD,Everett Community College,,No,No,No,No,Yes,No Change,active,475,,
+497,Everett Community College,Stanwood -Camano Island SD,Everett Community College,,No,Yes,No,No,No,No Change,active,476,,
+498,Everett Community College,Stanwood -Camano Island SD,Everett Community College,,No,No,Yes,No,No,No Change,active,477,,
+499,Everett Community College,Stanwood -Camano Island SD,Everett Community College,,No,No,No,Yes,No,No Change,active,478,,
+500,Everett Community College,Stanwood -Camano Island SD,Everett Community College,,No,No,No,No,Yes,No Change,active,479,,
+501,Everett Community College,Marysville SD,Everett Community College,,No,Yes,No,No,No,No Change,active,480,,
+502,Everett Community College,Marysville SD,Everett Community College,,No,No,Yes,No,No,No Change,active,481,,
+503,Everett Community College,Marysville SD,Everett Community College,,No,No,No,Yes,No,No Change,active,482,,
+504,Everett Community College,Marysville SD,Everett Community College,,No,No,No,No,Yes,No Change,active,483,,
+505,Everett Community College,Snohomish SD,Everett Community College,,No,Yes,No,No,No,No Change,active,484,,
+506,Everett Community College,Snohomish SD,Everett Community College,,No,No,Yes,No,No,No Change,active,485,,
+507,Everett Community College,Snohomish SD,Everett Community College,,No,No,No,Yes,No,No Change,active,486,,
+508,Everett Community College,Snohomish SD,Everett Community College,,No,No,No,No,Yes,No Change,active,487,,
+509,Puyallup Open Doors,Puyallup SD,Puyallup Open Doors,,No,Yes,No,No,No,No Change,active,488,,
+510,Everett Community College,Lake Washington Institute for Technology (LWIT),Everett Community College,,No,Yes,No,No,No,No Change,active,489,,
+511,Everett Community College,Lake Washington Institute for Technology (LWIT),Everett Community College,,No,No,Yes,No,No,No Change,active,490,,
+512,Everett Community College,Lake Washington Institute for Technology (LWIT),Everett Community College,,No,No,No,Yes,No,No Change,active,491,,
+513,Everett Community College,Lake Washington Institute for Technology (LWIT),Everett Community College,,No,No,No,No,Yes,No Change,active,492,,
+514,ESD 101,Newport SD,ESD 101,,Yes,Yes,No,No,No,No Change,active,493,,
+515,Big Bend Community College – BBCC Quincy GED,Quincy School District,Big Bend Community College,BBCC Quincy GED,No,Yes,No,No,No,No Change,active,494,,
+516,Big Bend Community College – BBCC Quincy HS,Quincy School District,Big Bend Community College,BBCC Quincy HS,No,No,Yes,No,No,No Change,active,495,,
+517,Big Bend Community College – BBCC Quincy College,Quincy School District,Big Bend Community College,BBCC Quincy College,No,No,No,Yes,No,No Change,active,496,,
+518,Big Bend Community College – BBCC Quincy Career,Quincy School District,Big Bend Community College,BBCC Quincy Career,No,No,No,No,Yes,No Change,active,497,,
+519,Everett Community College – EVCC - Everett GED,Everett School District,Everett Community College,EVCC - Everett GED,No,Yes,No,No,No,No Change,active,498,,
+520,Everett Community College – EVCC - Everett HS,Everett School District,Everett Community College,EVCC - Everett HS,No,No,Yes,No,No,No Change,active,499,,
+521,Everett Community College – EVCC - Everett College,Everett School District,Everett Community College,EVCC - Everett College,No,No,No,Yes,No,No Change,active,500,,
+522,Everett Community College – EVCC - Everett Career,Everett School District,Everett Community College,EVCC - Everett Career,No,No,No,No,Yes,No Change,active,501,,
+523,ESD 101/ Next Gen Zone – ESD101 NextGen- DeerPk HS,Deer Park School District,ESD 101/ Next Gen Zone,ESD101 NextGen- DeerPk HS,Yes,No,Yes,No,No,No Change,active,502,,
+524,ESD 101/ Next Gen Zone – ESD101 NextGen - DeerPk Career,Deer Park School District,ESD 101/ Next Gen Zone,ESD101 NextGen - DeerPk Career,Yes,No,No,No,Yes,No Change,active,503,,
+525,ESD 101/ Next Gen Zone – ESD101 NextGen - Freeman Career,Freeman School District,ESD 101/ Next Gen Zone,ESD101 NextGen - Freeman Career,Yes,No,No,No,Yes,No Change,active,504,,
+526,ESD 101/ Next Gen Zone – ESD101 NextGen- Mead HS,Mead School District,ESD 101/ Next Gen Zone,ESD101 NextGen- Mead HS,Yes,No,Yes,No,No,No Change,active,505,,
+527,ESD 101/ Next Gen Zone – ESD101 NextGen - Mead Career,Mead School District,ESD 101/ Next Gen Zone,ESD101 NextGen - Mead Career,Yes,No,No,No,Yes,No Change,active,506,,
+528,ESD 101/ Next Gen Zone – ESD101 NextGen- Spokane HS,Spokane School District,ESD 101/ Next Gen Zone,ESD101 NextGen- Spokane HS,Yes,No,Yes,No,No,No Change,active,507,,
+529,ESD 101/ Next Gen Zone – ESD101 NextGen - Spokane Career,Spokane School District,ESD 101/ Next Gen Zone,ESD101 NextGen - Spokane Career,Yes,No,No,No,Yes,No Change,active,508,,
+530,ESD 101/ Next Gen Zone – ESD101 NextGen- MedLake HS,Medical Lake School District,ESD 101/ Next Gen Zone,ESD101 NextGen- MedLake HS,Yes,No,Yes,No,No,No Change,active,509,,
+531,ESD 101/ Next Gen Zone – ESD101 NextGen - MedLake Career,Medical Lake School District,ESD 101/ Next Gen Zone,ESD101 NextGen - MedLake Career,Yes,No,No,No,Yes,No Change,active,510,,
+532,ESD 101/ Next Gen Zone – ESD101 NextGen- Cheney GED,Cheney School District,ESD 101/ Next Gen Zone,ESD101 NextGen- Cheney GED,Yes,Yes,No,No,No,No Change,active,511,,
+533,ESD 101/ Next Gen Zone – ESD101 NextGen- Cheney HS,Cheney School District,ESD 101/ Next Gen Zone,ESD101 NextGen- Cheney HS,Yes,No,Yes,No,No,No Change,active,512,,
+534,ESD 101/ Next Gen Zone – ESD101 NextGen - Cheney Career,Cheney School District,ESD 101/ Next Gen Zone,ESD101 NextGen - Cheney Career,Yes,No,No,No,Yes,No Change,active,513,,
+535,Spokane Community College – SpokaneCC-MedLake HS,Medical Lake School District,Spokane Community College,SpokaneCC-MedLake HS,No,No,Yes,No,No,No Change,active,514,,
+536,Spokane Community College – SpokaneCC-MedLake Clg,Medical Lake School District,Spokane Community College,SpokaneCC-MedLake Clg,No,No,No,Yes,No,No Change,active,515,,
+537,ESD 101/ Next Gen Zone – ESD101 NextGen - Pullman Career,Pullman School District,ESD 101/ Next Gen Zone,ESD101 NextGen - Pullman Career,Yes,No,No,No,Yes,No Change,active,516,,
+538,Big Bend CC Open Doors - Soap Lake – Big Bend CC,Soap Lake School District,Big Bend CC Open Doors - Soap Lake,Big Bend CC,No,Yes,No,No,No,No Change,active,517,,
+539,Big Bend CC Open Doors - Soap Lake – Big Bend CC,Soap Lake School District,Big Bend CC Open Doors - Soap Lake,Big Bend CC,No,No,Yes,No,No,No Change,active,518,,
+540,Big Bend CC Open Doors - Soap Lake – Big Bend CC,Soap Lake School District,Big Bend CC Open Doors - Soap Lake,Big Bend CC,No,No,No,Yes,No,No Change,active,519,,
+541,Big Bend CC Open Doors - Soap Lake – Big Bend CC,Soap Lake School District,Big Bend CC Open Doors - Soap Lake,Big Bend CC,No,No,No,No,Yes,No Change,active,520,,
+542,ESD 105 Open Doors – Yakama,Yakama Nation,ESD 105 Open Doors,Yakama,Yes,Yes,No,No,No,Archived,archived,521,,
+543,Kelso Gold Open Doors - GED – Loowit High School Kelso,Kelso School District,Kelso Gold Open Doors - GED,Loowit High School Kelso,No,Yes,No,No,No,No Change,active,522,,
+544,Kelso Gold Open Doors - Diploma – Loowit High School Kelso,Kelso School District,Kelso Gold Open Doors - Diploma,Loowit High School Kelso,No,No,Yes,No,No,No Change,active,523,,
+545,Graduation Alliance Edmonds – Edmonds School District Office,Edmonds,Graduation Alliance Edmonds,Edmonds School District Office,No,Yes,Yes,No,No,No Change,active,524,,
+546,ESD 189/ Open Doors Skagit: Sedro-Woolley – Skagit County,Sedro-Woolley,ESD 189/ Open Doors Skagit: Sedro-Woolley,Skagit County,Yes,Yes,Yes,No,No,No Change,active,525,,
+547,ESD 189/ Open Doors Skagit: Concrete – Skagit County,Concrete,ESD 189/ Open Doors Skagit: Concrete,Skagit County,Yes,Yes,Yes,No,No,No Change,active,526,,
+548,ESD 189/ Open Doors Skagit: Burlington – Skagit County,Burlington,ESD 189/ Open Doors Skagit: Burlington,Skagit County,Yes,Yes,Yes,No,No,No Change,active,527,,
+549,Ignite Open Doors Youth Re-engagement – Lower Columbia College,Castle Rock School District,Ignite Open Doors Youth Re-engagement,Lower Columbia College,No,Yes,Yes,No,No,Archived,archived,528,,2024
+550,Ignite Open Doors Youth Re-engagement – Lower Columbia College,Castle Rock School District,Ignite Open Doors Youth Re-engagement,Lower Columbia College,No,No,No,No,Yes,Archived,archived,529,,2024
+551,CHOICE Open Doors – Choice,Shelton School District,CHOICE Open Doors,Choice,No,Yes,No,No,No,No Change,active,530,,
+552,CHOICE Open Doors – Choice,Shelton School District,CHOICE Open Doors,Choice,No,No,Yes,No,No,No Change,active,531,,
+553,Woodland Open Doors Option at Lower Columbia College – Lower Columbia College,Woodland School District,Woodland Open Doors Option at Lower Columbia College,Lower Columbia College,No,Yes,No,No,No,No Change,active,532,,
+554,Woodland Open Doors Option at Lower Columbia College – Lower Columbia College,Woodland School District,Woodland Open Doors Option at Lower Columbia College,Lower Columbia College,No,No,Yes,No,No,No Change,active,533,,
+555,Woodland Open Doors Option at Lower Columbia College – Lower Columbia College,Woodland School District,Woodland Open Doors Option at Lower Columbia College,Lower Columbia College,No,No,No,Yes,No,No Change,active,534,,
+556,Woodland Open Doors Option at Lower Columbia College – Lower Columbia College,Woodland School District,Woodland Open Doors Option at Lower Columbia College,Lower Columbia College,No,No,No,No,Yes,No Change,active,535,,
+557,ESD 189/Open Doors Skagit: Anacortes – Skagit County,Anacortes,ESD 189/Open Doors Skagit: Anacortes,Skagit County,Yes,Yes,No,No,No,No Change,active,536,,
+558,ESD 189/Open Doors Skagit: Anacortes – Skagit County,Anacortes,ESD 189/Open Doors Skagit: Anacortes,Skagit County,Yes,No,Yes,No,No,No Change,active,537,,
+559,Ferndale School District Open Doors – Ferndale High School,Ferndale,Ferndale School District Open Doors,Ferndale High School,No,Yes,No,No,No,No Change,active,538,,
+560,Ferndale School District Open Doors – Ferndale High School,Ferndale,Ferndale School District Open Doors,Ferndale High School,No,No,Yes,No,No,No Change,active,539,,
+561,ESD 189/Open Doors Skagit: LaConner﻿ – Skagit County,LaConner,ESD 189/Open Doors Skagit: LaConner﻿,Skagit County,Yes,Yes,No,No,No,No Change,active,540,,
+562,ESD 189/Open Doors Skagit: LaConner﻿ – Skagit County,LaConner,ESD 189/Open Doors Skagit: LaConner﻿,Skagit County,Yes,No,Yes,No,No,No Change,active,541,,
+563,Skagit Valley College Open Doors – Skagit Valley College,Stanwood-Camano,Skagit Valley College Open Doors,Skagit Valley College,No,Yes,No,No,No,No Change,active,542,,
+564,Skagit Valley College Open Doors – Skagit Valley College,Stanwood-Camano,Skagit Valley College Open Doors,Skagit Valley College,No,No,Yes,No,No,No Change,active,543,,
+565,Skagit Valley College Open Doors – Skagit Valley College,Stanwood-Camano,Skagit Valley College Open Doors,Skagit Valley College,No,No,No,Yes,No,No Change,active,544,,
+566,Skagit Valley College Open Doors – Skagit Valley College,Stanwood-Camano,Skagit Valley College Open Doors,Skagit Valley College,No,No,No,No,Yes,No Change,active,545,,
+567,"ESD 101/ Next Gen Zone – Next Generation Zone, Pullman",Rosalia,ESD 101/ Next Gen Zone,"Next Generation Zone, Pullman",Yes,Yes,No,No,No,No Change,active,546,,
+568,Career Link GED – South Seattle College,Highline,Career Link GED,South Seattle College,No,Yes,No,No,No,No Change,active,547,,
+569,ESD 189 Open Doors – Skagit County,Mt Vernon School District,ESD 189 Open Doors,Skagit County,Yes,Yes,No,No,No,No Change,active,548,,
+570,ESD 189 Open Doors – Skagit County,Mt Vernon School District,ESD 189 Open Doors,Skagit County,Yes,No,Yes,No,No,No Change,active,549,,
+571,Yakima Valley CC Step up to College - GED – Various/Ellensburg,Kittitas,Yakima Valley CC Step up to College - GED,Various/Ellensburg,No,Yes,No,No,No,No Change,active,550,,
+572,Yakima Valley CC Step up to College – College – Various/Ellensburg,Kittitas,Yakima Valley CC Step up to College – College,Various/Ellensburg,No,No,No,Yes,No,No Change,active,551,,
+573,Yakima Valley CC Step up to College - Career – Various/Ellensburg,Kittitas,Yakima Valley CC Step up to College - Career,Various/Ellensburg,No,No,No,No,Yes,No Change,active,552,,
+574,Chinook Open Doors -GED – Lower Columbia Community College,Kalama,Chinook Open Doors -GED,Lower Columbia Community College,no,Yes,No,No,No,No Change,active,553,,
+575,Chinook Open Doors - HS Diploma – Lower Columbia Community College,Kalama,Chinook Open Doors - HS Diploma,Lower Columbia Community College,no,No,Yes,No,No,No Change,active,554,,
+576,Chinook Open Doors - College – Lower Columbia Community College,Kalama,Chinook Open Doors - College,Lower Columbia Community College,no,No,No,Yes,No,No Change,active,555,,
+577,Chinook Open Doors - Career – Lower Columbia Community College,Kalama,Chinook Open Doors - Career,Lower Columbia Community College,no,No,No,No,Yes,No Change,active,556,,
+578,Open Doors - Lower Columbia Community College - GED – Lower Columbia Community College,Wahkiakum,Open Doors - Lower Columbia Community College - GED,Lower Columbia Community College,No,Yes,No,No,No,No Change,active,557,,
+579,Open Doors - Lower Columbia Community College - HS Diploma – Lower Columbia Community College,Wahkiakum,Open Doors - Lower Columbia Community College - HS Diploma,Lower Columbia Community College,No,No,Yes,No,No,No Change,active,558,,
+580,Open Doors - Lower Columbia Community College - College – Lower Columbia Community College,Wahkiakum,Open Doors - Lower Columbia Community College - College,Lower Columbia Community College,No,No,No,Yes,No,No Change,active,559,,
+581,Open Doors - Lower Columbia Community College - Career – Lower Columbia Community College,Wahkiakum,Open Doors - Lower Columbia Community College - Career,Lower Columbia Community College,No,No,No,No,Yes,No Change,active,560,,
+582,Highlands Open Doors - GED – Highlands Campus,Omak,Highlands Open Doors - GED,Highlands Campus,No,Yes,No,No,No,No Change,active,561,,
+583,Highlands Open Doors - HS Diploma – Highlands Campus,Omak,Highlands Open Doors - HS Diploma,Highlands Campus,No,No,Yes,No,No,No Change,active,562,,
+584,WorkSource Okanogan Open Doors - GED – WorkSource Okanogan,Okanogan,WorkSource Okanogan Open Doors - GED,WorkSource Okanogan,No,Yes,No,No,No,No Change,active,563,,
+585,WorkSource Okanogan Open Doors - HS Diploma – Worksource Okanogan,Okanogan,WorkSource Okanogan Open Doors - HS Diploma,Worksource Okanogan,No,No,Yes,No,No,No Change,active,564,,
+586,Selah Open Doors - GED – Selah High School,Selah,Selah Open Doors - GED,Selah High School,No,Yes,No,No,No,No Change,active,565,,
+587,Open Doors at Centralia CC - GED – Centralia College,Chehalis,Open Doors at Centralia CC - GED,Centralia College,No,Yes,No,No,No,No Change,active,566,,
+588,Open Doors at Centralia CC - HS Diploma – Centralia College,Chehalis,Open Doors at Centralia CC - HS Diploma,Centralia College,No,No,Yes,No,No,No Change,active,567,,
+589,Open Doors at Centralia CC - College – Centralia College,Chehalis,Open Doors at Centralia CC - College,Centralia College,No,No,No,Yes,No,No Change,active,568,,
+590,Open Doors at Centralia CC - Career – Centralia College,Chehalis,Open Doors at Centralia CC - Career,Centralia College,No,No,No,No,Yes,No Change,active,569,,
+591,OCEAN Open Doors – OCEAN,Port Townsend School District,OCEAN Open Doors,OCEAN,No,No,Yes,No,No,No Change,active,570,,
+592,OCEAN Open Doors – OCEAN,Port Townsend School District,OCEAN Open Doors,OCEAN,No,No,No,No,Yes,No Change,active,571,,
+593,Ellensburg Open Doors – Ellensburg Choice Schools,Ellensburg,Ellensburg Open Doors,Ellensburg Choice Schools,No,No,Yes,No,No,No Change,active,572,,
+594,WorkSource Okanogan Open Doors – WorkSource Okanogan,Okanogan,WorkSource Okanogan Open Doors,WorkSource Okanogan,No,No,No,No,Yes,No Change,active,573,,
+595,Ellensburg Open Doors – Ellensburg Choice Schools,Ellensburg,Ellensburg Open Doors,Ellensburg Choice Schools,No,No,No,No,Yes,No Change,active,574,,
+596,ESD 112 Open Doors – ESD 112 Campus,Klickitat,ESD 112 Open Doors,ESD 112 Campus,Yes,Yes,No,No,No,No Change,active,575,,
+597,ESD 112 Open Doors – ESD 112 Campus,Klickitat,ESD 112 Open Doors,ESD 112 Campus,Yes,No,Yes,No,No,No Change,active,576,,
+598,Kettle Falls Open Doors Program – Kettle Falls High School,Kettle Falls,Kettle Falls Open Doors Program,Kettle Falls High School,No,Yes,No,No,No,No Change,active,577,,
+599,Kettle Falls Open Doors Program – Kettle Falls High School,Kettle Falls,Kettle Falls Open Doors Program,Kettle Falls High School,No,No,Yes,No,No,No Change,active,578,,
+600,Central Valley SD Open Doors – Central Valley Virtual Learning Building,Central Valley,Central Valley SD Open Doors,Central Valley Virtual Learning Building,No,Yes,No,No,No,No Change,active,579,,
+601,Central Valley SD Open Doors – Central Valley Virtual Learning Building,Central Valley,Central Valley SD Open Doors,Central Valley Virtual Learning Building,No,No,Yes,No,No,No Change,active,580,,
+602,Discovery High School Achieve – Discovery High School,Longview,Discovery High School Achieve,Discovery High School,No,Yes,No,No,No,No Change,active,581,,
+603,Highline CC/Pathways to College – Highline Community College,Highline,Highline CC/Pathways to College,Highline Community College,No,No,No,Yes,No,No Change,active,582,,
+604,Southwest Youth and Family Services – Southwest Youth & Family Services Education Center,Highline,Southwest Youth and Family Services,Southwest Youth & Family Services Education Center,No,No,Yes,No,No,No Change,active,583,,
+605,Davenport Open Doors – Davenport schools,Davenport,Davenport Open Doors,Davenport schools,No,Yes,No,No,No,No Change,active,584,,
+606,Davenport Open Doors – Davenport schools,Davenport,Davenport Open Doors,Davenport schools,No,No,Yes,No,No,No Change,active,585,,
+607,Davenport Open Doors – Davenport schools,Davenport,Davenport Open Doors,Davenport schools,No,No,No,No,Yes,No Change,active,586,,
+608,Open Doors at Centralia CC - GED – Centralia College,Onalaska,Open Doors at Centralia CC - GED,Centralia College,No,Yes,No,No,No,No Change,active,587,,
+609,Open Doors at Centralia CC - HS Diploma – Centralia College,Onalaska,Open Doors at Centralia CC - HS Diploma,Centralia College,No,No,Yes,No,No,No Change,active,588,,
+610,Open Doors at Centralia CC - College – Centralia College,Onalaska,Open Doors at Centralia CC - College,Centralia College,No,No,No,Yes,No,No Change,active,589,,
+611,Open Doors at Centralia CC - Career – Centralia College,Onalaska,Open Doors at Centralia CC - Career,Centralia College,No,No,No,No,Yes,No Change,active,590,,
+612,SLSD Open Doors - GED – Soap Lake Middle High School,Soap Lake School District,SLSD Open Doors - GED,Soap Lake Middle High School,No,Yes,No,No,No,No Change,active,591,,
+613,SLSD Open Doors - HS Diploma – Soap Lake Middle High School,Soap Lake School District,SLSD Open Doors - HS Diploma,Soap Lake Middle High School,No,No,Yes,No,No,No Change,active,592,,
+614,Discovery High School Achieve - Career – Discovery High School,Longview,Discovery High School Achieve - Career,Discovery High School,No,No,No,No,Yes,No Change,active,593,,
+615,Open Doors at Centralia CC - GED – Centralia College,Napavine,Open Doors at Centralia CC - GED,Centralia College,No,Yes,No,No,No,No Change,active,594,,
+616,Open Doors at Centralia CC - HS Diploma – Centralia College,Napavine,Open Doors at Centralia CC - HS Diploma,Centralia College,No,No,Yes,No,No,No Change,active,595,,
+617,Open Doors at Centralia CC - College – Centralia College,Napavine,Open Doors at Centralia CC - College,Centralia College,No,No,No,Yes,No,No Change,active,596,,
+618,Open Doors at Centralia CC - Career – Centralia College,Napavine,Open Doors at Centralia CC - Career,Centralia College,No,No,No,No,Yes,No Change,active,597,,
+619,ESD 112 Open Doors - GED – ESD 112 Campus,La Center,ESD 112 Open Doors - GED,ESD 112 Campus,Yes,Yes,No,No,No,No Change,active,598,,
+620,ESD 112 Open Doors - GED – ESD 112 Campus,Hockinson,ESD 112 Open Doors - GED,ESD 112 Campus,Yes,Yes,No,No,No,No Change,active,599,,
+621,ESD 112 Open Doors - GED – ESD 112 Campus,Ridgefield,ESD 112 Open Doors - GED,ESD 112 Campus,Yes,Yes,No,No,No,No Change,active,600,,
+622,ESD 112 Open Doors - GED – ESD 112 Campus,Washougal,ESD 112 Open Doors - GED,ESD 112 Campus,Yes,Yes,No,No,No,No Change,active,601,,
+623,ESD 112 Open Doors - GED – ESD 112 Campus,Woodland,ESD 112 Open Doors - GED,ESD 112 Campus,Yes,Yes,No,No,No,No Change,active,602,,
+624,Graduation Alliance Cusick Open Doors - HS Diploma – Cusik High School/Online,Cusick,Graduation Alliance Cusick Open Doors - HS Diploma,Cusik High School/Online,No,No,Yes,No,No,No Change,active,603,,
+625,Graduation Alliance Stanwood-Camano Open Doors - HS Diploma – Lincoln Hill HS/Online,Stanwood-Camano,Graduation Alliance Stanwood-Camano Open Doors - HS Diploma,Lincoln Hill HS/Online,No,No,Yes,No,No,No Change,active,604,,
+626,ESD 101/ Next Gen Zone - GED – ESD 101,Innovation Spokane Charter,ESD 101/ Next Gen Zone - GED,ESD 101,Yes,Yes,No,No,No,New,active,605,2027,
+627,ESD 101/ Next Gen Zone - Career – ESD 102,Innovation Spokane Charter,ESD 101/ Next Gen Zone - Career,ESD 102,Yes,No,No,No,Yes,New,active,606,2027,
+628,Discovery High School Achieve - College – Discovery High School,Longview School District,Discovery High School Achieve - College,Discovery High School,No,No,No,Yes,No,New,active,607,2027,
+629,Discovery High School Achieve - HS Diploma – Discovery High School,Longview School District,Discovery High School Achieve - HS Diploma,Discovery High School,No,No,Yes,No,No,New,active,608,2027,
+630,OCEAN Open Doors – OCEAN,Port Townsend School District,OCEAN Open Doors,OCEAN,No,Yes,No,No,No,New,active,609,2027,
+631,Reardan Open Doors - GED – Options Program,Reardan-Edwall School District,Reardan Open Doors - GED,Options Program,No,Yes,No,No,No,New,active,610,2027,
+632,Reardan Open Doors - HS Diploma – Options Program,Reardan-Edwall School District,Reardan Open Doors - HS Diploma,Options Program,No,No,Yes,No,No,New,active,611,2027,
+633,Bellevue Open Doors: Graduation Alliance: - GED – Online and site-based at Sammamish HS,Bellevue School District,Bellevue Open Doors: Graduation Alliance: - GED,Online and site-based at Sammamish HS,No,Yes,No,No,No,New,active,612,2027,
+634,Bellevue Open Doors School District - GED – Highland MS building,Bellevue School District,Bellevue Open Doors School District - GED,Highland MS building,No,Yes,No,No,No,New,active,613,2027,
+635,Bellevue Open Doors School District - HS Diploma – Highland MS building,Bellevue School District,Bellevue Open Doors School District - HS Diploma,Highland MS building,No,No,Yes,No,No,New,active,614,2027,
+636,Ephrata High School - Graduation Alliance Program – Online and site based at Ephrata,Ephrata School District,Ephrata High School - Graduation Alliance Program,Online and site based at Ephrata,No,Yes,No,No,No,New,active,615,2027,
+637,Ephrata High School - Graduation Alliance Program – Online and site based at Ephrata,Ephrata School District,Ephrata High School - Graduation Alliance Program,Online and site based at Ephrata,No,No,Yes,No,No,New,active,616,2027,
+638,"Yelm Open Doors Youth Reengagement Program – Yelm Extension School, Yelm, WA",Yelm Community Schools,Yelm Open Doors Youth Reengagement Program,"Yelm Extension School, Yelm, WA",No,Yes,No,No,No,New,active,617,2027,
+639,Green River College - White River Open Doors - GED – Green River College Main Campus and Satellite locations,White River School District,Green River College - White River Open Doors - GED,Green River College Main Campus and Satellite locations,No,Yes,No,No,No,New,active,618,2027,
+640,Green River College - White River Open Doors - HS Diploma – Green River College Main Campus and Satellite locations,White River School District,Green River College - White River Open Doors - HS Diploma,Green River College Main Campus and Satellite locations,No,No,Yes,No,No,New,active,619,2027,
+641,Green River College - White River Open Doors - College – Green River College Main Campus and Satellite locations,White River School District,Green River College - White River Open Doors - College,Green River College Main Campus and Satellite locations,No,No,No,Yes,No,New,active,620,2027,
+642,Career Link – South Seattle College,Renton Technical College (DFTC),Career Link,South Seattle College,No,Yes,No,No,No,New,active,621,2027,
+643,Career Link – South Seattle College,Renton Technical College (DFTC),Career Link,South Seattle College,No,No,Yes,No,No,New,active,622,2027,
+644,Career Link – South Seattle College,Renton Technical College (DFTC),Career Link,South Seattle College,No,No,No,Yes,No,New,active,623,2027,
+645,OESD 114 - Pathways to Success - GED – Kitsap County,Bainbridge Island School District,OESD 114 - Pathways to Success - GED,Kitsap County,Yes,Yes,No,No,No,New,active,624,2027,
+646,OESD 114 - Pathways to Success - HS Diploma – Kitsap County,Bainbridge Island School District,OESD 114 - Pathways to Success - HS Diploma,Kitsap County,Yes,No,Yes,No,No,New,active,625,2027,
+647,OESD 114 - Pathways to Success - Career – Kitsap County,Bainbridge Island School District,OESD 114 - Pathways to Success - Career,Kitsap County,Yes,No,No,No,Yes,New,active,626,2027,
+648,OESD 114 - Pathways to Success - GED – Kitsap County,Bremerton School District,OESD 114 - Pathways to Success - GED,Kitsap County,Yes,Yes,No,No,No,New,active,627,2027,
+649,OESD 114 - Pathways to Success - HS Diploma – Kitsap County,Bremerton School District,OESD 114 - Pathways to Success - HS Diploma,Kitsap County,Yes,No,Yes,No,No,New,active,628,2027,
+650,OESD 114 - Pathways to Success - Career – Kitsap County,Bremerton School District,OESD 114 - Pathways to Success - Career,Kitsap County,Yes,No,No,No,Yes,New,active,629,2027,
+651,OESD 114 - Pathways to Success - GED – Kitsap County,South Kitsap School District,OESD 114 - Pathways to Success - GED,Kitsap County,Yes,Yes,No,No,No,New,active,630,2027,
+652,OESD 114 - Pathways to Success - HS Diploma – Kitsap County,South Kitsap School District,OESD 114 - Pathways to Success - HS Diploma,Kitsap County,Yes,No,Yes,No,No,New,active,631,2027,
+653,OESD 114 - Pathways to Success - Career – Kitsap County,South Kitsap School District,OESD 114 - Pathways to Success - Career,Kitsap County,Yes,No,No,No,Yes,New,active,632,2027,
+654,Washington Spartan Virtual Academy Open Doors Youth Reengagement Program - GED – Granger High School,Granger School District,Washington Spartan Virtual Academy Open Doors Youth Reengagement Program - GED,Granger High School,No,Yes,No,No,No,New,active,633,2027,
+655,Washington Spartan Virtual Academy Open Doors Youth Reengagement Program - HS – Granger High School,Granger School District,Washington Spartan Virtual Academy Open Doors Youth Reengagement Program - HS,Granger High School,No,No,Yes,No,No,New,active,634,2027,
+656,Learning Center Seattle - GED – South Seattle College,Renton Technical College (DFTC),Learning Center Seattle - GED,South Seattle College,No,Yes,No,No,No,New,active,635,2027,
+657,Learning Center Seattle - College – South Seattle College,Renton Technical College (DFTC),Learning Center Seattle - College,South Seattle College,No,No,No,Yes,No,New,active,636,2027,
+658,Learning Center Seattle - Career – South Seattle College,Renton Technical College (DFTC),Learning Center Seattle - Career,South Seattle College,No,No,No,No,Yes,New,active,637,2027,
+659,ESD 105 Open Doors - GED – Sunnyside High School,Sunnyside School District,ESD 105 Open Doors - GED,Sunnyside High School,Yes,Yes,No,No,No,New,active,638,2027,
+660,ESD 105 Open Doors - GED – Mabton Junior Senior High School,Mabton School District,ESD 105 Open Doors - GED,Mabton Junior Senior High School,Yes,Yes,No,No,No,New,active,639,2027,
+661,East Grays Harbor Open Doors – East Grays Harbor High School,Elma School District,East Grays Harbor Open Doors,East Grays Harbor High School,No,Yes,No,No,No,New,active,640,2027,
+662,Centro Rendu - GED – Centro Rendu (Renton),Renton Technical College (DFTC),Centro Rendu - GED,Centro Rendu (Renton),No,Yes,No,No,No,New,active,641,2027,
+663,Centro Rendu - HS – Centro Rendu (Renton),Renton Technical College (DFTC),Centro Rendu - HS,Centro Rendu (Renton),No,No,Yes,No,No,New,active,642,2027,
+664,Centro Rendu - College – Centro Rendu (Renton),Renton Technical College (DFTC),Centro Rendu - College,Centro Rendu (Renton),No,No,No,Yes,No,New,active,643,2027,
+665,Centro Rendu - Career – Centro Rendu (Renton),Renton Technical College (DFTC),Centro Rendu - Career,Centro Rendu (Renton),No,No,No,No,Yes,New,active,644,2027,
+666,Ephrata School District Open Doors - GED – Ephrata SD Office Campus (across from Ephrata HS),Ephrata School District,Ephrata School District Open Doors - GED,Ephrata SD Office Campus (across from Ephrata HS),No,Yes,No,No,No,New,active,645,2027,
+667,Ephrata School District Open Doors - HS – Ephrata SD Office Campus (across from Ephrata HS),Ephrata School District,Ephrata School District Open Doors - HS,Ephrata SD Office Campus (across from Ephrata HS),No,No,Yes,No,No,New,active,646,2027,
+1,ESD113/Gravity HS,Aberdeen SD,ESD113/Gravity HS,,,,,,,,archived,647,,2021
+16,Graduation Alliance,Clarkston School District,Graduation Alliance,,,,,,,,archived,648,,2021
+23,Everett SD,Atlantic Education,Everett SD,,,,,,,,archived,649,,2018
+26,Goodwill/GED,Franklin Pierce SD,Goodwill/GED,,,,,,,,archived,650,,2016
+27,Franklin Pierce,Franklin Pierce SD,Franklin Pierce,,,,,,,,archived,651,,2016
+28,Graduation Alliance,Grand Coulee SD,Graduation Alliance,,,,,,,,archived,652,,2018
+72,Graduation Alliance,Sedro Woolley SD,Graduation Alliance,,,,,,,,archived,653,,2016
+87,Graduation Alliance,University Place SD,Graduation Alliance,,,,,,,,archived,654,,2017
+101,Discovery High School Achieve,Longview SD,Discovery High School Achieve,,,,,,,,archived,655,,2021
+117,ESD 112 Open Doors,Evergreen SD (Clark),ESD 112 Open Doors,,,,,,,,archived,656,,2021
+118,ESD 112 Open Doors,Camas SD,ESD 112 Open Doors,,,,,,,,archived,657,,2021
+136,ESD113/Gravity HS,Aberdeen SD,ESD113/Gravity HS,,,,,,,,archived,658,,2021
+137,ESD113/Gravity HS,Aberdeen SD,ESD113/Gravity HS,,,,,,,,archived,659,,2021
+138,ESD113/Gravity HS,Aberdeen SD,ESD113/Gravity HS,,,,,,,,archived,660,,2021
+247,Columbia Basin Job Corps SEA,Wellpinit SD,Columbia Basin Job Corps SEA,,,,,,,,archived,661,,2021
+248,Fort Simco Job Corps SEA,Wellpinit SD,Fort Simco Job Corps SEA,,,,,,,,archived,662,,2021
+256,State Street Open Doors Academy,Sedro Woolley SD,State Street Open Doors Academy,,,,,,,,archived,663,,2021
+287,Graduation Alliance,Puyallup SD,Graduation Alliance,,,,,,,,archived,664,,2021
+300,ESD 101/Next Gen Zone satellite,Chewelah,ESD 101/Next Gen Zone satellite,,,,,,,,archived,665,,2021
+318,Big Bend CC Step up to College,Moses Lake SD,Big Bend CC Step up to College,,,,,,,,archived,666,,2021

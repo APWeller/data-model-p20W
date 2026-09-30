@@ -1,0 +1,5 @@
+code,description,source_order,valid_from_year,valid_to_year
+0,No,1,,
+1,"Yes, student is/was a home–schooled student participating in public school courses and has not claimed any ALE funding in any month through the January count date.",2,,
+2,"Yes, student is/was a home–schooled student participating in public school ALE courses. The students ALE Enrollment was claimed for at least one month through the January count date but never for more than 0.8 FTE.",3,,
+3,"Yes, student is/was a home–schooled student participating in public school courses and in at least one month through the January count date the students ALE Enrollment was claimed as greater than 0.8 FTE.",4,,

@@ -1,0 +1,17 @@
+manual_version,i06_code,i06_program,i10_code_set,evidence_type,evidence
+19.0,36,Student Identified with a Disability,disability,guidance_quote,age-specific disability qualification code (code 1 or 15) in Element I10
+19.0,40,Reengagement,reengagement_program,guidance_quote,"If Element I06 contains a valid value of 40, data must also be submitted in Elements I07 – Start Date and Element I10 – Qualification Code."
+19.0,41,Earned - Washington State Seal of Biliteracy,language,guidance_quote,Element I10 – Qualification Code is the language in which the student earned the Seal of Biliteracy
+19.0,42,Proficient - Washington State Seal of Biliteracy,language,guidance_quote,Element I10 – Qualification Code is the language in which the student is identified as Biliteracy Proficient
+19.0,80,Student Sensory Disability,sensory_disability,guidance_quote,a valid value from Appendix AL – Student Sensory Disability
+19.0,81,Seal of Biliteracy Intermediate Earned,language,guidance_quote,Element I10 – Qualification Code is the language in which the student earned the Intermediate Seal of Biliteracy
+19.0,82,Seal of Biliteracy Intermediate Proficient,language,guidance_quote,Element I10 – Qualification Code is the language in which the student is identified as Intermediate Proficient
+19.0,83,Seal of Biliteracy Advanced Earned,language,guidance_quote,Element I10 – Qualification Code is the language in which the student earned the Advanced Seal of Biliteracy
+19.0,84,Seal of Biliteracy Advanced Proficient,language,guidance_quote,Element I10 – Qualification Code is the language in which the student is identified as Advanced Proficient
+19.0,19,Free/Reduced Meals Participation/Eligibility,frl_qualification,name_match,I10 group 'Free and Reduced Meal Qualification Codes' ~ program 'Free/Reduced Meals Participation/Eligibility'
+19.0,30,"GRADS (Graduation, Reality and Dual-Role Skills)",i10_grads_qualification,name_match,"I10 group 'GRADS Program Qualification Codes' ~ program 'GRADS (Graduation, Reality and Dual-Role Skills)'"
+19.0,32,Gifted – services or programs provided in the general education classroom,i10_gifted_referral,name_match,I10 group 'Gifted Program Referral Codes' ~ program 'Gifted – ...'
+19.0,33,Gifted – services or programs provided in a unique highly capable program,i10_gifted_referral,name_match,I10 group 'Gifted Program Referral Codes' ~ program 'Gifted – ...'
+19.0,34,Gifted – services or programs provided through acceleration,i10_gifted_referral,name_match,I10 group 'Gifted Program Referral Codes' ~ program 'Gifted – ...'
+19.0,35,Gifted – services or programs provided outside the traditional school setting,i10_gifted_referral,name_match,I10 group 'Gifted Program Referral Codes' ~ program 'Gifted – ...'
+19.0,69,Career Launch,career_launch_program,name_match,I10 group 'Career Launch Program Type Codes' ~ program 'Career Launch'

@@ -1,0 +1,4 @@
+code,description,source_order,valid_from_year,valid_to_year
+F,Female,1,,
+M,Male,2,,
+X,Gender not exclusively Male or Female,3,,

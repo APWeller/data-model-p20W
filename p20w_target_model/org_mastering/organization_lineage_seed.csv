@@ -1,0 +1,11 @@
+lineage_event_id,event_type,predecessor_org_id,successor_org_id,event_effective_period_code,event_effective_date,allocation_share,fact_reattribution_rule,evidence_source_code,steward_note
+1,SPLIT,100110,100111,A121,2001-07-01,(steward: e.g. FTE share in A014),ALLOCATE,SBCTC_COLLEGE_HISTORY,Pre-split student facts have no campus attribute in inventory: roll-forward only at aggregate level using allocation_share or report at lineage group
+2,SPLIT,100110,100112,A121,2001-07-01,(steward: 1 - share above),ALLOCATE,SBCTC_COLLEGE_HISTORY,
+3,MERGE,100111,100113,B904,2020-04-01,1.0000,ROLL_FORWARD_TO_SUCCESSOR,SBCTC_COLLEGE_HISTORY,All FS history rolls to re-merged Pierce
+4,MERGE,100112,100113,B904,2020-04-01,1.0000,ROLL_FORWARD_TO_SUCCESSOR,SBCTC_COLLEGE_HISTORY,All Puyallup history rolls to re-merged Pierce
+5,RECODE,100120,100120,C013,2021-01-01,1.0000,AS_REPORTED_ONLY,SBCTC_COLLEGE_HISTORY,Identity change of the code only; xwalk handles it; recorded for audit
+6,CLOSURE,100065,(steward to confirm successor),B782,2017-09-01,,AS_REPORTED_ONLY,SBCTC_COLLEGE_HISTORY,Inventory says 'discontinued'; confirm whether programs were absorbed by another Seattle college before choosing ABSORPTION
+7,CLOSURE,100173,(steward to confirm successor),B241,2013-07-01,,AS_REPORTED_ONLY,SBCTC_COLLEGE_HISTORY,Inventory shows code active A451..B234 only
+8,OPENING,,100300,9902,1999-09-01,,AS_REPORTED_ONLY,SBCTC_COLLEGE_HISTORY,
+9,RECLASSIFICATION,(PCHEES legacy Agency ID org for a branch campus/partnership),(parent PS_INSTITUTION org),2008-09,2008-07-01,1.0000,ROLL_FORWARD_TO_SUCCESSOR,PCHEES_PCH-E0090_NOTE,"Legacy agencies become ORG_PS_CAMPUS_SITE children; facts carry both institution and campus org ids (inventory row 1969 note)"
+10,SUCCESSION_PARTIAL,(UI account+RUN from Predecessor UI Account Number/RUN),(UI account+RUN on record),(P/S Transfer Y/M/D),,(n/a),AS_REPORTED_ONLY,ESD_UI_EMPLOYER,"Template: one row per ESD predecessor/successor pair (rows 670-673, 769-782); wages stay with the reporting account; lineage used for firm-continuity analysis"

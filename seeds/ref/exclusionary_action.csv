@@ -1,0 +1,9 @@
+code,description,source_order,valid_from_year,valid_to_year
+EX,Expulsion - see WAC 392-400-025 for definition,1,,
+LS,Long–term Suspension (greater than 10 consecutive school days) - see WAC 392-400-025 for definition,2,,
+SS,Short Term Suspension (10 or fewer consecutive school days) - see WAC 392-400-025 for definition,3,,
+IS,In School Suspension (student is excluded from their regular educational setting but remains in the student's current school placement for up to ten consecutive school days) - see WAC 392-400-025 for definition,4,,
+EE,Emergency Removal - see WAC 392-400-025 for definition,5,,
+NA,No Exclusionary Action Applied,6,,
+CE,"Classroom Exclusion (exclusion of a student from a classroom, instructional area, or activity area for all or any portion of the balance of the school day) - see WAC 392-400-025 for definition",7,,
+NE,"No Exclusionary Action Applied, Safety and Security Staff were involved",8,,

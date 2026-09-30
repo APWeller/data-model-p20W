@@ -1,0 +1,8 @@
+code,description,is_allowable_exception,source_order,valid_from_year,valid_to_year
+1,Parent and district agreed to extend the evaluation timeline per the requirements of WAC 392-172A-03005(c) and the agreement is documented in writing. .,Y,1,,
+2,Parent repeatedly failed to produce the student for the evaluation. WAC 392-172A-03005(d)(i).,Y,2,,
+3,"The student transferred in from another district after the consent was obtained and the evaluation had begun but not yet been completed by the sending school district, including a determination of eligibility. WAC 392-172A-03005(d)(ii).",Y,3,,
+4,District scheduling/staffing issues and no agreement to extend.,N,4,,
+5,The agreement to extend the evaluation timeline did not meet requirements per WAC 392-172A-03005(c).,N,5,,
+6,Data entry/tracking error(s).,N,6,,
+7,Other,N,7,,

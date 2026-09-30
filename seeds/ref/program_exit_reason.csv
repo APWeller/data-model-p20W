@@ -1,0 +1,10 @@
+code,description,source_order,valid_from_year,valid_to_year
+A,Program no longer needed,1,,
+B,Graduated (not to be used with Transitional Kindergarten or WA Reading Corps Literacy Support),2,,
+C,No longer enrolled,3,,
+D,Opted out of program (students/parent/guardian withdrew from program),4,,
+F,Other,5,,
+G,Transferred to GED Program (only for use with GRADS program students),6,,
+H,End of school year transition,7,,
+I,Student no longer qualifies for gifted program services based upon multiple objective assessment results (only for use with Gifted Program),8,,
+K,Parent/Guardian/Student declined services for this year only (only for use with Gifted Program),9,,
