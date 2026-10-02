@@ -10,20 +10,21 @@ lineage. This file explains what the lineage graph should look like once the not
    header makes it import as a notebook.
 2. Attach it to Unity Catalog compute. Any of these works: serverless, a cluster in Standard or Dedicated access mode,
    or a SQL warehouse for the SQL cells.
-3. Set the `catalog` widget (the default is `cedars_lineage_demo`) and choose **Run all**.
-   - If you can't create catalogs, point the widget at a sandbox catalog you own. The notebook creates the `bronze`,
-     `silver`, `ref` and `gold` schemas inside it.
-   - It refuses to run against a catalog whose `bronze.location` this notebook didn't create, so it can't overwrite
-     the real warehouse.
+3. Check the `catalog` and `schema` widgets (defaults: `ofmp20w_sandbox_catalog_dev` and `andrewweller`), then
+   choose **Run all**.
+   - Everything goes into that one schema. The medallion layer is a table-name prefix (`bronze_`, `silver_`, `ref_`,
+     `gold_`) instead of a separate schema, and the mock files land in a volume named `landing`.
+   - Every demo table is created with `CREATE OR REPLACE`. The notebook refuses to run if `bronze_location` already
+     exists in the schema and wasn't created by this notebook.
 4. After a few minutes, open any gold table in Catalog Explorer and go to **Lineage** → **See lineage graph**.
 
-The notebook can be rerun. The last cell (commented out) drops the catalog.
+The notebook can be rerun. The last cell (commented out) drops only the demo tables, view and volume, and leaves the schema alone.
 
 ## What gets built
 
 ```mermaid
 flowchart LR
-  subgraph vol[Volume: bronze.landing]
+  subgraph vol[Volume: landing]
     fa[file_a_location.csv]
     fb[file_b_district_student.csv]
     fc[file_c_school_student.csv]
@@ -31,22 +32,22 @@ flowchart LR
     fr[ref_*.csv]
   end
   subgraph bronze
-    bA[bronze.location]
-    bB[bronze.district_student_enrollment]
-    bC[bronze.school_student_enrollment]
-    bN[bronze.student_absence]
+    bA[bronze_location]
+    bB[bronze_district_student_enrollment]
+    bC[bronze_school_student_enrollment]
+    bN[bronze_student_absence]
   end
   subgraph ref
-    rc[ref.ref_code]
+    rc[ref_code]
   end
   subgraph silver
-    sA[silver.location]
-    xl[silver.xref_location]
-    sB[silver.district_student_enrollment]
-    sC[silver.school_student_enrollment]
-    sN[silver.student_absence]
-    xs[silver.xref_student]
-    sah[silver.student_attribute_history]
+    sA[silver_location]
+    xl[silver_xref_location]
+    sB[silver_district_student_enrollment]
+    sC[silver_school_student_enrollment]
+    sN[silver_student_absence]
+    xs[silver_xref_student]
+    sah[silver_student_attribute_history]
   end
   subgraph gold
     dd[dim_date]
@@ -90,17 +91,17 @@ In the lineage graph, expand a table and click a column. These four show the mos
 
 | Gold column | Expected upstream path | What it shows |
 |---|---|---|
-| `fact_school_enrollment.school_sk` | `dim_school.school_sk` ← `xref_location.school_code` ← `silver.location.school_code` ← `bronze.location.SchoolCode` ← `file_a_location.csv` | The school comes from **File A**, not File C. It resolves through the crosswalk (design §5.4). Join keys such as `bronze.school_student_enrollment.LocationId` may also appear, depending on the runtime. |
-| `fact_school_enrollment.enrolled_days` | `silver.school_student_enrollment.days_present` (C12) **and** the `silver.student_absence` columns behind the full-day absence count | One measure derived from two CEDARS files. The documentation trail for the design §6 approximation. |
-| `dim_student.gender` | `student_attribute_history.attribute_value` ← `silver.district_student_enrollment.gender` **and** `.grade_level` | Column lineage is **not row-aware**. After an UNPIVOT/PIVOT, gender appears to depend on grade level too. Expect over-inclusive lineage anywhere attributes are stored as rows. |
-| `v_student_attendance_summary.attendance_rate` | `fact_student_school_year` ← `fact_school_enrollment` and `fact_absence` ← silver ← bronze ← files | End-to-end lineage across six hops, through a view. This is what an analyst sees from the Tableau-facing layer. |
+| `gold_fact_school_enrollment.school_sk` | `gold_dim_school.school_sk` ← `silver_xref_location.school_code` ← `silver_location.school_code` ← `bronze_location.SchoolCode` ← `file_a_location.csv` | The school comes from **File A**, not File C. It resolves through the crosswalk (design §5.4). Join keys such as `bronze_school_student_enrollment.LocationId` may also appear, depending on the runtime. |
+| `gold_fact_school_enrollment.enrolled_days` | `silver_school_student_enrollment.days_present` (C12) **and** the `silver_student_absence` columns behind the full-day absence count | One measure derived from two CEDARS files. The documentation trail for the design §6 approximation. |
+| `gold_dim_student.gender` | `silver_student_attribute_history.attribute_value` ← `silver_district_student_enrollment.gender` **and** `.grade_level` | Column lineage is **not row-aware**. After an UNPIVOT/PIVOT, gender appears to depend on grade level too. Expect over-inclusive lineage anywhere attributes are stored as rows. |
+| `gold_v_student_attendance_summary.attendance_rate` | `gold_fact_student_school_year` ← `gold_fact_school_enrollment` and `gold_fact_absence` ← silver ← bronze ← files | End-to-end lineage across six hops, through a view. This is what an analyst sees from the Tableau-facing layer. |
 
 Also check:
 
-- **`dim_student_pii`.** B06, B07 and B09 flow only into this table. Open `silver.district_student_enrollment.legal_last_name`
+- **`gold_dim_student_pii`.** B06, B07 and B09 flow only into this table. Open `silver_district_student_enrollment.legal_last_name`
   and look **downstream** to confirm no other gold table receives it. This is the governance use case.
-- **`silver.xref_student`.** It has three upstream tables (B, C and N), from a `UNION ALL`.
-- **`dim_school`.** It is loaded by `MERGE`, and the lineage looks the same as for an `INSERT`.
+- **`silver_xref_student`.** It has three upstream tables (B, C and N), from a `UNION ALL`.
+- **`gold_dim_school`.** It is loaded by `MERGE`, and the lineage looks the same as for an `INSERT`.
 - **The notebook itself.** It appears as the producing entity on each edge. With a scheduled job, the job and run
   appear instead.
 
@@ -108,8 +109,8 @@ Also check:
 
 Section 6 builds the same summary twice:
 
-- `gold.demo_absence_by_school_sql` is built with SQL. Its upstream is `fact_absence`.
-- `gold.demo_absence_by_school_pandas` goes through `toPandas()` and then `createDataFrame()`. **No upstream** is
+- `gold_demo_absence_by_school_sql` is built with SQL. Its upstream is `fact_absence`.
+- `gold_demo_absence_by_school_pandas` goes through `toPandas()` and then `createDataFrame()`. **No upstream** is
   recorded, because Unity Catalog sees a table written from local data.
 
 The same gap appears whenever data leaves Spark and comes back. Examples are an external ETL tool writing files by
@@ -132,9 +133,9 @@ exported, such as an attestation of where a reported number came from, or a chec
   writes in the main pipeline, or lineage breaks at that point.
 - **Column comments complement lineage.** Lineage shows *which* columns feed a target, while the `CEDARS B12`-style
   comments say *what* each column means. Both appear in Catalog Explorer.
-- **Unpivoted tables blur column lineage.** `silver.student_attribute_history` is a good audit table, but anything
+- **Unpivoted tables blur column lineage.** `silver_student_attribute_history` is a good audit table, but anything
   pivoted out of it shows every unpivoted attribute as upstream. If precise column lineage for `dim_student`
-  matters, consider building it from `silver.district_student_enrollment` directly, using the history table only to
+  matters, consider building it from `silver_district_student_enrollment` directly, using the history table only to
   pick the winning row.
 - **Mapping vs. lineage.** `mapping/source_to_target.csv` is the *intended* lineage. Unity Catalog lineage is the
   *observed* lineage. Once pipelines exist, a validator could compare the two, joining the mapping to

@@ -9,30 +9,33 @@
 # MAGIC or a SQL warehouse). Lineage is recorded **when a query reads and writes tables**, not when a table is created,
 # MAGIC so every table here is created empty and then loaded with `INSERT … SELECT` or `MERGE`.
 # MAGIC
-# MAGIC **Safety:** everything is written to the catalog in the `catalog` widget (default `cedars_lineage_demo`).
-# MAGIC The setup cell refuses to run against a catalog whose `bronze.location` was not created by this notebook.
+# MAGIC **Where it writes:** every table goes into one schema, set by the `catalog` and `schema` widgets (default
+# MAGIC `ofmp20w_sandbox_catalog_dev.andrewweller`). The medallion layer is the table-name prefix (`bronze_`, `silver_`,
+# MAGIC `ref_`, `gold_`) instead of a separate schema. The setup cell refuses to run if `bronze_location` already exists in
+# MAGIC that schema and was not created by this notebook. Every table is `CREATE OR REPLACE`d, so don't reuse these names.
 # MAGIC
 # MAGIC Mock data only: districts 99001/99002, schools 9101/9102/9201 and SSIDs 9000000001–3 are fictitious.
 # MAGIC Code values (N07, B12, B13, C09, C10) are the real ones from `seeds/ref/`.
 
 # COMMAND ----------
 
-dbutils.widgets.text("catalog", "cedars_lineage_demo", "Demo catalog")
+dbutils.widgets.text("catalog", "ofmp20w_sandbox_catalog_dev", "Catalog")
+dbutils.widgets.text("schema", "andrewweller", "Schema")
 catalog = dbutils.widgets.get("catalog")
+schema = dbutils.widgets.get("schema")
 
-spark.sql(f"CREATE CATALOG IF NOT EXISTS `{catalog}`")
 spark.sql(f"USE CATALOG `{catalog}`")
+spark.sql(f"CREATE SCHEMA IF NOT EXISTS `{schema}`")
+spark.sql(f"USE SCHEMA `{schema}`")
 
-if spark.catalog.tableExists(f"{catalog}.bronze.location"):
-    props = {r.key: r.value for r in spark.sql("SHOW TBLPROPERTIES bronze.location").collect()}
+if spark.catalog.tableExists(f"{catalog}.{schema}.bronze_location"):
+    props = {r.key: r.value for r in spark.sql("SHOW TBLPROPERTIES bronze_location").collect()}
     if props.get("cedars.demo") != "lineage":
-        raise RuntimeError(f"{catalog}.bronze.location exists and was not created by this demo; pick another catalog.")
+        raise RuntimeError(f"{catalog}.{schema}.bronze_location exists and was not created by this demo; pick another schema.")
 
-for schema in ("bronze", "silver", "ref", "gold"):
-    spark.sql(f"CREATE SCHEMA IF NOT EXISTS {schema}")
-spark.sql("CREATE VOLUME IF NOT EXISTS bronze.landing COMMENT 'Mock CEDARS submission files (lineage demo)'")
-landing = f"/Volumes/{catalog}/bronze/landing"
-print(f"Using catalog {catalog}; landing volume {landing}")
+spark.sql("CREATE VOLUME IF NOT EXISTS landing COMMENT 'Mock CEDARS submission files (lineage demo)'")
+landing = f"/Volumes/{catalog}/{schema}/landing"
+print(f"Using {catalog}.{schema}; landing volume {landing}")
 
 # COMMAND ----------
 
@@ -120,7 +123,7 @@ display(dbutils.fs.ls(landing))
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC CREATE OR REPLACE TABLE bronze.location (
+# MAGIC CREATE OR REPLACE TABLE bronze_location (
 # MAGIC   SchoolYear STRING COMMENT 'CEDARS A01 – School Year (as received)',
 # MAGIC   CountyDistrictCode STRING COMMENT 'CEDARS A02 – County District Code (as received)',
 # MAGIC   DistrictName STRING COMMENT 'CEDARS A03 – District Name (as received)',
@@ -133,7 +136,7 @@ display(dbutils.fs.ls(landing))
 # MAGIC ) COMMENT 'CEDARS File A – Location, as received (lineage demo)'
 # MAGIC TBLPROPERTIES ('cedars.file_code' = 'A', 'cedars.demo' = 'lineage');
 # MAGIC
-# MAGIC CREATE OR REPLACE TABLE bronze.district_student_enrollment (
+# MAGIC CREATE OR REPLACE TABLE bronze_district_student_enrollment (
 # MAGIC   SchoolYear STRING COMMENT 'CEDARS B01 – School Year (as received)',
 # MAGIC   ServingCountyDistrictCode STRING COMMENT 'CEDARS B02 – Serving County District Code (as received)',
 # MAGIC   ResidentCountyDistrictCode STRING COMMENT 'CEDARS B03 – Home County District Code (as received)',
@@ -150,7 +153,7 @@ display(dbutils.fs.ls(landing))
 # MAGIC ) COMMENT 'CEDARS File B – District Student, as received (lineage demo)'
 # MAGIC TBLPROPERTIES ('cedars.file_code' = 'B');
 # MAGIC
-# MAGIC CREATE OR REPLACE TABLE bronze.school_student_enrollment (
+# MAGIC CREATE OR REPLACE TABLE bronze_school_student_enrollment (
 # MAGIC   SchoolYear STRING COMMENT 'CEDARS C01 – School Year (as received)',
 # MAGIC   ServingCountyDistrictCode STRING COMMENT 'CEDARS C02 – Serving County District Code (as received)',
 # MAGIC   DistrictStudentId STRING COMMENT 'CEDARS C03 – District Student ID (as received)',
@@ -165,7 +168,7 @@ display(dbutils.fs.ls(landing))
 # MAGIC ) COMMENT 'CEDARS File C – School Student, as received (lineage demo)'
 # MAGIC TBLPROPERTIES ('cedars.file_code' = 'C');
 # MAGIC
-# MAGIC CREATE OR REPLACE TABLE bronze.student_absence (
+# MAGIC CREATE OR REPLACE TABLE bronze_student_absence (
 # MAGIC   SchoolYear STRING COMMENT 'CEDARS N01 – School Year (as received)',
 # MAGIC   ServingCountyDistrictCode STRING COMMENT 'CEDARS N02 – Serving County District Code (as received)',
 # MAGIC   DistrictStudentId STRING COMMENT 'CEDARS N03 – District Student ID (as received)',
@@ -177,20 +180,20 @@ display(dbutils.fs.ls(landing))
 # MAGIC ) COMMENT 'CEDARS File N – Student Absence, as received (lineage demo)'
 # MAGIC TBLPROPERTIES ('cedars.file_code' = 'N');
 # MAGIC
-# MAGIC CREATE OR REPLACE TABLE ref.ref_code (
+# MAGIC CREATE OR REPLACE TABLE ref_code (
 # MAGIC   code_set STRING NOT NULL COMMENT 'Code set name',
 # MAGIC   code STRING NOT NULL COMMENT 'Code value as reported in CEDARS',
 # MAGIC   description STRING COMMENT 'Code description',
 # MAGIC   source_order INT COMMENT 'Row order in the source',
 # MAGIC   manual_version STRING NOT NULL COMMENT 'CEDARS manual version'
-# MAGIC ) COMMENT 'CEDARS code values (subset of ref.ref_code, lineage demo)';
+# MAGIC ) COMMENT 'CEDARS code values (subset of ref_code, lineage demo)';
 
 # COMMAND ----------
 
 # Ingest each landed file with read_files. inferColumnTypes => false keeps every column a STRING, as bronze requires.
 def load_bronze(table: str, file_name: str) -> None:
     spark.sql(f"""
-        INSERT INTO bronze.{table} BY NAME
+        INSERT INTO bronze_{table} BY NAME
         SELECT *,
                _metadata.file_name   AS _source_file,
                2027                  AS _school_year,
@@ -208,7 +211,7 @@ load_bronze("student_absence", "file_n_absence.csv")
 
 for code_set in ("absence_code", "gender", "grade_level"):
     spark.sql(f"""
-        INSERT INTO ref.ref_code BY NAME
+        INSERT INTO ref_code BY NAME
         SELECT '{code_set}' AS code_set, code, description, CAST(source_order AS INT) AS source_order, '19.0' AS manual_version
         FROM read_files('{landing}/ref_{code_set}.csv', format => 'csv', header => true, inferColumnTypes => false)
     """)
@@ -227,7 +230,7 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC CREATE OR REPLACE TABLE silver.location (
+# MAGIC CREATE OR REPLACE TABLE silver_location (
 # MAGIC   school_year INT NOT NULL COMMENT 'CEDARS A01 – School Year',
 # MAGIC   county_district_code STRING NOT NULL COMMENT 'CEDARS A02 – County District Code',
 # MAGIC   district_name STRING COMMENT 'CEDARS A03 – District Name',
@@ -239,7 +242,7 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC   _source_file STRING, _school_year INT, _manual_version STRING, _submission_type STRING, _load_ts TIMESTAMP
 # MAGIC ) COMMENT 'CEDARS File A – Location (lineage demo)';
 # MAGIC
-# MAGIC INSERT INTO silver.location BY NAME
+# MAGIC INSERT INTO silver_location BY NAME
 # MAGIC SELECT CAST(SchoolYear AS INT)                         AS school_year,
 # MAGIC        CountyDistrictCode                              AS county_district_code,
 # MAGIC        trim(DistrictName)                              AS district_name,
@@ -249,9 +252,9 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC        to_date(InitialSchoolStartDate, 'MM/dd/yyyy')   AS initial_school_start_date,
 # MAGIC        to_date(LastSchoolEndDate, 'MM/dd/yyyy')        AS last_school_end_date,
 # MAGIC        _source_file, _school_year, _manual_version, _submission_type, _load_ts
-# MAGIC FROM bronze.location;
+# MAGIC FROM bronze_location;
 # MAGIC
-# MAGIC CREATE OR REPLACE TABLE silver.xref_location (
+# MAGIC CREATE OR REPLACE TABLE silver_xref_location (
 # MAGIC   school_year INT NOT NULL COMMENT 'CEDARS A01 – School Year',
 # MAGIC   county_district_code STRING NOT NULL COMMENT 'CEDARS A02 – County District Code',
 # MAGIC   location_id STRING NOT NULL COMMENT 'CEDARS A04 – Location ID (district SIS number)',
@@ -262,13 +265,13 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC   _manual_version STRING, _submission_type STRING, _load_ts TIMESTAMP
 # MAGIC ) COMMENT 'Crosswalk: school year + district + Location ID -> OSPI school code, built from File A (lineage demo)';
 # MAGIC
-# MAGIC INSERT INTO silver.xref_location BY NAME
+# MAGIC INSERT INTO silver_xref_location BY NAME
 # MAGIC SELECT school_year, county_district_code, location_id, school_code, district_name, school_name,
 # MAGIC        count(*) OVER (PARTITION BY school_year, county_district_code, location_id) > 1 AS is_ambiguous,
 # MAGIC        _manual_version, _submission_type, current_timestamp() AS _load_ts
-# MAGIC FROM silver.location;
+# MAGIC FROM silver_location;
 # MAGIC
-# MAGIC CREATE OR REPLACE TABLE silver.district_student_enrollment (
+# MAGIC CREATE OR REPLACE TABLE silver_district_student_enrollment (
 # MAGIC   school_year INT NOT NULL COMMENT 'CEDARS B01 – School Year',
 # MAGIC   county_district_code STRING NOT NULL COMMENT 'CEDARS B02 – Serving County District Code',
 # MAGIC   home_county_district_code STRING COMMENT 'CEDARS B03 – Home County District Code',
@@ -284,7 +287,7 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC   _source_file STRING, _school_year INT, _manual_version STRING, _submission_type STRING, _load_ts TIMESTAMP
 # MAGIC ) COMMENT 'CEDARS File B – District Student (lineage demo)';
 # MAGIC
-# MAGIC INSERT INTO silver.district_student_enrollment BY NAME
+# MAGIC INSERT INTO silver_district_student_enrollment BY NAME
 # MAGIC SELECT CAST(SchoolYear AS INT)                         AS school_year,
 # MAGIC        ServingCountyDistrictCode                       AS county_district_code,
 # MAGIC        ResidentCountyDistrictCode                      AS home_county_district_code,
@@ -298,19 +301,19 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC        to_date(DistrictEnrollmentDate, 'MM/dd/yyyy')   AS district_enrollment_date,
 # MAGIC        to_date(DistrictExitDate, 'MM/dd/yyyy')         AS district_exit_date,
 # MAGIC        _source_file, _school_year, _manual_version, _submission_type, _load_ts
-# MAGIC FROM bronze.district_student_enrollment;
+# MAGIC FROM bronze_district_student_enrollment;
 
 # COMMAND ----------
 
 # MAGIC %sql
 # MAGIC -- File C and File N both resolve Location ID -> OSPI school code through xref_location (design §5.4).
-# MAGIC CREATE OR REPLACE TABLE silver.school_student_enrollment (
+# MAGIC CREATE OR REPLACE TABLE silver_school_student_enrollment (
 # MAGIC   school_year INT NOT NULL COMMENT 'CEDARS C01 – School Year',
 # MAGIC   county_district_code STRING NOT NULL COMMENT 'CEDARS C02 – Serving County District Code',
 # MAGIC   district_student_id STRING COMMENT 'CEDARS C03 – District Student ID',
 # MAGIC   ssid STRING NOT NULL COMMENT 'CEDARS C04 – State Student ID (SSID)',
 # MAGIC   location_id STRING NOT NULL COMMENT 'CEDARS C05 – Location ID',
-# MAGIC   school_code STRING COMMENT 'Derived: CEDARS A05 resolved from C05 via silver.xref_location',
+# MAGIC   school_code STRING COMMENT 'Derived: CEDARS A05 resolved from C05 via silver_xref_location',
 # MAGIC   school_enrollment_date DATE NOT NULL COMMENT 'CEDARS C06 – Date Student Enrolled in School',
 # MAGIC   school_exit_date DATE COMMENT 'CEDARS C08 – Date Student Exited from School',
 # MAGIC   school_withdrawal_code STRING COMMENT 'CEDARS C09 – School Withdrawal Code',
@@ -320,7 +323,7 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC   _dq_issues ARRAY<STRING> COMMENT 'Load metadata: failed non-rejecting checks (DQ001 = Location ID not in xref_location)'
 # MAGIC ) COMMENT 'CEDARS File C – School Student (lineage demo)';
 # MAGIC
-# MAGIC INSERT INTO silver.school_student_enrollment BY NAME
+# MAGIC INSERT INTO silver_school_student_enrollment BY NAME
 # MAGIC SELECT CAST(c.SchoolYear AS INT)                         AS school_year,
 # MAGIC        c.ServingCountyDistrictCode                       AS county_district_code,
 # MAGIC        c.DistrictStudentId                               AS district_student_id,
@@ -334,27 +337,27 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC        CAST(c.CumulativeDaysPresent AS INT)              AS days_present,
 # MAGIC        c._source_file, c._school_year, c._manual_version, c._submission_type, c._load_ts,
 # MAGIC        CASE WHEN x.school_code IS NULL THEN array('DQ001') ELSE CAST(array() AS ARRAY<STRING>) END AS _dq_issues
-# MAGIC FROM bronze.school_student_enrollment c
-# MAGIC LEFT JOIN silver.xref_location x
+# MAGIC FROM bronze_school_student_enrollment c
+# MAGIC LEFT JOIN silver_xref_location x
 # MAGIC   ON  x.school_year = CAST(c.SchoolYear AS INT)
 # MAGIC   AND x.county_district_code = c.ServingCountyDistrictCode
 # MAGIC   AND x.location_id = c.LocationId
 # MAGIC   AND NOT x.is_ambiguous;
 # MAGIC
-# MAGIC CREATE OR REPLACE TABLE silver.student_absence (
+# MAGIC CREATE OR REPLACE TABLE silver_student_absence (
 # MAGIC   school_year INT NOT NULL COMMENT 'CEDARS N01 – School Year',
 # MAGIC   county_district_code STRING NOT NULL COMMENT 'CEDARS N02 – Serving County District Code',
 # MAGIC   district_student_id STRING COMMENT 'CEDARS N03 – District Student ID',
 # MAGIC   ssid STRING NOT NULL COMMENT 'CEDARS N04 – State Student ID (SSID)',
 # MAGIC   location_id STRING NOT NULL COMMENT 'CEDARS N05 – Location ID',
-# MAGIC   school_code STRING COMMENT 'Derived: CEDARS A05 resolved from N05 via silver.xref_location',
+# MAGIC   school_code STRING COMMENT 'Derived: CEDARS A05 resolved from N05 via silver_xref_location',
 # MAGIC   absence_date DATE NOT NULL COMMENT 'CEDARS N06 – Absence Date',
 # MAGIC   absence_code STRING NOT NULL COMMENT 'CEDARS N07 – Absence Code [code set: absence_code]',
 # MAGIC   _source_file STRING, _school_year INT, _manual_version STRING, _submission_type STRING, _load_ts TIMESTAMP,
 # MAGIC   _dq_issues ARRAY<STRING> COMMENT 'Load metadata: failed non-rejecting checks (DQ001 = Location ID not in xref_location)'
 # MAGIC ) COMMENT 'CEDARS File N – Student Absence (lineage demo)';
 # MAGIC
-# MAGIC INSERT INTO silver.student_absence BY NAME
+# MAGIC INSERT INTO silver_student_absence BY NAME
 # MAGIC SELECT CAST(n.SchoolYear AS INT)                         AS school_year,
 # MAGIC        n.ServingCountyDistrictCode                       AS county_district_code,
 # MAGIC        n.DistrictStudentId                               AS district_student_id,
@@ -365,8 +368,8 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC        upper(n.AbsenceCode)                              AS absence_code,
 # MAGIC        n._source_file, n._school_year, n._manual_version, n._submission_type, n._load_ts,
 # MAGIC        CASE WHEN x.school_code IS NULL THEN array('DQ001') ELSE CAST(array() AS ARRAY<STRING>) END AS _dq_issues
-# MAGIC FROM bronze.student_absence n
-# MAGIC LEFT JOIN silver.xref_location x
+# MAGIC FROM bronze_student_absence n
+# MAGIC LEFT JOIN silver_xref_location x
 # MAGIC   ON  x.school_year = CAST(n.SchoolYear AS INT)
 # MAGIC   AND x.county_district_code = n.ServingCountyDistrictCode
 # MAGIC   AND x.location_id = n.LocationId
@@ -375,7 +378,7 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC CREATE OR REPLACE TABLE silver.xref_student (
+# MAGIC CREATE OR REPLACE TABLE silver_xref_student (
 # MAGIC   school_year INT NOT NULL COMMENT 'CEDARS *01 – School Year',
 # MAGIC   county_district_code STRING NOT NULL COMMENT 'CEDARS *02 – Serving County District Code',
 # MAGIC   district_student_id STRING NOT NULL COMMENT 'CEDARS B04, C03, N03 – District Student ID',
@@ -385,16 +388,16 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC   _manual_version STRING, _submission_type STRING, _load_ts TIMESTAMP
 # MAGIC ) COMMENT 'Crosswalk: District Student ID -> SSID, per school year and district (lineage demo)';
 # MAGIC
-# MAGIC INSERT INTO silver.xref_student BY NAME
+# MAGIC INSERT INTO silver_xref_student BY NAME
 # MAGIC WITH pairs AS (
 # MAGIC   SELECT school_year, county_district_code, district_student_id, ssid, 'B' AS file_code, _manual_version, _submission_type
-# MAGIC   FROM silver.district_student_enrollment
+# MAGIC   FROM silver_district_student_enrollment
 # MAGIC   UNION ALL
 # MAGIC   SELECT school_year, county_district_code, district_student_id, ssid, 'C', _manual_version, _submission_type
-# MAGIC   FROM silver.school_student_enrollment
+# MAGIC   FROM silver_school_student_enrollment
 # MAGIC   UNION ALL
 # MAGIC   SELECT school_year, county_district_code, district_student_id, ssid, 'N', _manual_version, _submission_type
-# MAGIC   FROM silver.student_absence
+# MAGIC   FROM silver_student_absence
 # MAGIC ),
 # MAGIC agg AS (
 # MAGIC   SELECT school_year, county_district_code, district_student_id, ssid,
@@ -410,24 +413,24 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC FROM agg;
 # MAGIC
 # MAGIC -- Survivorship input (design §5.1): one row per reported attribute value, ranked.
-# MAGIC CREATE OR REPLACE TABLE silver.student_attribute_history (
+# MAGIC CREATE OR REPLACE TABLE silver_student_attribute_history (
 # MAGIC   ssid STRING NOT NULL COMMENT 'CEDARS B05 – SSID',
 # MAGIC   school_year INT NOT NULL COMMENT 'CEDARS B01 – School Year',
 # MAGIC   county_district_code STRING NOT NULL COMMENT 'CEDARS B02 – Serving County District Code',
 # MAGIC   district_enrollment_date DATE NOT NULL COMMENT 'CEDARS B14 – Date Enrolled in District (survivorship order)',
 # MAGIC   is_primary_responsibility_district BOOLEAN COMMENT 'Derived: a File C enrollment with C10 = Y overlaps the B spell',
 # MAGIC   attribute_element_id STRING NOT NULL COMMENT 'Derived: CEDARS element ID of the attribute (B12, B13 in this demo)',
-# MAGIC   attribute_name STRING NOT NULL COMMENT 'Derived: attribute column name in silver.district_student_enrollment',
+# MAGIC   attribute_name STRING NOT NULL COMMENT 'Derived: attribute column name in silver_district_student_enrollment',
 # MAGIC   attribute_value STRING COMMENT 'CEDARS B12, B13 – value as typed in silver, cast to STRING',
 # MAGIC   survivorship_rank INT COMMENT 'Derived: 1 = surviving value (latest school year, then latest B14, then primary district)',
 # MAGIC   _manual_version STRING, _submission_type STRING, _load_ts TIMESTAMP
 # MAGIC ) COMMENT 'Every reported value of each student attribute, for survivorship auditing (lineage demo)';
 # MAGIC
-# MAGIC INSERT INTO silver.student_attribute_history BY NAME
+# MAGIC INSERT INTO silver_student_attribute_history BY NAME
 # MAGIC WITH primary_spells AS (
 # MAGIC   SELECT DISTINCT b.ssid, b.school_year, b.county_district_code, b.district_enrollment_date
-# MAGIC   FROM silver.district_student_enrollment b
-# MAGIC   JOIN silver.school_student_enrollment c
+# MAGIC   FROM silver_district_student_enrollment b
+# MAGIC   JOIN silver_school_student_enrollment c
 # MAGIC     ON  c.ssid = b.ssid AND c.school_year = b.school_year AND c.county_district_code = b.county_district_code
 # MAGIC     AND c.is_primary_school = 'Y'
 # MAGIC     AND c.school_enrollment_date <= coalesce(b.district_exit_date, DATE'9999-12-31')
@@ -437,7 +440,7 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC   SELECT * FROM (
 # MAGIC     SELECT ssid, school_year, county_district_code, district_enrollment_date, _manual_version, _submission_type,
 # MAGIC            gender AS B12, grade_level AS B13
-# MAGIC     FROM silver.district_student_enrollment
+# MAGIC     FROM silver_district_student_enrollment
 # MAGIC   ) AS src UNPIVOT (attribute_value FOR attribute_element_id IN (B12, B13))
 # MAGIC )
 # MAGIC SELECT u.ssid, u.school_year, u.county_district_code, u.district_enrollment_date,
@@ -465,7 +468,7 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC CREATE OR REPLACE TABLE gold.dim_date (
+# MAGIC CREATE OR REPLACE TABLE gold_dim_date (
 # MAGIC   date_sk INT NOT NULL COMMENT 'Derived: Date key YYYYMMDD (-1 unknown, -2 not applicable)',
 # MAGIC   full_date DATE COMMENT 'Derived: Calendar date',
 # MAGIC   calendar_year INT COMMENT 'Derived: Calendar year',
@@ -476,7 +479,7 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC   CONSTRAINT dim_date_pk PRIMARY KEY (date_sk)
 # MAGIC ) COMMENT 'Calendar date (lineage demo)';
 # MAGIC
-# MAGIC INSERT INTO gold.dim_date BY NAME
+# MAGIC INSERT INTO gold_dim_date BY NAME
 # MAGIC SELECT CAST(date_format(d, 'yyyyMMdd') AS INT) AS date_sk, d AS full_date, year(d) AS calendar_year,
 # MAGIC        month(d) AS calendar_month, date_format(d, 'EEEE') AS day_name, dayofweek(d) IN (1, 7) AS is_weekend,
 # MAGIC        CASE WHEN month(d) >= 9 THEN year(d) + 1 ELSE year(d) END AS school_year_sk
@@ -484,7 +487,7 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC UNION ALL SELECT -1, NULL, NULL, NULL, 'Unknown', NULL, -1
 # MAGIC UNION ALL SELECT -2, NULL, NULL, NULL, 'Not applicable', NULL, -2;
 # MAGIC
-# MAGIC CREATE OR REPLACE TABLE gold.dim_school_year (
+# MAGIC CREATE OR REPLACE TABLE gold_dim_school_year (
 # MAGIC   school_year_sk BIGINT NOT NULL COMMENT 'Derived: School year key = ending year',
 # MAGIC   school_year INT COMMENT 'CEDARS A01 – School year (ending year)',
 # MAGIC   school_year_label STRING COMMENT 'Derived: Label, e.g. 2026-27',
@@ -493,13 +496,13 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC   CONSTRAINT dim_school_year_pk PRIMARY KEY (school_year_sk)
 # MAGIC ) COMMENT 'School year (lineage demo)';
 # MAGIC
-# MAGIC INSERT INTO gold.dim_school_year BY NAME
+# MAGIC INSERT INTO gold_dim_school_year BY NAME
 # MAGIC SELECT DISTINCT school_year AS school_year_sk, school_year,
 # MAGIC        concat(school_year - 1, '-', right(CAST(school_year AS STRING), 2)) AS school_year_label,
 # MAGIC        make_date(school_year - 1, 9, 1) AS start_date, make_date(school_year, 8, 31) AS end_date
-# MAGIC FROM silver.location;
+# MAGIC FROM silver_location;
 # MAGIC
-# MAGIC CREATE OR REPLACE TABLE gold.dim_district (
+# MAGIC CREATE OR REPLACE TABLE gold_dim_district (
 # MAGIC   district_sk BIGINT NOT NULL COMMENT 'Surrogate key (-1 unknown, -2 not applicable)',
 # MAGIC   county_district_code STRING COMMENT 'CEDARS A02 – County-district code',
 # MAGIC   county_code STRING COMMENT 'CEDARS A02 – County code = first 2 digits of the county-district code',
@@ -508,15 +511,15 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC   CONSTRAINT dim_district_pk PRIMARY KEY (district_sk)
 # MAGIC ) COMMENT 'District (lineage demo)';
 # MAGIC
-# MAGIC INSERT INTO gold.dim_district BY NAME
+# MAGIC INSERT INTO gold_dim_district BY NAME
 # MAGIC SELECT xxhash64('district', county_district_code) AS district_sk, county_district_code,
 # MAGIC        left(county_district_code, 2) AS county_code, max(district_name) AS district_name, TRUE AS is_current
-# MAGIC FROM silver.xref_location
+# MAGIC FROM silver_xref_location
 # MAGIC GROUP BY county_district_code
 # MAGIC UNION ALL SELECT -1, NULL, NULL, 'Unknown', TRUE
 # MAGIC UNION ALL SELECT -2, NULL, NULL, 'Not applicable', TRUE;
 # MAGIC
-# MAGIC CREATE OR REPLACE TABLE gold.dim_school (
+# MAGIC CREATE OR REPLACE TABLE gold_dim_school (
 # MAGIC   school_sk BIGINT NOT NULL COMMENT 'Surrogate key (-1 unknown, -2 not applicable, -3 out-of-district)',
 # MAGIC   county_district_code STRING COMMENT 'CEDARS A02 – County-district code the school belongs to',
 # MAGIC   school_code STRING COMMENT 'CEDARS A05 – OSPI school code (9999 = out-of-district)',
@@ -526,15 +529,15 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC   CONSTRAINT dim_school_pk PRIMARY KEY (school_sk)
 # MAGIC ) COMMENT 'School (lineage demo)';
 # MAGIC
-# MAGIC INSERT INTO gold.dim_school BY NAME
+# MAGIC INSERT INTO gold_dim_school BY NAME
 # MAGIC SELECT -1 AS school_sk, NULL AS county_district_code, NULL AS school_code, 'Unknown' AS school_name, FALSE AS is_out_of_district, TRUE AS is_current
 # MAGIC UNION ALL SELECT -2, NULL, NULL, 'Not applicable', FALSE, TRUE
 # MAGIC UNION ALL SELECT -3, NULL, '9999', 'Out-of-district school', TRUE, TRUE;
 # MAGIC
-# MAGIC MERGE INTO gold.dim_school t
+# MAGIC MERGE INTO gold_dim_school t
 # MAGIC USING (
 # MAGIC   SELECT county_district_code, school_code, max_by(school_name, school_year) AS school_name
-# MAGIC   FROM silver.xref_location
+# MAGIC   FROM silver_xref_location
 # MAGIC   WHERE NOT is_ambiguous
 # MAGIC   GROUP BY county_district_code, school_code
 # MAGIC ) s
@@ -546,37 +549,37 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC CREATE OR REPLACE TABLE gold.dim_absence_type (
+# MAGIC CREATE OR REPLACE TABLE gold_dim_absence_type (
 # MAGIC   absence_type_sk BIGINT NOT NULL COMMENT 'Surrogate key (-1 unknown)',
 # MAGIC   code STRING COMMENT 'CEDARS N07 – Code value',
 # MAGIC   description STRING COMMENT 'CEDARS N07 – Code description',
 # MAGIC   is_excused BOOLEAN COMMENT 'CEDARS N07 – EF, EP',
 # MAGIC   is_full_day BOOLEAN COMMENT 'CEDARS N07 – EF, UF',
 # MAGIC   CONSTRAINT dim_absence_type_pk PRIMARY KEY (absence_type_sk)
-# MAGIC ) COMMENT 'Absence type (N07), built from ref.ref_code (lineage demo)';
+# MAGIC ) COMMENT 'Absence type (N07), built from ref_code (lineage demo)';
 # MAGIC
-# MAGIC INSERT INTO gold.dim_absence_type BY NAME
+# MAGIC INSERT INTO gold_dim_absence_type BY NAME
 # MAGIC SELECT xxhash64('absence_code', code) AS absence_type_sk, code, description,
 # MAGIC        code IN ('EF', 'EP') AS is_excused, code IN ('EF', 'UF') AS is_full_day
-# MAGIC FROM ref.ref_code WHERE code_set = 'absence_code'
+# MAGIC FROM ref_code WHERE code_set = 'absence_code'
 # MAGIC UNION ALL SELECT -1, NULL, 'Unknown', NULL, NULL;
 # MAGIC
-# MAGIC CREATE OR REPLACE TABLE gold.dim_grade_level (
+# MAGIC CREATE OR REPLACE TABLE gold_dim_grade_level (
 # MAGIC   grade_level_sk BIGINT NOT NULL COMMENT 'Surrogate key (-1 unknown)',
 # MAGIC   code STRING COMMENT 'CEDARS B13 – Grade level code',
 # MAGIC   description STRING COMMENT 'CEDARS B13 – Grade level description',
 # MAGIC   sort_order INT COMMENT 'Derived: source order from the appendix',
 # MAGIC   CONSTRAINT dim_grade_level_pk PRIMARY KEY (grade_level_sk)
-# MAGIC ) COMMENT 'Grade level (B13), built from ref.ref_code (lineage demo)';
+# MAGIC ) COMMENT 'Grade level (B13), built from ref_code (lineage demo)';
 # MAGIC
-# MAGIC INSERT INTO gold.dim_grade_level BY NAME
+# MAGIC INSERT INTO gold_dim_grade_level BY NAME
 # MAGIC SELECT xxhash64('grade_level', code) AS grade_level_sk, code, description, source_order AS sort_order
-# MAGIC FROM ref.ref_code WHERE code_set = 'grade_level'
+# MAGIC FROM ref_code WHERE code_set = 'grade_level'
 # MAGIC UNION ALL SELECT -1, NULL, 'Unknown', NULL;
 # MAGIC
 # MAGIC -- Pivot the survivorship winners back to columns. Watch dim_student.gender in column lineage: it traces to
 # MAGIC -- attribute_value, which traces to BOTH gender and grade_level upstream (lineage is not row-aware).
-# MAGIC CREATE OR REPLACE TABLE gold.dim_student (
+# MAGIC CREATE OR REPLACE TABLE gold_dim_student (
 # MAGIC   student_sk BIGINT NOT NULL COMMENT 'Surrogate key (-1 unknown, -2 not applicable)',
 # MAGIC   ssid STRING COMMENT 'CEDARS B05 – State Student ID (durable key)',
 # MAGIC   gender STRING COMMENT 'CEDARS B12 – Gender (survivorship winner)',
@@ -585,34 +588,34 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC   effective_to DATE NOT NULL COMMENT 'SCD2: row effective to (9999-12-31 while current)',
 # MAGIC   is_current BOOLEAN NOT NULL COMMENT 'SCD2: current row flag',
 # MAGIC   CONSTRAINT dim_student_pk PRIMARY KEY (student_sk)
-# MAGIC ) COMMENT 'Student, thin, survivorship from silver.student_attribute_history (lineage demo)';
+# MAGIC ) COMMENT 'Student, thin, survivorship from silver_student_attribute_history (lineage demo)';
 # MAGIC
-# MAGIC INSERT INTO gold.dim_student BY NAME
+# MAGIC INSERT INTO gold_dim_student BY NAME
 # MAGIC SELECT xxhash64('student', h.ssid) AS student_sk, h.ssid,
 # MAGIC        max(CASE WHEN h.attribute_element_id = 'B12' THEN h.attribute_value END) AS gender,
 # MAGIC        max(CASE WHEN h.attribute_element_id = 'B12' THEN g.description END) AS gender_description,
 # MAGIC        make_date(min(h.school_year) - 1, 9, 1) AS effective_from, DATE'9999-12-31' AS effective_to, TRUE AS is_current
-# MAGIC FROM silver.student_attribute_history h
-# MAGIC LEFT JOIN ref.ref_code g ON g.code_set = 'gender' AND g.code = h.attribute_value
+# MAGIC FROM silver_student_attribute_history h
+# MAGIC LEFT JOIN ref_code g ON g.code_set = 'gender' AND g.code = h.attribute_value
 # MAGIC WHERE h.survivorship_rank = 1
 # MAGIC GROUP BY h.ssid
 # MAGIC UNION ALL SELECT -1, NULL, NULL, 'Unknown', DATE'1900-01-01', DATE'9999-12-31', TRUE
 # MAGIC UNION ALL SELECT -2, NULL, NULL, 'Not applicable', DATE'1900-01-01', DATE'9999-12-31', TRUE;
 # MAGIC
 # MAGIC -- Restricted PII lives in its own table; lineage shows B06/B07/B09 flow here and nowhere else in gold.
-# MAGIC CREATE OR REPLACE TABLE gold.dim_student_pii (
+# MAGIC CREATE OR REPLACE TABLE gold_dim_student_pii (
 # MAGIC   ssid STRING NOT NULL COMMENT 'CEDARS B05 – State Student ID',
 # MAGIC   legal_last_name STRING COMMENT 'CEDARS B06 – Legal last name (latest reported)',
 # MAGIC   legal_first_name STRING COMMENT 'CEDARS B07 – Legal first name (latest reported)',
 # MAGIC   birth_date DATE COMMENT 'CEDARS B09 – Birth date (latest reported)'
 # MAGIC ) COMMENT 'Restricted student PII, keyed by SSID (lineage demo)';
 # MAGIC
-# MAGIC INSERT INTO gold.dim_student_pii BY NAME
+# MAGIC INSERT INTO gold_dim_student_pii BY NAME
 # MAGIC SELECT ssid,
 # MAGIC        max_by(legal_last_name, struct(school_year, district_enrollment_date)) AS legal_last_name,
 # MAGIC        max_by(legal_first_name, struct(school_year, district_enrollment_date)) AS legal_first_name,
 # MAGIC        max_by(birth_date, struct(school_year, district_enrollment_date)) AS birth_date
-# MAGIC FROM silver.district_student_enrollment
+# MAGIC FROM silver_district_student_enrollment
 # MAGIC GROUP BY ssid;
 
 # COMMAND ----------
@@ -626,7 +629,7 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC CREATE OR REPLACE TABLE gold.fact_absence (
+# MAGIC CREATE OR REPLACE TABLE gold_fact_absence (
 # MAGIC   school_year_sk BIGINT NOT NULL COMMENT 'CEDARS N01 – School year',
 # MAGIC   student_sk BIGINT NOT NULL COMMENT 'CEDARS N04 – Student (SSID)',
 # MAGIC   district_sk BIGINT NOT NULL COMMENT 'CEDARS N02 – Serving district',
@@ -639,7 +642,7 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC   excused_flag INT COMMENT 'CEDARS N07 – 1 when N07 is EF or EP'
 # MAGIC ) COMMENT 'Transaction: SSID x school x absence date (lineage demo)';
 # MAGIC
-# MAGIC INSERT INTO gold.fact_absence BY NAME
+# MAGIC INSERT INTO gold_fact_absence BY NAME
 # MAGIC SELECT a.school_year                                         AS school_year_sk,
 # MAGIC        coalesce(st.student_sk, -1)                           AS student_sk,
 # MAGIC        coalesce(d.district_sk, -1)                           AS district_sk,
@@ -650,14 +653,14 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC        CASE WHEN t.is_full_day THEN 1 ELSE 0 END             AS full_day_flag,
 # MAGIC        CASE WHEN NOT t.is_full_day THEN 1 ELSE 0 END         AS part_day_flag,
 # MAGIC        CASE WHEN t.is_excused THEN 1 ELSE 0 END              AS excused_flag
-# MAGIC FROM silver.student_absence a
-# MAGIC LEFT JOIN gold.dim_student st      ON st.ssid = a.ssid AND st.is_current
-# MAGIC LEFT JOIN gold.dim_district d      ON d.county_district_code = a.county_district_code AND d.is_current
-# MAGIC LEFT JOIN gold.dim_school sc       ON sc.county_district_code = a.county_district_code AND sc.school_code = a.school_code AND sc.is_current
-# MAGIC LEFT JOIN gold.dim_absence_type t  ON t.code = a.absence_code
+# MAGIC FROM silver_student_absence a
+# MAGIC LEFT JOIN gold_dim_student st      ON st.ssid = a.ssid AND st.is_current
+# MAGIC LEFT JOIN gold_dim_district d      ON d.county_district_code = a.county_district_code AND d.is_current
+# MAGIC LEFT JOIN gold_dim_school sc       ON sc.county_district_code = a.county_district_code AND sc.school_code = a.school_code AND sc.is_current
+# MAGIC LEFT JOIN gold_dim_absence_type t  ON t.code = a.absence_code
 # MAGIC WHERE a._submission_type = 'year-end final';
 # MAGIC
-# MAGIC CREATE OR REPLACE TABLE gold.fact_school_enrollment (
+# MAGIC CREATE OR REPLACE TABLE gold_fact_school_enrollment (
 # MAGIC   school_year_sk BIGINT NOT NULL COMMENT 'CEDARS C01 – School year',
 # MAGIC   student_sk BIGINT NOT NULL COMMENT 'CEDARS C04 – Student (SSID)',
 # MAGIC   district_sk BIGINT NOT NULL COMMENT 'CEDARS C02 – Serving district',
@@ -670,14 +673,14 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC   enrolled_days INT COMMENT 'Derived from CEDARS C12, N06, N07 – days present + full-day absences in the spell (approximation, design §6)'
 # MAGIC ) COMMENT 'Coverage: SSID x school x school entry date (lineage demo)';
 # MAGIC
-# MAGIC INSERT INTO gold.fact_school_enrollment BY NAME
+# MAGIC INSERT INTO gold_fact_school_enrollment BY NAME
 # MAGIC WITH full_day_absences AS (
 # MAGIC   SELECT c.ssid, c.county_district_code, c.location_id, c.school_enrollment_date, count(*) AS full_day_absences
-# MAGIC   FROM silver.school_student_enrollment c
-# MAGIC   JOIN silver.student_absence a
+# MAGIC   FROM silver_school_student_enrollment c
+# MAGIC   JOIN silver_student_absence a
 # MAGIC     ON  a.ssid = c.ssid AND a.county_district_code = c.county_district_code AND a.location_id = c.location_id
 # MAGIC     AND a.absence_date BETWEEN c.school_enrollment_date AND coalesce(c.school_exit_date, DATE'9999-12-31')
-# MAGIC   JOIN gold.dim_absence_type t ON t.code = a.absence_code AND t.is_full_day
+# MAGIC   JOIN gold_dim_absence_type t ON t.code = a.absence_code AND t.is_full_day
 # MAGIC   GROUP BY ALL
 # MAGIC )
 # MAGIC SELECT c.school_year                                                      AS school_year_sk,
@@ -690,23 +693,23 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC        c.school_withdrawal_code                                           AS withdrawal_code,
 # MAGIC        c.days_present,
 # MAGIC        c.days_present + coalesce(f.full_day_absences, 0)                  AS enrolled_days
-# MAGIC FROM silver.school_student_enrollment c
-# MAGIC LEFT JOIN silver.district_student_enrollment b
+# MAGIC FROM silver_school_student_enrollment c
+# MAGIC LEFT JOIN silver_district_student_enrollment b
 # MAGIC   ON  b.ssid = c.ssid AND b.school_year = c.school_year AND b.county_district_code = c.county_district_code
 # MAGIC   AND c.school_enrollment_date BETWEEN b.district_enrollment_date AND coalesce(b.district_exit_date, DATE'9999-12-31')
 # MAGIC LEFT JOIN full_day_absences f
 # MAGIC   ON  f.ssid = c.ssid AND f.county_district_code = c.county_district_code
 # MAGIC   AND f.location_id = c.location_id AND f.school_enrollment_date = c.school_enrollment_date
-# MAGIC LEFT JOIN gold.dim_student st      ON st.ssid = c.ssid AND st.is_current
-# MAGIC LEFT JOIN gold.dim_district d      ON d.county_district_code = c.county_district_code AND d.is_current
-# MAGIC LEFT JOIN gold.dim_school sc       ON sc.county_district_code = c.county_district_code AND sc.school_code = c.school_code AND sc.is_current
-# MAGIC LEFT JOIN gold.dim_grade_level g   ON g.code = b.grade_level
+# MAGIC LEFT JOIN gold_dim_student st      ON st.ssid = c.ssid AND st.is_current
+# MAGIC LEFT JOIN gold_dim_district d      ON d.county_district_code = c.county_district_code AND d.is_current
+# MAGIC LEFT JOIN gold_dim_school sc       ON sc.county_district_code = c.county_district_code AND sc.school_code = c.school_code AND sc.is_current
+# MAGIC LEFT JOIN gold_dim_grade_level g   ON g.code = b.grade_level
 # MAGIC WHERE c._submission_type = 'year-end final';
 
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC CREATE OR REPLACE TABLE gold.fact_student_school_year (
+# MAGIC CREATE OR REPLACE TABLE gold_fact_student_school_year (
 # MAGIC   school_year_sk BIGINT NOT NULL COMMENT 'CEDARS *01 – School year',
 # MAGIC   student_sk BIGINT NOT NULL COMMENT 'CEDARS B05 – Student (SSID)',
 # MAGIC   district_sk BIGINT NOT NULL COMMENT 'CEDARS B02 – Serving district',
@@ -717,15 +720,15 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC   excused_absences INT COMMENT 'CEDARS N07 – count of EF/EP'
 # MAGIC ) COMMENT 'Periodic snapshot: SSID x serving district x school year, built from gold facts (lineage demo)';
 # MAGIC
-# MAGIC INSERT INTO gold.fact_student_school_year BY NAME
+# MAGIC INSERT INTO gold_fact_student_school_year BY NAME
 # MAGIC WITH enr AS (
 # MAGIC   SELECT school_year_sk, student_sk, district_sk, sum(enrolled_days) AS enrolled_days, sum(days_present) AS days_present
-# MAGIC   FROM gold.fact_school_enrollment GROUP BY ALL
+# MAGIC   FROM gold_fact_school_enrollment GROUP BY ALL
 # MAGIC ),
 # MAGIC absn AS (
 # MAGIC   SELECT school_year_sk, student_sk, district_sk,
 # MAGIC          sum(full_day_flag) AS full_day_absences, sum(part_day_flag) AS part_day_absences, sum(excused_flag) AS excused_absences
-# MAGIC   FROM gold.fact_absence GROUP BY ALL
+# MAGIC   FROM gold_fact_absence GROUP BY ALL
 # MAGIC )
 # MAGIC SELECT e.school_year_sk, e.student_sk, e.district_sk, e.enrolled_days, e.days_present,
 # MAGIC        coalesce(a.full_day_absences, 0) AS full_day_absences,
@@ -734,18 +737,18 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # MAGIC FROM enr e
 # MAGIC LEFT JOIN absn a USING (school_year_sk, student_sk, district_sk);
 # MAGIC
-# MAGIC CREATE OR REPLACE VIEW gold.v_student_attendance_summary
+# MAGIC CREATE OR REPLACE VIEW gold_v_student_attendance_summary
 # MAGIC COMMENT 'Analyst view: attendance by student, district and year. attendance_rate uses the enrolled-days approximation (design §6).'
 # MAGIC AS
 # MAGIC SELECT y.school_year_label, d.district_name, s.ssid, s.gender_description,
 # MAGIC        f.enrolled_days, f.days_present, f.full_day_absences, f.part_day_absences,
 # MAGIC        round(f.days_present / nullif(f.enrolled_days, 0), 3) AS attendance_rate
-# MAGIC FROM gold.fact_student_school_year f
-# MAGIC JOIN gold.dim_school_year y ON y.school_year_sk = f.school_year_sk
-# MAGIC JOIN gold.dim_district d    ON d.district_sk = f.district_sk
-# MAGIC JOIN gold.dim_student s     ON s.student_sk = f.student_sk;
+# MAGIC FROM gold_fact_student_school_year f
+# MAGIC JOIN gold_dim_school_year y ON y.school_year_sk = f.school_year_sk
+# MAGIC JOIN gold_dim_district d    ON d.district_sk = f.district_sk
+# MAGIC JOIN gold_dim_student s     ON s.student_sk = f.student_sk;
 # MAGIC
-# MAGIC SELECT * FROM gold.v_student_attendance_summary ORDER BY ssid, district_name;
+# MAGIC SELECT * FROM gold_v_student_attendance_summary ORDER BY ssid, district_name;
 
 # COMMAND ----------
 
@@ -760,14 +763,14 @@ for code_set in ("absence_code", "gender", "grade_level"):
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC CREATE OR REPLACE TABLE gold.demo_absence_by_school_sql AS
-# MAGIC SELECT school_sk, sum(absence_count) AS absences FROM gold.fact_absence GROUP BY school_sk;
+# MAGIC CREATE OR REPLACE TABLE gold_demo_absence_by_school_sql AS
+# MAGIC SELECT school_sk, sum(absence_count) AS absences FROM gold_fact_absence GROUP BY school_sk;
 
 # COMMAND ----------
 
-pdf = spark.table("gold.fact_absence").toPandas()
+pdf = spark.table("gold_fact_absence").toPandas()
 summary = pdf.groupby("school_sk", as_index=False)["absence_count"].sum().rename(columns={"absence_count": "absences"})
-spark.createDataFrame(summary).write.mode("overwrite").saveAsTable("gold.demo_absence_by_school_pandas")
+spark.createDataFrame(summary).write.mode("overwrite").saveAsTable("gold_demo_absence_by_school_pandas")
 
 # COMMAND ----------
 
@@ -788,7 +791,7 @@ display(spark.sql(f"""
            entity_type,
            max(event_time) AS last_seen
     FROM system.access.table_lineage
-    WHERE target_table_catalog = '{catalog}'
+    WHERE target_table_catalog = '{catalog}' AND target_table_schema = '{schema}'
       AND event_date >= current_date() - INTERVAL 7 DAYS
     GROUP BY ALL
     ORDER BY target, source
@@ -802,7 +805,7 @@ edges = spark.sql(f"""
            target_table_full_name || '.' || target_column_name AS target,
            coalesce(source_table_full_name, source_path) || '.' || source_column_name AS source
     FROM system.access.column_lineage
-    WHERE target_table_catalog = '{catalog}'
+    WHERE target_table_catalog = '{catalog}' AND target_table_schema = '{schema}'
       AND event_date >= current_date() - INTERVAL 7 DAYS
       AND source_column_name IS NOT NULL
 """).collect()
@@ -818,8 +821,8 @@ def trace(column: str, depth: int = 0, seen: frozenset = frozenset()) -> None:
     for src in sorted(upstream.get(column, ())):
         trace(src, depth + 1, seen | {column})
 
-for col in ("gold.dim_student.gender", "gold.fact_school_enrollment.school_sk", "gold.v_student_attendance_summary.attendance_rate"):
-    trace(f"{catalog}.{col}")
+for col in ("gold_dim_student.gender", "gold_fact_school_enrollment.school_sk", "gold_v_student_attendance_summary.attendance_rate"):
+    trace(f"{catalog}.{schema}.{col}")
     print()
 
 # COMMAND ----------
@@ -827,9 +830,20 @@ for col in ("gold.dim_student.gender", "gold.fact_school_enrollment.school_sk", 
 # MAGIC %md
 # MAGIC ## Teardown
 # MAGIC
-# MAGIC Uncomment to remove everything this notebook created. Lineage history for dropped tables stays in the system
-# MAGIC tables for the retention period.
+# MAGIC Uncomment to drop the tables, view and volume this notebook created. The schema and anything else in it are left
+# MAGIC alone. Lineage history for dropped tables stays in the system tables for the retention period.
 
 # COMMAND ----------
 
-# spark.sql(f"DROP CATALOG IF EXISTS `{catalog}` CASCADE")
+# demo_tables = [
+#     "bronze_location", "bronze_district_student_enrollment", "bronze_school_student_enrollment", "bronze_student_absence",
+#     "ref_code", "silver_location", "silver_xref_location", "silver_district_student_enrollment",
+#     "silver_school_student_enrollment", "silver_student_absence", "silver_xref_student", "silver_student_attribute_history",
+#     "gold_dim_date", "gold_dim_school_year", "gold_dim_district", "gold_dim_school", "gold_dim_absence_type",
+#     "gold_dim_grade_level", "gold_dim_student", "gold_dim_student_pii", "gold_fact_absence", "gold_fact_school_enrollment",
+#     "gold_fact_student_school_year", "gold_demo_absence_by_school_sql", "gold_demo_absence_by_school_pandas",
+# ]
+# spark.sql("DROP VIEW IF EXISTS gold_v_student_attendance_summary")
+# for t in demo_tables:
+#     spark.sql(f"DROP TABLE IF EXISTS {t}")
+# spark.sql("DROP VOLUME IF EXISTS landing")
